@@ -1,0 +1,26 @@
+.circle-button {
+	color: white;
+	opacity: 100%;
+	border: 2px solid #d0d0d0;
+	cursor: pointer;
+	padding-top: 27px;
+	padding-bottom: 27px;
+}
+
+.big-circle-btn {
+	width: 145px;
+	height: 121px;
+	background-color: #dc5921;
+}
+
+.small-circle-btn {
+	width: 98px;
+	height: 82px;
+	background-color: #f3733c;
+}
+
+.circleBtnFont {
+	font-size: 26px;
+	line-height: 1.2;
+}
+

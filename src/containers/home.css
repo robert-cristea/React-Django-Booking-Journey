@@ -1,7 +1,7 @@
 .bg-img {
     /* The image used */
     background-image: url("../images/desert.jpg");
-    max-width:1440px;
+    /* max-width:1440px; */
     min-height: 380px;
   
     /* Center and scale the image nicely */
@@ -39,3 +39,79 @@
     background-color: #ddd;
     color: black;
   }
+
+.logo {
+  padding-top:14px;
+  padding-left:39px;
+}
+
+.notify {
+  font-size:37px;
+  font-weight: 600;
+  padding-left:10px;
+  padding-right:30px
+}
+
+.font-weight-medium {
+  font-weight:600;
+}
+
+.pt-29 {
+  padding-top:29px
+}
+
+.px-39 {
+  padding-left:39px;
+  padding-right:39px;
+}
+
+.br-card {
+  border-radius:40px;
+  /* height:800px; */
+  /* width:600px; */
+}
+.circle-field {
+  /* width:500px;  */
+  /* height:500px; */
+}
+
+.font-greeting {
+  font-size: 70px; 
+  padding-top: 6.25rem; 
+}
+
+.font-skip {
+  font-size:18px;
+  cursor:default;
+}
+
+.card-bottom {
+  padding-bottom:21px;
+  padding-right:18px;
+  padding-left:18px;
+}
+.circle-button {
+	color: white;
+	opacity: 1;
+	border: 2px solid #d0d0d0;
+	cursor: pointer;
+	padding-top: 27px;
+	padding-bottom: 27px;
+}
+
+.big-circle-btn {
+	width: 145px;
+	height: 121px;
+	background-color: #dc5921;
+}
+
+.small-circle-btn {
+	width: 98px;
+	height: 82px;
+	background-color: #f3733c;
+}
+
+.circleBtnFont {
+	font-size: 26px;
+	line-height: 1.2;
+}

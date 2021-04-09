@@ -1,14 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { connect } from "react-redux";
 import BaseRouter from "./routes";
-import * as actions from "./store/actions/auth";
-import "semantic-ui-css/semantic.min.css";
 
 class App extends Component {
-  componentDidMount() {
-    this.props.onTryAutoSignup();
-  }
 
   render() {
     return (
@@ -19,19 +13,5 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.auth.token !== null
-  };
-};
+export default App;
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onTryAutoSignup: () => dispatch(actions.authCheckState())
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
