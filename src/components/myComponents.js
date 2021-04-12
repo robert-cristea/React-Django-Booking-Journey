@@ -6,18 +6,19 @@ import "./myComponent.css";
 
 const MyComponent = (props) => {
 	const options = {
-		"size": 180,
-		"minSize": 20,
-		"gutter": 0,
+		"size": 145,
+		"minSize": 145,
+		"gutter": 15,
 		"provideProps": true,
-		"numCols": 2,
+		"numCols": 3,
 		"fringeWidth": 160,
 		"yRadius": 120,
 		"xRadius": 120,
 		"cornerRadius": 10,
-		"showGuides": true,
+		"showGuides": false,
 		"compact": true,
-		"gravitation": 5
+		"gravitation": 5,
+		"cornerRadius":120
 	}
 
 	// const children = props.data.map((data, i) => {

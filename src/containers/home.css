@@ -115,3 +115,10 @@
 	font-size: 26px;
 	line-height: 1.2;
 }
+
+:root{
+  --lenX:-50px;
+  --lenY:-30px;
+
+}
+

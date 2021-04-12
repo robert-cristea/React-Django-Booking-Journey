@@ -6,7 +6,7 @@ import { CircleButton } from "../components/CircleButton";
 import { CircularProgressBar } from '../components/CircularProgressBar';
 import DateRangePicker from '../components/CustomDateRangePicker';
 // import Bubbles from '../components/index.js'
-// import MyComponent from '../components/myComponents'
+import MyComponent from '../components/myComponents'
 
 import "./home.css";
 import "./range.css";
@@ -16,9 +16,6 @@ import { addDays } from 'date-fns';
 
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-
-
-
 
 const Home = (props) => {
 
@@ -36,7 +33,7 @@ const Home = (props) => {
     const [date, setDate] = useState(
         {
             startDate: new Date(),
-            endDate: addDays(new Date(), 7),
+            endDate: addDays(new Date(), 0),
             key: 'selection'
         }
     );
@@ -181,8 +178,8 @@ const Home = (props) => {
                 'number': number,
                 'theme': theme,
                 'howlong': howLong,
-                'fromDate': startDate === null? "":dateFormat(new Date(startDate),"yyyy-mm-dd"),
-                'toDate': endDate === null? "":dateFormat(new Date(endDate),"yyyy-mm-dd")
+                'fromDate': dateFormat(new Date(startDate),"yyyy-mm-dd"),
+                'toDate': dateFormat(new Date(endDate),"yyyy-mm-dd")
             }, {
                 headers: {
                     // 'Accept': 'application/json',
@@ -225,7 +222,6 @@ const Home = (props) => {
                 </div>
 
                 <div className="w-full px-4 pt-29">
-
                     {!showFinalPage ?
                         <div className="w-full mx-auto shadow-lg py-3 px-4 br-card" style={{ maxWidth: "519px" }}>
 
@@ -246,51 +242,57 @@ const Home = (props) => {
                             <hr className="mb-4" style={{ width: "30%" }} />
                             <div className="circle-field" style={{ position: "relative" }}>
                                 {(data.step === 0) &&
-
-
-
-                                    <>
-
-                                        <CircleButton name="Family" className="child" key="1" onClick={() => handleClickBtn(1, "Family")} />
-                                        <CircleButton name="Friends" className="child" key="2" onClick={() => handleClickBtn(1, "Friends")} />
-                                        <CircleButton name="Couple" className="child" key="3" onClick={() => handleClickBtn(1, "Couple")} />
-                                        <CircleButton name="Solo" className="child" key="4" onClick={() => handleClickBtn(1, "Solo")} />
-                                    </>
+                                    // <>
+                                    <MyComponent>
+                                        <CircleButton name="Family" className="child" key="1" sel="1" onClick={() => handleClickBtn(1, "Family")} />
+                                        <CircleButton name="Friends" className="child" key="2" sel="2" onClick={() => handleClickBtn(1, "Friends")} />
+                                        <CircleButton name="Couple" className="child" key="3" sel="3" onClick={() => handleClickBtn(1, "Couple")} />
+                                        <CircleButton name="Solo" className="child" key="4" sel="4" onClick={() => handleClickBtn(1, "Solo")} />
+                                    </MyComponent>
+                                    // </>
                                 }
                                 {(showNumberPage === 1) &&
                                     <>
-                                        <CircleButton name="Family" />
-                                        <CircleButton name="3" size="sm" onClick={() => handleClickBtn(2, "3")} />
-                                        <CircleButton name="4" size="sm" onClick={() => handleClickBtn(2, "4")} />
-                                        <CircleButton name="5" size="sm" onClick={() => handleClickBtn(2, "5")} />
-                                        <CircleButton name="6+" size="sm" onClick={() => handleClickBtn(2, "6+")} />
+                                    <MyComponent>
+                                        <CircleButton name="3" className="child" key="2" size="sm" sel="1" onClick={() => handleClickBtn(2, "3")} />
+                                        <CircleButton name="4" className="child" key="3" size="sm" sel="2" onClick={() => handleClickBtn(2, "4")} />
+                                        <CircleButton name="5" className="child" key="4" size="sm" sel="3" onClick={() => handleClickBtn(2, "5")} />
+                                        <CircleButton name="Family" className="child" sel="1" key="4" />
+                                        <CircleButton name="6+" className="child" key="5" sel="5" size="sm" onClick={() => handleClickBtn(2, "6+")} />
+                                    </MyComponent>
                                     </>
                                 }
                                 {(showNumberPage === 2) &&
                                     <>
-                                        <CircleButton name="Friends" />
-                                        <CircleButton name="2" size="sm" onClick={() => handleClickBtn(2, "2")} />
-                                        <CircleButton name="3" size="sm" onClick={() => handleClickBtn(2, "3")} />
-                                        <CircleButton name="4" size="sm" onClick={() => handleClickBtn(2, "4")} />
-                                        <CircleButton name="5" size="sm" onClick={() => handleClickBtn(2, "5")} />
-                                        <CircleButton name="6+" size="sm" onClick={() => handleClickBtn(2, "6+")} />
+                                    <MyComponent>
+                                        <CircleButton name="2" className="child" key="2" sel="1" size="sm" onClick={() => handleClickBtn(2, "2")} />
+                                        <CircleButton name="3" className="child" key="3" sel="2" size="sm" onClick={() => handleClickBtn(2, "3")} />
+                                        <CircleButton name="4" className="child" key="4" sel="3" size="sm" onClick={() => handleClickBtn(2, "4")} />
+                                        <CircleButton name="Friends" className="child" sel="4" key="1" />
+                                        <CircleButton name="5" className="child" key="5" sel="5" size="sm" onClick={() => handleClickBtn(2, "5")} />
+                                        <CircleButton name="6+" className="child" key="6" sel="6" size="sm" onClick={() => handleClickBtn(2, "6+")} />
+                                    </MyComponent>
                                     </>
                                 }
                                 {(number !== "" && data.step === 2) &&
                                     <>
-                                        <CircleButton name="Beach" onClick={() => handleClickBtn(3, "Beach")} />
-                                        <CircleButton name="City life" onClick={() => handleClickBtn(3, "City life")} />
-                                        <CircleButton name="Nature" onClick={() => handleClickBtn(3, "Nature")} />
-                                        <CircleButton name="Suprise me" onClick={() => handleClickBtn(3, "Suprise me")} />
-                                        <CircleButton name="Country side" onClick={() => handleClickBtn(3, "Country side")} />
+                                    <MyComponent>
+                                        <CircleButton name="Beach" className="child" key="1" sel="1" onClick={() => handleClickBtn(3, "Beach")} />
+                                        <CircleButton name="City life" className="child" key="2" sel="2" onClick={() => handleClickBtn(3, "City life")} />
+                                        <CircleButton name="Nature" className="child" key="3" sel="3" onClick={() => handleClickBtn(3, "Nature")} />
+                                        <CircleButton name="Suprise me" className="child" key="4" sel="4" onClick={() => handleClickBtn(3, "Suprise me")} />
+                                        <CircleButton name="Country side" className="child" key="5" sel="5" onClick={() => handleClickBtn(3, "Country side")} />
+                                    </MyComponent>
                                     </>
                                 }
                                 {(theme !== "" && data.step === 3) &&
                                     <>
-                                        <CircleButton name="Weekend" onClick={() => handleClickBtn(4, "Weekend")} />
-                                        <CircleButton name="Weekish" onClick={() => handleClickBtn(4, "Weekish")} />
-                                        <CircleButton name="Long Weekend" onClick={() => handleClickBtn(4, "Long Weekend")} />
-                                        <CircleButton name="Longer" onClick={() => handleClickBtn(4, "Longer")} />
+                                    <MyComponent>
+                                        <CircleButton name="Weekend" className="child" key="1" sel="1" onClick={() => handleClickBtn(4, "Weekend")} />
+                                        <CircleButton name="Weekish" className="child" key="2" sel="2" onClick={() => handleClickBtn(4, "Weekish")} />
+                                        <CircleButton name="Long Weekend" className="child" key="3" sel="3" onClick={() => handleClickBtn(4, "Long Weekend")} />
+                                        <CircleButton name="Longer" className="child" key="4" sel="4" onClick={() => handleClickBtn(4, "Longer")} />
+                                    </MyComponent>
                                     </>
                                 }
                                 {(howLong !== "" && data.step === 4) &&
@@ -306,6 +308,7 @@ const Home = (props) => {
                                                 rangeColors={["#DC5921"]}
                                                 weekdayDisplayFormat={"EEEEEE"}
                                                 scroll={{ enabled: true }}
+                                                minDate={new Date()}
                                             />
                                         </div>
 
