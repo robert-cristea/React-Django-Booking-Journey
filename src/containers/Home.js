@@ -5,7 +5,6 @@ import dateFormat from 'dateformat'
 import { CircleButton } from "../components/CircleButton";
 import { CircularProgressBar } from '../components/CircularProgressBar';
 import DateRangePicker from '../components/CustomDateRangePicker';
-// import Bubbles from '../components/index.js'
 import MyComponent from '../components/myComponents'
 
 import "./home.css";
@@ -14,8 +13,8 @@ import logo from "../images/logo.png";
 import backArrow from "../images/backArrow.png";
 import { addDays } from 'date-fns';
 
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import 'react-date-range/dist/styles.css'; 
+import 'react-date-range/dist/theme/default.css'; 
 
 const Home = (props) => {
 
@@ -88,8 +87,6 @@ const Home = (props) => {
     }, [startDate, endDate]);
 
     const handleDatePickerChange = (item) => {
-        console.log("handleDatePickerChange-----", item);
-        // console.log(state[0].startDate);
         setDate(item.selection);
     }
 
