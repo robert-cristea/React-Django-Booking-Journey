@@ -1,8 +1,28 @@
-# Django React Boilerplate
+#Django and React Mix
 
-This repository contains a boilerplate project setup for Django and React. The project contains backend user authentication with the Django Rest Framework and rest-auth. The frontend has react redux setup for user authentication by storing the token in localstorage.
+Django, React based Frontend
 
-[Watch the tutorial on how to integrate Django and React](https://youtu.be/YKYVv0gm_0o)
+# App
+
+The App is booking journey site.
+It involves several pages including selecting people or organization, theme, numbers, time periods and etc.
+
+
+## Alpha Interface
+
+![Interface](https://github.com/vietvulong/React-Django-Booking-Journey/blob/main/screenshots/home.PNG)
+
+![Interface](https://github.com/vietvulong/React-Django-Booking-Journey/blob/main/screenshots/calendar.PNG)
+
+
+# Technology Stack
+
+
+Databases
+
+MySql
+
+# How to implement
 
 ## Backend development workflow
 
@@ -12,7 +32,6 @@ source env/bin/activate
 pip install -r requirements.txt
 python manage.py runserver
 ```
-
 ## Frontend development workflow
 
 ```json
@@ -25,3 +44,6 @@ npm start
 ```json
 npm run build
 ```
+
+
+
