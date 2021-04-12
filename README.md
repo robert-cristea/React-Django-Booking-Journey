@@ -10,9 +10,9 @@ It involves several pages including selecting people or organization, theme, num
 
 ## Alpha Interface
 
-![Interface](https://github.com/vietvulong/React-Django-Booking-Journey/blob/main/screenshots/home.PNG)
+![Interface](https://github.com/vietvulong/React-Django-Booking-Journey/blob/main/screenshots/home.png)
 
-![Interface](https://github.com/vietvulong/React-Django-Booking-Journey/blob/main/screenshots/calendar.PNG)
+![Interface](https://github.com/vietvulong/React-Django-Booking-Journey/blob/main/screenshots/calendar.png)
 
 
 # Technology Stack
@@ -44,6 +44,3 @@ npm start
 ```json
 npm run build
 ```
-
-
-
