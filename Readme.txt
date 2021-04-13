@@ -7,7 +7,6 @@ Django, React based Frontend
 The App is booking journey site.
 It involves several pages including selecting people or organization, theme, numbers, time periods and etc.
 
-
 ## Alpha Interface
 
 ![Interface](https://github.com/vietvulong/React-Django-Booking-Journey/blob/main/screenshots/home.PNG)
