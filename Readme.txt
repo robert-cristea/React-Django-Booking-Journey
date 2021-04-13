@@ -17,7 +17,6 @@ It involves several pages including selecting people or organization, theme, num
 
 # Technology Stack
 
-
 Databases
 
 MySql
