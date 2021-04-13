@@ -10,13 +10,13 @@
 .big-circle-btn {
 	width: 145px;
 	height: 121px;
-	background-color: #dc5921;
+	background-color: #dc5921!important;
 }
 
 .small-circle-btn {
 	width: 98px;
 	height: 82px;
-	background-color: #f3733c;
+	background-color: #f3733c!important;
 }
 
 .circleBtnFont {
