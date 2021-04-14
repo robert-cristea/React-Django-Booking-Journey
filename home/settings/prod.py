@@ -3,7 +3,7 @@
 from .base import *
 
 DEBUG = False
-ALLOWED_HOSTS += ['http://domain.com']
+ALLOWED_HOSTS += ['http://3.23.24.90']
 WSGI_APPLICATION = 'home.wsgi.prod.application'
 
 DATABASES = {
@@ -35,7 +35,7 @@ AUTH_PASSWORD_VALIDATORS = [
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8000',
+    'http://3.23.24.90',
     'http://localhost:3000',
     'http://*'
 )
