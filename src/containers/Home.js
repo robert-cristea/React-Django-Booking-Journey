@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import dateFormat from 'dateformat'
-
 import { CircleButton } from "../components/CircleButton";
 import { CircularProgressBar } from '../components/CircularProgressBar';
 import DateRangePicker from '../components/CustomDateRangePicker';
 import MyComponent from '../components/myComponents'
-
-import "./home.css";
-import "./range.css";
-import logo from "../images/logo.png";
-import backArrow from "../images/backArrow.png";
+import dateFormat from 'dateformat'
 import { addDays } from 'date-fns';
 
+import {BACKEND_URL} from '../utils/request';
+import logo from "../images/logo.png";
+import backArrow from "../images/backArrow.png";
+import "./home.css";
+import "./range.css";
 import 'react-date-range/dist/styles.css'; 
 import 'react-date-range/dist/theme/default.css'; 
 
@@ -72,8 +71,6 @@ const Home = (props) => {
             setHowLong(data.item);
         }
         if (data.step === 5) {
-            console.log("data.item.start-----", data.item.start);
-            console.log("data.item.end-----", data.item.end);
             setStartDate(data.item.start);
             setEndDate(data.item.end);
         }
@@ -170,7 +167,7 @@ const Home = (props) => {
         console.log("endDate  " + endDate);
 
         axios
-            .post('http://127.0.0.1:8000/api-vacation/storeData', {
+            .post(BACKEND_URL + 'api-vacation/storeData', {
                 'who': who,
                 'number': number,
                 'theme': theme,

@@ -2,7 +2,7 @@
 
 from .base import *
 
-ALLOWED_HOSTS += ['127.0.0.1','localhost']
+ALLOWED_HOSTS += ['3.23.24.90','localhost']
 DEBUG = True
 
 WSGI_APPLICATION = 'home.wsgi.dev.application'
@@ -23,9 +23,9 @@ DATABASES = {
 }
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8000',
-    'http://localhost:3000',
     'http://*'
+    'http://3.23.24.90',
+    'http://localhost:3000',
     
 )
 # CSRF_COOKIE_SECURE = True
