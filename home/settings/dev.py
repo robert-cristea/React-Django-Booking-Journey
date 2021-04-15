@@ -22,5 +22,4 @@ CORS_ORIGIN_WHITELIST = (
     'http://*',
     'http://3.23.24.90',
     'http://localhost:3000',
-    
 )
