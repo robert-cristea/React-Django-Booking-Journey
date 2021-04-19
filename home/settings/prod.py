@@ -7,14 +7,6 @@ ALLOWED_HOSTS += ['http://3.23.24.90']
 WSGI_APPLICATION = 'home.wsgi.prod.application'
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'db_name',
-    #     'USER': 'db_user',
-    #     'PASSWORD': 'db_password',
-    #     'HOST': 'localhost',
-    #     'PORT': '',
-    # }
     'default': {
     'ENGINE': 'django.db.backends.mysql',
     'NAME': 'natoosa',
@@ -39,3 +31,8 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'http://*'
 )
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+print(BASE_DIR)
+STATIC_URL = '/static/'

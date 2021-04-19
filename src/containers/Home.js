@@ -217,7 +217,7 @@ const Home = (props) => {
 
                 <div className="w-full px-4 pt-29">
                     {!showFinalPage ?
-                        <div className="w-full mx-auto shadow-lg py-3 px-4 br-card" style={{ maxWidth: "519px" }}>
+                        <div className="w-full mx-auto shadow-lg py-3 px-4 br-card">
 
                             <div className="d-flex justify-content-between">
                                 <p style={{ fontWeight: "300", fontSize: "20px" }}>Adjust your search:</p>
@@ -234,7 +234,7 @@ const Home = (props) => {
 
                             </h1>
                             <hr className="mb-4" style={{ width: "30%" }} />
-                            <div className="circle-field" style={{ position: "relative" }}>
+                            <div className="circle-field">
                                 {(data.step === 0) &&
                                     // <>
                                     <MyComponent>
@@ -246,7 +246,6 @@ const Home = (props) => {
                                     // </>
                                 }
                                 {(showNumberPage === 1) &&
-                                    <>
                                     <MyComponent>
                                         <CircleButton name="3" className="child" key="2" size="sm" sel="1" onClick={() => handleClickBtn(2, "3")} />
                                         <CircleButton name="4" className="child" key="3" size="sm" sel="2" onClick={() => handleClickBtn(2, "4")} />
@@ -254,10 +253,8 @@ const Home = (props) => {
                                         <CircleButton name="Family" className="child" sel="1" key="4" />
                                         <CircleButton name="6+" className="child" key="5" sel="5" size="sm" onClick={() => handleClickBtn(2, "6+")} />
                                     </MyComponent>
-                                    </>
                                 }
                                 {(showNumberPage === 2) &&
-                                    <>
                                     <MyComponent>
                                         <CircleButton name="2" className="child" key="2" sel="1" size="sm" onClick={() => handleClickBtn(2, "2")} />
                                         <CircleButton name="3" className="child" key="3" sel="2" size="sm" onClick={() => handleClickBtn(2, "3")} />
@@ -266,10 +263,8 @@ const Home = (props) => {
                                         <CircleButton name="5" className="child" key="5" sel="5" size="sm" onClick={() => handleClickBtn(2, "5")} />
                                         <CircleButton name="6+" className="child" key="6" sel="6" size="sm" onClick={() => handleClickBtn(2, "6+")} />
                                     </MyComponent>
-                                    </>
                                 }
                                 {(number !== "" && data.step === 2) &&
-                                    <>
                                     <MyComponent>
                                         <CircleButton name="Beach" className="child" key="1" sel="1" onClick={() => handleClickBtn(3, "Beach")} />
                                         <CircleButton name="City life" className="child" key="2" sel="2" onClick={() => handleClickBtn(3, "City life")} />
@@ -277,17 +272,14 @@ const Home = (props) => {
                                         <CircleButton name="Suprise me" className="child" key="4" sel="4" onClick={() => handleClickBtn(3, "Suprise me")} />
                                         <CircleButton name="Country side" className="child" key="5" sel="5" onClick={() => handleClickBtn(3, "Country side")} />
                                     </MyComponent>
-                                    </>
                                 }
                                 {(theme !== "" && data.step === 3) &&
-                                    <>
                                     <MyComponent>
                                         <CircleButton name="Weekend" className="child" key="1" sel="1" onClick={() => handleClickBtn(4, "Weekend")} />
                                         <CircleButton name="Weekish" className="child" key="2" sel="2" onClick={() => handleClickBtn(4, "Weekish")} />
                                         <CircleButton name="Long Weekend" className="child" key="3" sel="3" onClick={() => handleClickBtn(4, "Long Weekend")} />
                                         <CircleButton name="Longer" className="child" key="4" sel="4" onClick={() => handleClickBtn(4, "Longer")} />
                                     </MyComponent>
-                                    </>
                                 }
                                 {(howLong !== "" && data.step === 4) &&
                                     <>
