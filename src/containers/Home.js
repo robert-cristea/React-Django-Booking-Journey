@@ -236,14 +236,12 @@ const Home = (props) => {
                             <hr className="mb-4" style={{ width: "30%" }} />
                             <div className="circle-field">
                                 {(data.step === 0) &&
-                                    // <>
                                     <MyComponent>
                                         <CircleButton name="Family" className="child" key="1" sel="1" onClick={() => handleClickBtn(1, "Family")} />
                                         <CircleButton name="Friends" className="child" key="2" sel="2" onClick={() => handleClickBtn(1, "Friends")} />
                                         <CircleButton name="Couple" className="child" key="3" sel="3" onClick={() => handleClickBtn(1, "Couple")} />
                                         <CircleButton name="Solo" className="child" key="4" sel="4" onClick={() => handleClickBtn(1, "Solo")} />
                                     </MyComponent>
-                                    // </>
                                 }
                                 {(showNumberPage === 1) &&
                                     <MyComponent>
