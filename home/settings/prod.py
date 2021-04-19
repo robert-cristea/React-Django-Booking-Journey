@@ -27,10 +27,10 @@ AUTH_PASSWORD_VALIDATORS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-CORS_ORIGIN_WHITELIST = (
-    'http://3.23.24.90',
-    'http://localhost:3000',
-    'http://*'
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'http://3.23.24.90',
+#     'http://localhost:3000',
+#     'http://*'
+# )
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
