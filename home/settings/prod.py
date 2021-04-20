@@ -5,7 +5,7 @@ from .base import *
 DEBUG = False
 
 ALLOWED_HOSTS += ['http://3.23.24.90',"localhost",'3.133.142.214']
-WSGI_APPLICATION = 'home.wsgi.prod.application'
+WSGI_APPLICATION = 'home.wsgi.application'
 
 DATABASES = {
     'default': {
