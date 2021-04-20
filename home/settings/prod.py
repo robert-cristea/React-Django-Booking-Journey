@@ -3,15 +3,16 @@
 from .base import *
 
 DEBUG = False
-ALLOWED_HOSTS += ['http://3.23.24.90',"localhost"]
+
+ALLOWED_HOSTS += ['http://3.23.24.90',"localhost",'3.133.142.214']
 WSGI_APPLICATION = 'home.wsgi.prod.application'
 
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.mysql',
     'NAME': 'natoosa',
-    'USER': 'root',
-    'PASSWORD': '',
+    'USER': 'user_natoosa',
+    'PASSWORD': 'db_password*',
     'HOST': 'localhost',
     'PORT': '3306',
     }

@@ -2,7 +2,8 @@
 
 from .base import *
 
-ALLOWED_HOSTS += ['3.23.24.90','localhost']
+
+ALLOWED_HOSTS += ['3.23.24.90','localhost','3.133.142.214']
 DEBUG = True
 
 WSGI_APPLICATION = 'home.wsgi.dev.application'
