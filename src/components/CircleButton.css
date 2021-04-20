@@ -1,0 +1,87 @@
+.circle-button {
+	color: white;
+	opacity: 100%;
+	border: 2px solid #d0d0d0;
+	cursor: pointer;
+	padding-top: 27px;
+	padding-bottom: 27px;
+}
+
+.big-circle-btn {
+	width: 145px;
+	height: 121px;
+	background-color: #dc5921!important;
+}
+
+.small-circle-btn {
+	width: 98px;
+	height: 82px;
+	background-color: #f3733c!important;
+}
+
+.circleBtnFont {
+	font-size: 26px;
+	line-height: 1.2;
+}
+
+:root {
+	--animation-time:2s;
+	/* --animation-degree:25deg; */
+	--animation-length:-20px;
+}
+
+@keyframes move1 {
+	0% {transform: translate(5px,5px);}
+	100% {transform: translate(-10px,-10px);}
+}
+@keyframes move2 {
+	0% {transform: translate(10px,-10px);}
+	100% {transform: translate(-5px,12px);}
+}
+@keyframes move3 {
+	0% {transform: translate(-6px,-1px);}
+	100% {transform: translate(14px,12px);}
+}
+@keyframes move4 {
+	0% {transform: translate(-1px,15px);}
+	100% {transform: translate(12px,-8px);}
+}
+@keyframes move5 {
+	0% {transform: translate(-10px,5px);}
+	100% {transform: translate(15px,10px);}
+}
+@keyframes move6 {
+	0% {transform: translate(12px,-14px);}
+	100% {transform: translate(-12px,-5px);}
+}
+@keyframes scale1 {
+	0% {transform: scale(1,1);}
+	100% {transform: scale(1.2,1.2);}
+}
+
+.circle-button[sel="1"] {
+	animation: move1 var(--animation-time) ease alternate infinite;
+}
+
+.circle-button[sel="2"] {
+	animation: move2 var(--animation-time) ease alternate infinite;
+}
+.circle-button[sel="3"] {
+	animation: move3 var(--animation-time) ease alternate infinite;
+}
+.circle-button[sel="4"] {
+	animation: move4 var(--animation-time) ease alternate infinite;
+}
+.circle-button[sel="5"] {
+	animation: move5 var(--animation-time) ease alternate infinite;
+}
+.circle-button[sel="6"] {
+	animation: move6 var(--animation-time) ease alternate infinite;
+}
+
+.circle-button:hover {
+	animation:scale1 1s linear 1;
+	transform: scale(1.2,1.2);
+}
+
+
