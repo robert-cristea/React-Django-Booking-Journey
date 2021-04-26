@@ -40,7 +40,10 @@ npm start
 ## For deploying
 
 ```json
+pip install -r requirements.txt
 npm run build
+python manage.py collectstatic
+python manage.py runserver 
 ```
 
 

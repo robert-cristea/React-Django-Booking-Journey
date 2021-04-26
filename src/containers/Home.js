@@ -167,7 +167,7 @@ const Home = (props) => {
         console.log("endDate  " + endDate);
 
         axios
-            .post(BACKEND_URL + 'api-vacation/storeData', {
+            .post(BACKEND_URL + '/api-vacation/storeData', {
                 'who': who,
                 'number': number,
                 'theme': theme,
