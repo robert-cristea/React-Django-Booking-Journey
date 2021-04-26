@@ -10,7 +10,7 @@ WSGI_APPLICATION = 'home.wsgi.application'
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'natoosa',
+    'NAME': 'natoosa_db',
     'USER': 'user_natoosa',
     'PASSWORD': 'db_password*',
     'HOST': 'localhost',
