@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vacation
+from .models import User
 
 # Register your models here.
-admin.site.register(Vacation)
+admin.site.register(User)

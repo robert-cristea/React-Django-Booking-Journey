@@ -160,3 +160,8 @@ body {
 ._2MD0k {
   display: flex
 }
+
+.font-greeting {
+	font-size: 4rem;
+	padding-top: 6.25rem;
+}

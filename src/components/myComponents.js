@@ -24,9 +24,6 @@ const MyComponent = (props) => {
 	useEffect(() => {
 		handleResize();
 		window.addEventListener("resize",handleResize)
-		return () => {
-			console.log("ssssssss")
-		}
 	})
 
 	const options = {

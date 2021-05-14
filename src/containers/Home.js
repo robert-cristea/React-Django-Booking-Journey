@@ -42,11 +42,11 @@ const Home = (props) => {
             { 'name': 'Solo', 'clickable': false }
         ],
         2: [
-            { 'name': '2', 'clickable': false },
-            { 'name': '3', 'clickable': false },
-            { 'name': '4', 'clickable': false },
-            { 'name': '5', 'clickable': false },
-            { 'name': '6', 'clickable': false }
+            { 'name': 2, 'clickable': false },
+            { 'name': 3, 'clickable': false },
+            { 'name': 4, 'clickable': false },
+            { 'name': 5, 'clickable': false },
+            { 'name': 6, 'clickable': false }
         ],
         3: [
             { 'name': 'Weekend', 'clickable': false },
@@ -63,7 +63,7 @@ const Home = (props) => {
             { 'name': 'Beach', 'clickable': false },
             { 'name': 'City Life', 'clickable': false },
             { 'name': 'Nature', 'clickable': false },
-            { 'name': 'Suprise me', 'clickable': false },
+            { 'name': 'Surprise me', 'clickable': false },
             { 'name': 'Country side', 'clickable': false },
             { 'name': 'Other', 'clickable': false }
         ],
@@ -129,17 +129,14 @@ const Home = (props) => {
         return isMounted
     }
 
-    // useEffect(() => {
-    //     setTimeStamp(new Date().toUTCString())
-    //     fetch('https://api.ipify.org/?format=json')
-    //         .then(response => response.json())
-    //         .then(res => {
-    //             setUserIp(res.ip)
-
-    //         })
-    //     return () => {
-    //     }
-    // }, [])
+    useEffect(() => {
+        setTimeStamp(new Date().toUTCString())
+        fetch('https://api.ipify.org/?format=json')
+            .then(response => response.json())
+            .then(res => {
+                setUserIp(res.ip)
+            })
+    }, [])
 
     useEffect(() => {
         if (isMounted) {
@@ -214,11 +211,25 @@ const Home = (props) => {
     }, [multiTheme])
 
     useEffect(() => {
-        if (step === 5) {
-            handleTransmitData();
-        }
-        if (step === 2) {
-            setIsMultiple(false);
+        switch(step){
+            case 1:
+                setMultiWho([]);
+                break;
+            case 2:
+                setIsMultiple(false);
+                setMultiNumber([]);
+                break;
+            case 3:
+                setMultiPeriod([]);
+                break;
+            case 4:
+                setMultiTheme([]);
+                break;
+            case 5:
+                handleTransmitData();
+                break;
+            default:
+                break;
         }
     }, [step])
 
@@ -259,12 +270,15 @@ const Home = (props) => {
         setIsMultiple(false);
         switch (step) {
             case 2:
+                setMultiNumber([]);
                 setStep(1);
                 break;
             case 3:
+                setMultiPeriod([]);
                 setStep(2);
                 break;
             case 4:
+                setMultiTheme([]);
                 setStep(3);
                 break;
             default:
@@ -306,23 +320,24 @@ const Home = (props) => {
         console.log("number  " + multiNumber);
         console.log("howlong  " + multiPeriod);
         console.log("theme  " + multiTheme);
-
-        // axios
-        //     .post(BACKEND_URL + '/api-vacation/storeData', {
-        //         'who': who,
-        //         'number': number,
-        //         'theme': theme,
-        //         'howlong': howLong,
-        //         // 'fromDate': dateFormat(new Date(startDate), "yyyy-mm-dd"),
-        //         // 'toDate': dateFormat(new Date(endDate), "yyyy-mm-dd")
-        //     }, {
-        //         headers: {
-        //             // 'Accept': 'application/json',
-        //             // 'Content-Type': 'application/json',
-        //         },
-        //     })
-        //     .then(res => console.log('Results: ' + res))
-        //     .catch(err => console.log('Login error: ' + err))
+        console.log(dateFormat(timeStamp,"yyyy-mm-dd hh:mm:ss"));
+        console.log(BACKEND_URL)
+        axios
+            .post(BACKEND_URL + '/api-vacation/storeData', {
+                'who': multiWho,
+                'number': multiNumber,
+                'howlong': multiPeriod,
+                'theme': multiTheme,
+                'userip':userIp,
+                'timestamp':dateFormat(timeStamp,"yyyy-mm-dd hh:mm:ss")
+            }, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(res => console.log('Results: ' + res))
+            .catch(err => console.log('Login error: ' + err))
 
     }
 
@@ -343,7 +358,7 @@ const Home = (props) => {
                         <p className="bg-white text-center rounded-lg py-1 notify">Find your next destination</p>
                     </div>
                 </div>
-                <div className="w-full d-flex align-items-center px-4 form-card">
+                <div className="w-full d-flex align-items-center justify-content-center px-4 form-card">
                     {step < 5 ?
                         <div className="w-full mx-auto shadow-lg br-card" style={{ display: 'flex', flexDirection: 'column', width: "40vw", minWidth: "400px", position: 'relative' }}>
                             <div className="py-3 px-4">
@@ -404,7 +419,6 @@ const Home = (props) => {
                                 </div>
                             </div>
                         </div> : <p className="text-center font-weight-medium font-greeting">Searching <span style={{ display: "block" }}>for the best vacation</span> for you</p>}
-
                 </div>
             </div>
         </div>
