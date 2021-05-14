@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from "axios";
 import { CircleButton } from "../components/CircleButton";
 import { CircularProgressBar } from '../components/CircularProgressBar';
@@ -7,310 +7,403 @@ import MyComponent from '../components/myComponents'
 import dateFormat from 'dateformat'
 import { addDays } from 'date-fns';
 
-import {BACKEND_URL} from '../utils/request';
+import { BACKEND_URL } from '../utils/request';
 import logo from "../images/logo.png";
 import backArrow from "../images/backArrow.png";
+import forwardArrow from "../images/forwardArrow.png";
 import "./home.css";
 import "./range.css";
-import 'react-date-range/dist/styles.css'; 
-import 'react-date-range/dist/theme/default.css'; 
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+import SwitchComponent from '../components/SwitchComponent';
+import _ from "lodash";
 
 const Home = (props) => {
 
-    const [who, setWho] = useState("");
-    const [number, setNumber] = useState("");
-    const [theme, setTheme] = useState("");
-    const [howLong, setHowLong] = useState("");
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(addDays(new Date(), 7));
+    // set user info
+    const [userIp, setUserIp] = useState("")
+    const [timeStamp, setTimeStamp] = useState("")
+    const [step, setStep] = useState(1)
+    
+    const [multiWho, setMultiWho] = useState([])
+    const [multiNumber, setMultiNumber] = useState([])
+    const [multiPeriod, setMultiPeriod] = useState([])
+    const [multiTheme, setMultiTheme] = useState([])
+    
+    const isMounted = useMounted();
+    const [isMultiple, setIsMultiple] = useState(false)
+    const [showLongerPeriod, setShowLongerPeriod] = useState(false)
 
-    const [data, setdata] = useState({ step: 0, item: '' })
-    const [showNumberPage, setShowNumberPage] = useState(0);
-    const [showFinalPage, setShowFinalPage] = useState(false);
+    const initialButtons = {
+        1: [
+            { 'name': 'Family', 'clickable': false },
+            { 'name': 'Friends', 'clickable': false },
+            { 'name': 'Couple', 'clickable': false },
+            { 'name': 'Solo', 'clickable': false }
+        ],
+        2: [
+            { 'name': '2', 'clickable': false },
+            { 'name': '3', 'clickable': false },
+            { 'name': '4', 'clickable': false },
+            { 'name': '5', 'clickable': false },
+            { 'name': '6', 'clickable': false }
+        ],
+        3: [
+            { 'name': 'Weekend', 'clickable': false },
+            { 'name': 'Weekish', 'clickable': false },
+            { 'name': 'Long Weekend', 'clickable': false },
+            { 'name': 'Midweek', 'clickable': false },
+            { 'name': 'Longer', 'clickable': false },
+            { 'name': '2 Weeks', 'clickable': false },
+            { 'name': '3 Weeks', 'clickable': false },
+            { 'name': '4 Weeks', 'clickable': false },
+            { 'name': '5 Weeks', 'clickable': false }
+        ],
+        4: [
+            { 'name': 'Beach', 'clickable': false },
+            { 'name': 'City Life', 'clickable': false },
+            { 'name': 'Nature', 'clickable': false },
+            { 'name': 'Suprise me', 'clickable': false },
+            { 'name': 'Country side', 'clickable': false },
+            { 'name': 'Other', 'clickable': false }
+        ],
+    }
+    const [buttonArray, setbuttonArray] = useState({ ...initialButtons })
 
-    const [date, setDate] = useState(
-        {
-            startDate: new Date(),
-            endDate: addDays(new Date(), 0),
-            key: 'selection'
+    const handleSwitchChange = () => {
+        setIsMultiple(!isMultiple)
+        switch (step) {
+            case 1:
+                setMultiWho([]);
+                break;
+            case 2:
+                setMultiNumber([]);
+                break;
+            case 3:
+                setMultiPeriod([]);
+                break;
+            case 4:
+                setMultiTheme([]);
+                break;
+            default:
+                break;
         }
-    );
+    }
 
-    useEffect(() => {
-
-        if (data.step === 1) {
-            setWho(data.item);
-            switch (data.item) {
-                case "Family":
-                    setShowNumberPage(1);
-                    break;
-                case "Friends":
-                    setShowNumberPage(2);
-                    break;
-                case "Solo":
-                    setdata({ step: 2, item: "1" });
-                    break;
-                case "Couple":
-                    setdata({ step: 2, item: "2" });
-                    break;
-                default:
-                    setShowNumberPage(3);
+    const displaybuttons = (step, subStage) => {
+        if (step !== 3) {
+            return (
+                buttonArray[step].map((item, index) =>
+                    <CircleButton name={item.name} className="child" key={index} sel={index} clicked={item.clickable} onClick={() => handleClickBtn(step, index)} />
+                ));
+        } else {
+            if (subStage === 1) {
+                const stage1_arr = buttonArray[step].slice(0, 5);
+                return (
+                    stage1_arr.map((item, index) =>
+                        <CircleButton name={item.name} className="child" key={index} sel={index} clicked={item.clickable} onClick={() => handleClickBtn(step, index)} />
+                    ));
+            }
+            if (subStage === 2) {
+                const stage2_arr = buttonArray[step].slice(4, 9);
+                return (
+                    stage2_arr.map((item, index) =>
+                        <CircleButton name={item.name} className="child" key={index} sel={index} clicked={item.clickable} onClick={() => handleClickBtn(step, index + 4)} />
+                    ));
+            }
+            if (subStage === 3) {
+                const stage3_arr = buttonArray[step].slice(0, 4).concat(buttonArray[step].slice(5, 8));
+                return (
+                    stage3_arr.map((item, index) =>
+                        <CircleButton name={item.name} className="child" key={index} sel={index} clicked={item.clickable} onClick={() => { if (index < 4) handleClickBtn(step, index); else handleClickBtn(step, index + 1); }} />
+                ));
             }
         }
+    }
 
-        if (data.step === 2) {
-            setNumber(data.item);
-            setShowNumberPage(0);
-        }
+    function useMounted() {
+        const [isMounted, setIsMounted] = useState(false)
+        useEffect(() => {
+            setIsMounted(true)
+        }, [])
+        return isMounted
+    }
 
-        if (data.step === 3) {
-            setTheme(data.item);
-        }
+    // useEffect(() => {
+    //     setTimeStamp(new Date().toUTCString())
+    //     fetch('https://api.ipify.org/?format=json')
+    //         .then(response => response.json())
+    //         .then(res => {
+    //             setUserIp(res.ip)
 
-        if (data.step === 4) {
-            setHowLong(data.item);
-        }
-        if (data.step === 5) {
-            setStartDate(data.item.start);
-            setEndDate(data.item.end);
-        }
-    }, [data.item, data.step]);
-
+    //         })
+    //     return () => {
+    //     }
+    // }, [])
 
     useEffect(() => {
-        if (data.step === 5) {
+        if (isMounted) {
+            if (isMultiple) {
+                return;
+            } else {
+                for (let i = 0; i < buttonArray[1].length; i++) {
+                    buttonArray[1][i]['clickable'] = false;
+                    setbuttonArray({ ...buttonArray })
+                }
+                if (multiWho.length !== 0 && !(multiWho.includes('Solo') || multiWho.includes('Couple'))) {
+                    setStep(2);
+                }
+                if (multiWho.includes('Solo') || multiWho.includes('Couple')) {
+                    if (multiWho.includes('Solo')) {
+                        setMultiNumber([...multiNumber, 1])
+                    } else {
+                        setMultiNumber([...multiNumber, 2])
+                    }
+                    setStep(3)
+                }
+            }
+        }
+    }, [multiWho])
+
+    useEffect(() => {
+        if (isMounted) {
+            if (isMultiple) {
+                return;
+            } else {
+                for (let i = 0; i < buttonArray[2].length; i++) {
+                    buttonArray[2][i]['clickable'] = false;
+                    setbuttonArray({ ...buttonArray })
+                }
+                if (multiNumber.length !== 0) {
+                    setStep(3);
+                }
+            }
+        }
+    }, [multiNumber])
+
+    useEffect(() => {
+        if (isMounted) {
+            if (isMultiple) {
+                return;
+            } else {
+                for (let i = 0; i < buttonArray[3].length; i++) {
+                    buttonArray[3][i]['clickable'] = false;
+                    setbuttonArray({ ...buttonArray })
+                }
+                if (multiPeriod.length !== 0) {
+                    setStep(4);
+                }
+            }
+        }
+    }, [multiPeriod])
+
+    useEffect(() => {
+        if (isMounted) {
+            if (isMultiple) {
+                return;
+            } else {
+                for (let i = 0; i < buttonArray[4].length; i++) {
+                    buttonArray[4][i]['clickable'] = false;
+                    setbuttonArray({ ...buttonArray })
+                }
+                if (multiTheme.length !== 0) {
+                    setStep(5);
+                }
+            }
+        }
+    }, [multiTheme])
+
+    useEffect(() => {
+        if (step === 5) {
             handleTransmitData();
         }
-    }, [startDate, endDate]);
+        if (step === 2) {
+            setIsMultiple(false);
+        }
+    }, [step])
 
-    const handleDatePickerChange = (item) => {
-        setDate(item.selection);
+    const handleForwardBtnClick = () => {
+        switch (step) {
+            case 1:
+                if ((multiWho.length === 1 && multiWho.includes('Solo')) ||
+                    (multiWho.length === 1 && multiWho.includes('Couple')) ||
+                    (multiWho.length === 2 && multiWho.includes('Solo') && multiWho.includes('Couple'))) {
+
+                    if ((multiWho.length === 1 && multiWho.includes('Solo'))) setMultiNumber([...multiNumber, 1]);
+                    if ((multiWho.length === 1 && multiWho.includes('Couple'))) setMultiNumber([...multiNumber, 2]);
+                    if ((multiWho.length === 2 && multiWho.includes('Solo') && multiWho.includes('Couple'))) {
+                        setMultiNumber([...multiNumber, 3]);
+                    }
+                    setStep(3)
+                }
+                else {
+                    setStep(2);
+                }
+                break;
+            case 2:
+                setStep(3);
+                break;
+            case 3:
+                setStep(4);
+                break;
+            case 4:
+                setStep(5);
+                break;
+            default:
+                break;
+        }
+        setIsMultiple(false);
+    }
+
+    const handleBackBtnClick = () => {
+        setIsMultiple(false);
+        switch (step) {
+            case 2:
+                setStep(1);
+                break;
+            case 3:
+                setStep(2);
+                break;
+            case 4:
+                setStep(3);
+                break;
+            default:
+                break;
+        }
     }
 
     const handleClickBtn = (x, y) => {
-        setdata({ step: x, item: y });
-    }
+        buttonArray[x][y]['clickable'] = true;
+        setbuttonArray({ ...buttonArray })
 
-    const handleClickBackBtn = () => {
-
-        var step = data.step;
-        switch (step) {
-            case 1:
-                setWho("");
-                setdata({ step: 0, item: "" });
-                setShowNumberPage(0);
-                break;
-            case 2:
-                setNumber("");
-                if (who === "Couple" || who === "Solo" || who === "") {
-                    setdata({ step: 0, item: "" });
-                }
-                else {
-                    setdata({ step: 1, item: who });
-                }
-                break;
-            case 3:
-                setTheme("");
-                setdata({ step: 2, item: number });
-                break;
-            case 4:
-                setHowLong("");
-                setdata({ step: 3, item: theme });
-                break;
-            case 5:
-                setStartDate(new Date().getTime());
-                setEndDate("");
-                setdata({ step: 4, item: howLong });
-                break;
-            default:
-                break;
+        if (x === 1 && !multiWho.includes(buttonArray[x][y]['name'])) {
+            setMultiWho([...multiWho, buttonArray[x][y]['name']])
         }
-    }
-
-    const handleSkipBtn = () => {
-        switch (data.step) {
-            case 0:
-                setdata({ step: 1, item: null });
-                setdata({ step: 2, item: null });
-                break;
-            case 1:
-                setdata({ step: 2, item: null });
-                break;
-            case 2:
-                setdata({ step: 3, item: null });
-                break;
-            case 3:
-                setdata({ step: 4, item: null });
-                break;
-            case 4:
-                setdata({ step: 5, item: { start: null, end: null } });
-                break;
-            default:
-                break;
+        // if (x === 2 && !multiNumber.includes(buttonArray[x][y]['name'])) {
+        //     setMultiNumber([...multiNumber, buttonArray[x][y]['name']])
+        // }
+        if (x === 2) {
+            setMultiNumber([...multiNumber, buttonArray[x][y]['name']])
+            setStep(3);
+            setIsMultiple(false)
         }
-    }
+        if (x === 3 && !multiPeriod.includes(buttonArray[x][y]['name'])) {
+            if (buttonArray[x][y]['name'] === "Longer") {
+                setShowLongerPeriod(true);
+            } else {
+                setMultiPeriod([...multiPeriod, buttonArray[x][y]['name']])
+            }
 
-    const handleNextBtn = () => {
-        setdata({ step: 5, item: { start: date.startDate, end: date.endDate } })
-
+        }
+        if (x === 4 && !multiTheme.includes(buttonArray[x][y]['name'])) {
+            setMultiTheme([...multiTheme, buttonArray[x][y]['name']])
+        }
     }
 
     const handleTransmitData = () => {
 
-        setShowFinalPage(true);
+        console.log("who  " + multiWho);
+        console.log("number  " + multiNumber);
+        console.log("howlong  " + multiPeriod);
+        console.log("theme  " + multiTheme);
 
-        console.log("who  " + who);
-        console.log("number  " + number);
-        console.log("theme  " + theme);
-        console.log("howlong  " + howLong);
-        console.log("startDate  " + startDate);
-        console.log("endDate  " + endDate);
-
-        axios
-            .post(BACKEND_URL + '/api-vacation/storeData', {
-                'who': who,
-                'number': number,
-                'theme': theme,
-                'howlong': howLong,
-                'fromDate': dateFormat(new Date(startDate),"yyyy-mm-dd"),
-                'toDate': dateFormat(new Date(endDate),"yyyy-mm-dd")
-            }, {
-                headers: {
-                    // 'Accept': 'application/json',
-                    // 'Content-Type': 'application/json',
-                },
-            })
-            .then(res => console.log('Results: ' + res))
-            .catch(err => console.log('Login error: ' + err))
+        // axios
+        //     .post(BACKEND_URL + '/api-vacation/storeData', {
+        //         'who': who,
+        //         'number': number,
+        //         'theme': theme,
+        //         'howlong': howLong,
+        //         // 'fromDate': dateFormat(new Date(startDate), "yyyy-mm-dd"),
+        //         // 'toDate': dateFormat(new Date(endDate), "yyyy-mm-dd")
+        //     }, {
+        //         headers: {
+        //             // 'Accept': 'application/json',
+        //             // 'Content-Type': 'application/json',
+        //         },
+        //     })
+        //     .then(res => console.log('Results: ' + res))
+        //     .catch(err => console.log('Login error: ' + err))
 
     }
 
     return (
         <div className="w-full">
-
             <div className="w-full mx-auto">
+                <div className="header bg-img">
+                    <div className="d-flex justify-content-between align-items-center mx-5" style={{ paddingTop: "14px" }}>
+                        <a className="logo" href="#home"><img src={logo} alt="logo" /></a>
 
-                <div className="bg-img">
-                    <nav className="navbar navbar-expand-lg navbar-light justify-content-between">
-                        <a className="navbar-brand logo " href="#home"><img src={logo} alt="logo" /></a>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="collapse navbar-collapse mr-5 pt-3" style={{ flexGrow: "0" }} id="navbarNav">
-                            <ul className="navbar-nav topnav">
-                                <li className="nav-item px-2 active">
-                                    <a className="nav-link" href="#home" style={{ color: "brown" }}>Home</a>
-                                </li>
-                                <li className="nav-item px-2">
-                                    <a className="nav-link" href="#about">About</a>
-                                </li>
-                                <li className="nav-item px-2">
-                                    <a className="nav-link" href="#contact">Contact</a>
-                                </li>
-                            </ul>
+                        <div className="d-flex topnav" style={{ flexGrow: "0" }}>
+                            <a href="#home" style={{ color: "brown" }}>Home</a>
+                            <a href="#about">About</a>
+                            <a href="#contact">Contact</a>
                         </div>
-                    </nav>
-                    <div className="d-flex px-39 pt-29">
+                    </div>
+                    <div className="d-flex mx-5 pt-3">
                         <p className="bg-white text-center rounded-lg py-1 notify">Find your next destination</p>
                     </div>
                 </div>
-
-                <div className="w-full px-4 pt-29">
-                    {!showFinalPage ?
-                        <div className="w-full mx-auto shadow-lg py-3 px-4 br-card">
-
-                            <div className="d-flex justify-content-between">
-                                <p style={{ fontWeight: "300", fontSize: "20px" }}>Adjust your search:</p>
-
-                                {data.step === 0 && <CircularProgressBar percentage={0} />}
-                                {data.step > 0 && <CircularProgressBar percentage={25 * (data.step - 1)} />}
-
+                <div className="w-full d-flex align-items-center px-4 form-card">
+                    {step < 5 ?
+                        <div className="w-full mx-auto shadow-lg br-card" style={{ display: 'flex', flexDirection: 'column', width: "40vw", minWidth: "400px", position: 'relative' }}>
+                            <div className="py-3 px-4">
+                                <div className="d-flex justify-content-between">
+                                    <p style={{ fontWeight: "300", fontSize: "1.2rem" }}>Adjust your search:</p>
+                                    <div>
+                                        {step === 1 && <CircularProgressBar percentage={0} />}
+                                        {step > 1 && <CircularProgressBar percentage={25 * (step-1)} />}
+                                    </div>
+                                </div>
+                                <h2 className="text-center">
+                                    {step === 1 && "Who is travelling?"}
+                                    {step === 2 && "How Many?"}
+                                    {step === 3 && "How long?"}
+                                    {step === 4 && "Vacation Theme"}
+                                </h2>
+                                <hr style={{ width: "30%", marginTop: "10px", marginBottom: "10px" }} />
+                                <div className="d-flex justify-content-between">
+                                    <div></div>
+                                    <SwitchComponent onChange={handleSwitchChange} checked={isMultiple} />
+                                </div>
                             </div>
-                            <h1 className="text-center">
-                                {(data.step === 0 || data.step === 1) && "Who is travelling?"}
-                                {data.step === 2 && "Vacation Theme"}
-                                {data.step === 3 && "How long?"}
-                                {data.step === 4 && "Time frame"}
-
-                            </h1>
-                            <hr className="mb-4" style={{ width: "30%" }} />
-                            <div className="circle-field">
-                                {(data.step === 0) &&
+                            <div className="circle-field w-full" style={{ height: "64%" }}>
+                                {(step === 1) &&
                                     <MyComponent>
-                                        <CircleButton name="Family" className="child" key="1" sel="1" onClick={() => handleClickBtn(1, "Family")} />
-                                        <CircleButton name="Friends" className="child" key="2" sel="2" onClick={() => handleClickBtn(1, "Friends")} />
-                                        <CircleButton name="Couple" className="child" key="3" sel="3" onClick={() => handleClickBtn(1, "Couple")} />
-                                        <CircleButton name="Solo" className="child" key="4" sel="4" onClick={() => handleClickBtn(1, "Solo")} />
+                                        {displaybuttons(1, 0)}
                                     </MyComponent>
                                 }
-                                {(showNumberPage === 1) &&
+                                {(step === 2) &&
                                     <MyComponent>
-                                        <CircleButton name="3" className="child" key="2" size="sm" sel="1" onClick={() => handleClickBtn(2, "3")} />
-                                        <CircleButton name="4" className="child" key="3" size="sm" sel="2" onClick={() => handleClickBtn(2, "4")} />
-                                        <CircleButton name="5" className="child" key="4" size="sm" sel="3" onClick={() => handleClickBtn(2, "5")} />
-                                        <CircleButton name="Family" className="child" sel="1" key="4" />
-                                        <CircleButton name="6+" className="child" key="5" sel="5" size="sm" onClick={() => handleClickBtn(2, "6+")} />
+                                        {displaybuttons(2, 0)}
                                     </MyComponent>
                                 }
-                                {(showNumberPage === 2) &&
+                                {(step === 3 && !isMultiple) && (showLongerPeriod ?
                                     <MyComponent>
-                                        <CircleButton name="2" className="child" key="2" sel="1" size="sm" onClick={() => handleClickBtn(2, "2")} />
-                                        <CircleButton name="3" className="child" key="3" sel="2" size="sm" onClick={() => handleClickBtn(2, "3")} />
-                                        <CircleButton name="4" className="child" key="4" sel="3" size="sm" onClick={() => handleClickBtn(2, "4")} />
-                                        <CircleButton name="Friends" className="child" sel="4" key="1" />
-                                        <CircleButton name="5" className="child" key="5" sel="5" size="sm" onClick={() => handleClickBtn(2, "5")} />
-                                        <CircleButton name="6+" className="child" key="6" sel="6" size="sm" onClick={() => handleClickBtn(2, "6+")} />
+                                        {displaybuttons(3, 2)}
+                                    </MyComponent> :
+                                    <MyComponent>
+                                        {displaybuttons(3, 1)}
+                                    </MyComponent>)
+                                }
+                                {(step === 3 && isMultiple) &&
+                                    <MyComponent>
+                                        {displaybuttons(3, 3)}
                                     </MyComponent>
                                 }
-                                {(number !== "" && data.step === 2) &&
+                                {(step === 4) &&
                                     <MyComponent>
-                                        <CircleButton name="Beach" className="child" key="1" sel="1" onClick={() => handleClickBtn(3, "Beach")} />
-                                        <CircleButton name="City life" className="child" key="2" sel="2" onClick={() => handleClickBtn(3, "City life")} />
-                                        <CircleButton name="Nature" className="child" key="3" sel="3" onClick={() => handleClickBtn(3, "Nature")} />
-                                        <CircleButton name="Suprise me" className="child" key="4" sel="4" onClick={() => handleClickBtn(3, "Suprise me")} />
-                                        <CircleButton name="Country side" className="child" key="5" sel="5" onClick={() => handleClickBtn(3, "Country side")} />
+                                        {displaybuttons(4, 0)}
                                     </MyComponent>
-                                }
-                                {(theme !== "" && data.step === 3) &&
-                                    <MyComponent>
-                                        <CircleButton name="Weekend" className="child" key="1" sel="1" onClick={() => handleClickBtn(4, "Weekend")} />
-                                        <CircleButton name="Weekish" className="child" key="2" sel="2" onClick={() => handleClickBtn(4, "Weekish")} />
-                                        <CircleButton name="Long Weekend" className="child" key="3" sel="3" onClick={() => handleClickBtn(4, "Long Weekend")} />
-                                        <CircleButton name="Longer" className="child" key="4" sel="4" onClick={() => handleClickBtn(4, "Longer")} />
-                                    </MyComponent>
-                                }
-                                {(howLong !== "" && data.step === 4) &&
-                                    <>
-                                        <div className="w-full">
-                                            <DateRangePicker
-                                                onChange={handleDatePickerChange}
-                                                showSelectionPreview={true}
-                                                moveRangeOnFirstSelection={false}
-                                                months={1}
-                                                ranges={[date]}
-                                                direction="vertical"
-                                                rangeColors={["#DC5921"]}
-                                                weekdayDisplayFormat={"EEEEEE"}
-                                                scroll={{ enabled: true }}
-                                                minDate={new Date()}
-                                            />
-                                        </div>
-
-                                        <div className="row py-4">
-                                            <button className="btn btn-success mx-auto" onClick={handleNextBtn}>Next</button>
-                                        </div>
-                                    </>
                                 }
                             </div>
 
-                            <div className="d-flex justify-content-between align-items-center card-bottom">
-                                {
-                                    data.step > 0 ? <div><img src={backArrow} alt="backArrow" onClick={handleClickBackBtn} style={{ float: "left", width: "38px" }} /></div> : <div></div>
-                                }
-                                <p className="font-skip" onClick={handleSkipBtn}>Skip</p>
+                            <div className="pb-3 px-3" style={{ width: "100%", position: 'absolute', bottom: 0 }}>
+                                <div className="d-flex justify-content-between w-full align-items-center">
+                                    {step > 1 ? <img src={backArrow} alt="backArrow" onClick={handleBackBtnClick} style={{ width: "1.8rem" }} /> : <div></div>}
+                                    <div><img src={forwardArrow} alt="forwardArrow" onClick={handleForwardBtnClick} style={{ width: "1.8rem" }} /></div>
+                                </div>
                             </div>
-                        </div>
-                        : <p className="text-center font-weight-medium font-greeting">Searching <span style={{ display: "block" }}>for the best vacation</span> for you</p>}
+                        </div> : <p className="text-center font-weight-medium font-greeting">Searching <span style={{ display: "block" }}>for the best vacation</span> for you</p>}
 
                 </div>
             </div>

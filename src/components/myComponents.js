@@ -1,19 +1,43 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import BubbleUI from "react-bubble-ui";
 import "react-bubble-ui/dist/index.css";
-// import Child from "./ChildComponent";
-import "./myComponent.css";
 
 const MyComponent = (props) => {
+
+	const [breakpoint, setbreakpoint] = useState(0);
+
+	//choose the screen size
+	const handleResize = () => {
+		const screenwidth = window.innerWidth;
+
+		if(screenwidth < 600) {
+			setbreakpoint(3);
+		}else if(screenwidth >= 600 && screenwidth <= 768){
+			setbreakpoint(2);
+		}else if(screenwidth >= 768 && screenwidth <= 992){
+			setbreakpoint(1);
+		}else{
+			setbreakpoint(0);
+		}
+	}
+
+	useEffect(() => {
+		handleResize();
+		window.addEventListener("resize",handleResize)
+		return () => {
+			console.log("ssssssss")
+		}
+	})
+
 	const options = {
-		"size": 145,
-		"minSize": 145,
-		"gutter": 15,
+		"size": breakpoint === 0? 100 : (breakpoint === 1? 90:(breakpoint === 2? 80 : 70)),
+		"minSize": breakpoint === 0? 100 : (breakpoint === 1? 90:(breakpoint === 2? 80 : 70)),
+		"gutter": 1,
 		"provideProps": true,
 		"numCols": 3,
 		"fringeWidth": 160,
-		"yRadius": 120,
-		"xRadius": 120,
+		"yRadius": 140,
+		"xRadius": 140,
 		"cornerRadius": 10,
 		"showGuides": false,
 		"compact": true,
@@ -21,13 +45,8 @@ const MyComponent = (props) => {
 		"cornerRadius":120
 	}
 
-	// const children = props.data.map((data, i) => {
-	// 	 return <Child data={data} className="child" key={i}>
-	// });
-	// const children = props.children;
-
 	return (
-		<BubbleUI options={options} className="myBubbleUI">
+		<BubbleUI options={options} className="myBubbleUI" style={{height:"100%"}}>
 			{props.children}
 		</BubbleUI>
 	);

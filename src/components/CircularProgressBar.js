@@ -1,10 +1,32 @@
-import React,{Component} from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 export const CircularProgressBar = (props) => {
+    const [size, setsize] = useState(38)
+    //choose the screen size
+    const handleResize = () => {
+        const screenwidth = window.innerWidth;
+
+        if (screenwidth < 600) {
+            setsize(25)
+        } else if (screenwidth >= 600 && screenwidth <= 768) {
+            setsize(28)
+        } else if (screenwidth >= 768 && screenwidth <= 992) {
+            setsize(32)
+        } else if (screenwidth >= 992 && screenwidth <= 1200) {
+            setsize(36)
+        }
+    }
+
+    useEffect(() => {
+        handleResize();
+        window.addEventListener("resize", handleResize)
+        return () => {
+        }
+    })
     return (
-        <div style={{ width: "38px", height: "38px" }}>
+        <div style={{ width: size, height: size }}>
             <CircularProgressbar
                 strokeWidth={20}
                 value={props.percentage}
@@ -43,7 +65,7 @@ export const CircularProgressBar = (props) => {
                     // Customize background - only used when the `background` prop is true
                     background: {
                         fill: '#3e98c7',
-                    },
+                    }
                 }}
             />
         </div>

@@ -1,125 +1,162 @@
-.bg-img {
-    /* The image used */
-    background-image: url("../images/desert.jpg");
-    /* max-width:1440px; */
-    min-height: 380px;
-  
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  
-    /* Needed to position the navbar */
-    position: relative;
-  }
-  
-  /* Position the navbar container inside the image */
-  .container {
-    width: auto;
-  }
-  
-  /* The navbar */
-  .topnav {
-    overflow: hidden;
-    background-color:none;
-    padding-top: 20px;
-  }
-  
-  /* Navbar links */
-  .topnav a {
-    color: #f2f2f2;
-    text-align: center;
-    padding: 8px 16px;
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: 600;
-  }
-  
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
+html {
+  height:100vh;
+}
 
-.logo {
-  padding-top:14px;
-  padding-left:39px;
+body {
+  min-width:500px;
+}
+
+/* header */
+.header {
+  height:30vh;
+}
+
+.bg-img {
+	/* The image used */
+	background-image: url('../images/desert.jpg');
+	/* Center and scale the image nicely */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	/* Needed to position the navbar */
+	position: relative;
+}
+
+.logo img {
+  width:15vw;
+  margin-top: 5px;
+  min-width:150px;
+  max-width: 210px;
+}
+
+/* Navbar links */
+.topnav {
+	overflow: hidden;
+	background-color: none;
+	padding-top: 20px;
+}
+
+.topnav a {
+	color: #f2f2f2;
+	text-align: center;
+	padding: 0.5rem 1rem;
+	text-decoration: none;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.topnav a:hover {
+	background-color: #ddd;
+	text-decoration: none;
+	color: black;
 }
 
 .notify {
-  font-size:37px;
-  font-weight: 600;
-  padding-left:10px;
-  padding-right:30px
+	font-size: 2rem;
+	font-weight: 600;
+	padding-left: 10px;
+	padding-right: 30px;
+	visibility: visible;
 }
 
-.font-weight-medium {
-  font-weight:600;
+.notify-wrapper {
+  padding-left:55px;
 }
 
-.pt-29 {
-  padding-top:29px
-}
-
-.px-39 {
-  padding-left:39px;
-  padding-right:39px;
+/* main body */
+.form-card {
+  min-height: 500px;
+  height:70vh;
 }
 
 .br-card {
-  border-radius:40px;
-  max-width: 519px;
-  min-width:400px;
+	border-radius: 2.5rem;
+  height:90%
 }
+
 .circle-field {
-  position: relative;
-  max-width:100%; 
-  height:500px;
+	position: relative;
+	max-width: 100%;
 }
 
-.font-greeting {
-  font-size: 70px; 
-  padding-top: 6.25rem; 
+/* font */
+.font-weight-medium {
+	font-weight: 600;
 }
 
-.font-skip {
-  font-size:18px;
-  cursor:default;
+/* responsive breakpoints */
+
+@media only screen and (max-width: 600px) {
+	html,
+	body {
+		font-size: 10px;
+	}
+  .form-card {
+    height: 45vh
+  }
+	.br-card {
+		max-width: 350px;
+    min-height: max-content;
+		/* min-width: 300px; */
+	}
 }
 
-.card-bottom {
-  padding-bottom:21px;
-  padding-right:18px;
-  padding-left:18px;
-}
-.circle-button {
-	color: white;
-	opacity: 1;
-	border: 2px solid #d0d0d0;
-	cursor: pointer;
-	padding-top: 27px;
-	padding-bottom: 27px;
-}
-
-.big-circle-btn {
-	width: 145px;
-	height: 121px;
-	background-color: #dc5921;
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	html,
+	body {
+		font-size: 10px;
+	}
+  .form-card {
+    height: 50vh
+  }
+	.br-card {
+		max-width: 400px;
+    min-height: max-content;
+		/* min-width: 350px; */
+	}
 }
 
-.small-circle-btn {
-	width: 98px;
-	height: 82px;
-	background-color: #f3733c;
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	html,
+	body {
+		font-size: 12px;
+	}
+  .form-card {
+    height: 55vh
+  }
+	.br-card {
+		max-width: 450px;
+    min-height: max-content;
+		/* min-width: 400px; */
+	}
 }
 
-.circleBtnFont {
-	font-size: 26px;
-	line-height: 1.2;
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	html,
+	body {
+		font-size: 14px;
+	}
+	.br-card {
+		max-width: 519px;
+	}
+  .form-card {
+    min-height: 560px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+	html,
+	body {
+		font-size: 16px;
+	}
 }
 
-:root{
-  --lenX:-50px;
-  --lenY:-30px;
-
+._3bAl3 {
+	width: 100% !important;
 }
 
+._2MD0k {
+  display: flex
+}
