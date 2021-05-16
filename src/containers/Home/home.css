@@ -13,7 +13,7 @@ body {
 
 .bg-img {
 	/* The image used */
-	background-image: url('../images/desert.jpg');
+	background-image: url('../../images/desert.jpg');
 	/* Center and scale the image nicely */
 	background-position: center;
 	background-repeat: no-repeat;

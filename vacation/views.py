@@ -34,8 +34,10 @@ def storeData(request):
                 user.friends= 1
             if(who[i].lower() == "couple"):
                 user.couple= 1
-        number = json_data['number'][0]
-        print(number)
+        
+        number = json_data['number']
+        if len(number) != 0:
+            number = number[0]
         if(number == 1):
             user.one_passengers= 1
         if(number == 2):

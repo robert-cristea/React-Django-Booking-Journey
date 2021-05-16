@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "bootstrap-daterangepicker": "^3.1.0",
     "chartist": "^0.11.4",
     "classnames": "^2.2.6",
     "date-fns": "^2.20.0",
@@ -21,6 +22,7 @@
     "perfect-scrollbar": "^1.5.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-bootstrap-daterangepicker": "^7.0.0",
     "react-bootstrap-sweetalert": "^5.1.9",
     "react-bubble-ui": "^1.1.0",
     "react-chartist": "^0.14.3",
