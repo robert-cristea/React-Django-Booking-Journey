@@ -303,12 +303,6 @@ const Home = (props) => {
     }
 
     const handleTransmitData = () => {
-
-        console.log("who  " + multiWho);
-        console.log("number  " + multiNumber);
-        console.log("howlong  " + multiPeriod);
-        console.log("theme  " + multiTheme);
-        console.log(BACKEND_URL)
         axios
             .post(BACKEND_URL + '/api-vacation/storeData', {
                 'who': multiWho,
