@@ -1,7 +1,0 @@
-.rdrDateRangePickerWrapper, .rdrCalendarWrapper, .rdrMonth {
-    width: 100% !important;
-}
-
-.rdrCalendarWrapper * :not(.rdrMonthName) {
-    font-size: 12px;
-}

@@ -138,10 +138,10 @@ class City(models.Model):
         db_table = "cities_features"
 
 class UserCity (models.Model):
-    user_id = models.IntegerField(max_length=20)
+    user_id = models.IntegerField()
     city_name = models.CharField(max_length = 150)
-    matching_score = models.IntegerField(max_length=20)
-    users_rating = models.IntegerField(max_length=20)
+    matching_score = models.IntegerField()
+    users_rating = models.IntegerField()
 
     #Metadata
     class Meta:

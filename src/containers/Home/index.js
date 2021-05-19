@@ -7,8 +7,8 @@ import SwitchComponent from '../../components/Home/SwitchComponent';
 import Search from '../Search';
 
 import axios from "axios";
-import dateFormat from 'dateformat'
-import { addDays } from 'date-fns';
+// import dateFormat from 'dateformat'
+// import { addDays } from 'date-fns';
 import { BACKEND_URL } from '../../utils/request';
 import logo from "../../images/logo.png";
 import backArrow from "../../images/backArrow.png";
@@ -20,21 +20,17 @@ import 'react-date-range/dist/theme/default.css';
 const Home = (props) => {
 
     // set user info
-    const [userIp, setUserIp] = useState("")
-    const [timeStamp, setTimeStamp] = useState("")
     const [step, setStep] = useState(1)
     
     const [multiWho, setMultiWho] = useState([])
     const [multiNumber, setMultiNumber] = useState([])
     const [multiPeriod, setMultiPeriod] = useState([])
     const [multiTheme, setMultiTheme] = useState([])
-
     const [userId, setUserId] = useState()
     
     const isMounted = useMounted();
     const [isMultiple, setIsMultiple] = useState(false)
     const [showLongerPeriod, setShowLongerPeriod] = useState(false)
-
     const [showAdvancedSearchPage, setShowAdvancedSearchPage] = useState(false)
 
     const initialButtons = {
@@ -131,15 +127,6 @@ const Home = (props) => {
         }, [])
         return isMounted
     }
-
-    useEffect(() => {
-        setTimeStamp(new Date().toUTCString())
-        fetch('https://api.ipify.org/?format=json')
-            .then(response => response.json())
-            .then(res => {
-                setUserIp(res.ip)
-            })
-    }, [])
 
     useEffect(() => {
         if (isMounted) {
@@ -297,9 +284,6 @@ const Home = (props) => {
         if (x === 1 && !multiWho.includes(buttonArray[x][y]['name'])) {
             setMultiWho([...multiWho, buttonArray[x][y]['name']])
         }
-        // if (x === 2 && !multiNumber.includes(buttonArray[x][y]['name'])) {
-        //     setMultiNumber([...multiNumber, buttonArray[x][y]['name']])
-        // }
         if (x === 2) {
             setMultiNumber([...multiNumber, buttonArray[x][y]['name']])
             setStep(3);
@@ -324,7 +308,6 @@ const Home = (props) => {
         console.log("number  " + multiNumber);
         console.log("howlong  " + multiPeriod);
         console.log("theme  " + multiTheme);
-        console.log(dateFormat(timeStamp,"yyyy-mm-dd hh:mm:ss"));
         console.log(BACKEND_URL)
         axios
             .post(BACKEND_URL + '/api-vacation/storeData', {
@@ -332,8 +315,6 @@ const Home = (props) => {
                 'number': multiNumber,
                 'howlong': multiPeriod,
                 'theme': multiTheme,
-                'userip':userIp,
-                'timestamp':dateFormat(timeStamp,"yyyy-mm-dd hh:mm:ss")
             }, {
                 headers: {
                     'Accept': 'application/json',
@@ -362,7 +343,7 @@ const Home = (props) => {
                         <p className="bg-white text-center rounded-lg py-1 notify">Find your next destination</p>
                     </div>
                 </div>
-                { showAdvancedSearchPage?
+                { !showAdvancedSearchPage?
                 <div className="w-full d-flex align-items-center justify-content-center px-4 form-card">
                     {step < 5 ?
                         <div className="w-full mx-auto shadow-lg br-card" style={{ display: 'flex', flexDirection: 'column', width: "40vw", minWidth: "400px", position: 'relative' }}>

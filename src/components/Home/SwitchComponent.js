@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React from "react";
 import Switch from "react-switch";
 
 const SwitchComponent = (props) => {

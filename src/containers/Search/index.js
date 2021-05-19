@@ -1,24 +1,18 @@
-import React, { Component, useState, useRef, useEffect } from 'react';
-import './search.css';
-
+import React, { useState, useEffect } from 'react';
+import Scrollbar from 'react-perfect-scrollbar'
 import DateRangePicker from 'react-bootstrap-daterangepicker';
+import './search.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-daterangepicker/daterangepicker.css';
-
-import calendarIcon from "../../images/calendarIcon.png";
-import pic1 from "../../images/Cities/Amsterdam.jpeg";
-import moment from 'moment';
-import TagComponent from '../../components/Search/TagComponent'
-
-import 'react-perfect-scrollbar/dist/css/styles.css';
-import Scrollbar from 'react-perfect-scrollbar'
-import axios from "axios";
-import { BACKEND_URL } from '../../utils/request';
-import _ from 'lodash';
-
-import ReactStars from "react-rating-stars-component";
 import 'font-awesome/css/font-awesome.min.css';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import moment from 'moment';
+import axios from "axios";
+import _ from 'lodash';
+import calendarIcon from "../../images/calendarIcon.png";
+import { BACKEND_URL } from '../../utils/request';
 import SiteCard from '../../components/Search/SiteCard'
+import TagComponent from '../../components/Search/TagComponent'
 
 const Search = (props) => {
 
@@ -56,15 +50,15 @@ const Search = (props) => {
 
     useEffect(() => {
         axios
-        .post(BACKEND_URL + '/api-vacation/getCityInfo', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(res => { return res.data; })
-        .then(res => { console.log(res); setCitiesInfo(res);})
-        .catch(err => console.log('Login error: ' + err))
+            .post(BACKEND_URL + '/api-vacation/getCityInfo', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(res => { return res.data; })
+            .then(res => { console.log(res); setCitiesInfo(res); })
+            .catch(err => console.log('Login error: ' + err))
 
     }, [])
 
@@ -100,22 +94,22 @@ const Search = (props) => {
 
     const handleDeleteTagBtnClick = (value) => {
         _.remove(who, function (n) {
-            return n == value;
+            return n === value;
         });
         setWho(_.cloneDeep(who));
 
         _.remove(number, function (n) {
-            return n == value;
+            return n === value;
         });
         setNumber(_.cloneDeep(number));
 
         _.remove(howlong, function (n) {
-            return n == value;
+            return n === value;
         });
         setHowlong(_.cloneDeep(howlong));
 
         _.remove(themes, function (n) {
-            return n == value;
+            return n === value;
         });
         setThemes(_.cloneDeep(themes));
     }
@@ -150,7 +144,7 @@ const Search = (props) => {
                     'Content-Type': 'application/json',
                 },
             })
-            .then(res => { console.log('Results: ' + res);})
+            .then(res => { console.log('Results: ' + res); })
             .catch(err => console.log('Login error: ' + err))
     }
 
@@ -163,7 +157,7 @@ const Search = (props) => {
         }
         if (where === "traveler" && !checked && _.includes(traveler, name)) {
             _.remove(traveler, function (n) {
-                return n == name;
+                return n === name;
             });
             setTraveler(_.cloneDeep(traveler))
         }
@@ -173,7 +167,7 @@ const Search = (props) => {
         }
         if (tagItem === 'themes' && where === "tagDropDown" && !checked && _.includes(themes, name)) {
             _.remove(themes, function (n) {
-                return n == name;
+                return n === name;
             })
             setThemes(_.cloneDeep(themes))
         }
@@ -221,7 +215,7 @@ const Search = (props) => {
     const displayTag = (values) => {
         return (
             values.map((value, index) =>
-                <TagComponent name={value + (_.isNumber(value) ? (value === 1 ? " person" : " people") : "")} key={index} onClick={() => handleDeleteTagBtnClick(value)} case = "1" />
+                <TagComponent name={value + (_.isNumber(value) ? (value === 1 ? " person" : " people") : "")} key={index} onClick={() => handleDeleteTagBtnClick(value)} case="1" />
             )
         );
     };
@@ -233,7 +227,7 @@ const Search = (props) => {
     const displaySiteCard = (values) => {
         return (
             values.map((value, index) =>
-                <SiteCard key={index} item = {value} />
+                <SiteCard key={index} item={value} />
             )
         );
     }
@@ -298,33 +292,33 @@ const Search = (props) => {
                                                 <div className="custom-dropDownMenu pl-2">
                                                     <div className="w-100" style={{ height: "200px" }}>
                                                         <Scrollbar style={{ paddingLeft: "5px", paddingRight: "15px" }}>
-                                                            <p className="my-2" style={{ fontSize: "0.8rem", fontWeight: "600" }}>Other Themes</p>
+                                                            <p className="my-2 tagList-heading">Other Themes</p>
                                                             {listAndGroups['Other Themes'].map((value, index) =>
 
-                                                                <div className="custom-control custom-checkbox" style={{ fontSize: "0.8rem", fontWeight: "400" }} key={index}>
+                                                                <div className="custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value} checked={_.includes(themes, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'themes')} />
                                                                     <label className="custom-control-label" htmlFor={value}>{value}</label>
                                                                 </div>)}
-                                                            <p className="my-2" style={{ fontSize: "0.8rem", fontWeight: "600" }}>How Long</p>
+                                                            <p className="my-2 tagList-heading">How Long</p>
                                                             {listAndGroups['How Long'].map((value, index) =>
 
-                                                                <div className="custom-control custom-checkbox" style={{ fontSize: "0.8rem", fontWeight: "400" }} key={index}>
+                                                                <div className="custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value + "howlong"} checked={_.includes(howlong, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'howLong')} />
                                                                     <label className="custom-control-label" htmlFor={value + "howlong"}>{value}</label>
                                                                 </div>)}
 
-                                                            <p className="my-2" style={{ fontSize: "0.8rem", fontWeight: "600" }}>How Many</p>
+                                                            <p className="my-2 tagList-heading">How Many</p>
                                                             {listAndGroups['How Many'].map((value, index) =>
 
-                                                                <div className="custom-control custom-checkbox" style={{ fontSize: "0.8rem", fontWeight: "400" }} key={index}>
+                                                                <div className="custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value + "howMany"} checked={_.includes(number, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'howMany')} />
                                                                     <label className="custom-control-label" htmlFor={value + "howMany"}>{value}</label>
                                                                 </div>)}
 
-                                                            <p className="mb-1" style={{ fontSize: "0.8rem", fontWeight: "600" }}>Who is traveling</p>
+                                                            <p className="my-2 tagList-heading">Who is traveling</p>
                                                             {listAndGroups['Who is traveling'].map((value, index) =>
 
-                                                                <div className="custom-control custom-checkbox" style={{ fontSize: "0.8rem", fontWeight: "400" }} key={index}>
+                                                                <div className="custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value} checked={_.includes(who, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'who')} />
                                                                     <label className="custom-control-label" htmlFor={value}>{value}</label>
                                                                 </div>)}
@@ -379,14 +373,14 @@ const Search = (props) => {
                     </div>
                 </div>
                 <div className="ml-3 list-box p-2">
-                    <Scrollbar style={{height:"55vh", paddingRight:"15px"}}>
-                        {displaySiteCard(citiesInfo.slice(0,4))}
-                    {showMeMore &&
-                        displaySiteCard(citiesInfo.slice(4,8))
-                    }
-                    <div className="d-flex justify-content-center mt-4">
-                        <button className="btn btn-success shadow-lg" style={{border:"1px solid #555555",backgroundColor:"#e5e5e5", color:"#555555", fontSize:"1rem"}} onClick={()=>{setShowMeMore(true)}}>Show me more</button>
-                    </div>
+                    <Scrollbar style={{ height: "55vh", paddingRight: "15px" }}>
+                        {displaySiteCard(citiesInfo.slice(0, 4))}
+                        {showMeMore &&
+                            displaySiteCard(citiesInfo.slice(4, 8))
+                        }
+                        <div className="d-flex justify-content-center mt-4">
+                            <button className="btn shadow-lg showMoreBtn" onClick={() => { setShowMeMore(true) }}>Show me more</button>
+                        </div>
                     </Scrollbar>
                 </div>
             </div>

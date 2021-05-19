@@ -90,7 +90,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
 /*Data for the table `auth_permission` */
 
@@ -147,10 +147,18 @@ insert  into `auth_permission`(`id`,`name`,`content_type_id`,`codename`) values
 (50,'Can change Token',13,'change_token'),
 (51,'Can delete Token',13,'delete_token'),
 (52,'Can view Token',13,'view_token'),
-(53,'Can add vacation',14,'add_vacation'),
-(54,'Can change vacation',14,'change_vacation'),
-(55,'Can delete vacation',14,'delete_vacation'),
-(56,'Can view vacation',14,'view_vacation');
+(53,'Can add user',14,'add_user'),
+(54,'Can change user',14,'change_user'),
+(55,'Can delete user',14,'delete_user'),
+(56,'Can view user',14,'view_user'),
+(57,'Can add city',15,'add_city'),
+(58,'Can change city',15,'change_city'),
+(59,'Can delete city',15,'delete_city'),
+(60,'Can view city',15,'view_city'),
+(61,'Can add user city',16,'add_usercity'),
+(62,'Can change user city',16,'change_usercity'),
+(63,'Can delete user city',16,'delete_usercity'),
+(64,'Can view user city',16,'view_usercity');
 
 /*Table structure for table `auth_user` */
 
@@ -170,12 +178,9 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `auth_user` */
-
-insert  into `auth_user`(`id`,`password`,`last_login`,`is_superuser`,`username`,`first_name`,`last_name`,`email`,`is_staff`,`is_active`,`date_joined`) values 
-(1,'pbkdf2_sha256$150000$xfSu8GRJ03hI$zQfJ93am6FniQ2Vc6MwNN29o1oyFxbLJzWh378DfAKo=','2021-04-19 11:22:34.328072',1,'admin','','','admin@email.com',1,1,'2021-04-15 00:15:58.839135');
 
 /*Table structure for table `auth_user_groups` */
 
@@ -226,6 +231,148 @@ CREATE TABLE `authtoken_token` (
 
 /*Data for the table `authtoken_token` */
 
+/*Table structure for table `cities_features` */
+
+DROP TABLE IF EXISTS `cities_features`;
+
+CREATE TABLE `cities_features` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `city_name` varchar(150) NOT NULL,
+  `country` varchar(150) NOT NULL,
+  `short_description` varchar(1000) NOT NULL,
+  `sites` varchar(100) NOT NULL,
+  `picture` varchar(150) NOT NULL DEFAULT 'null',
+  `solo` smallint(5) unsigned NOT NULL,
+  `couple` smallint(5) unsigned NOT NULL,
+  `family` smallint(5) unsigned NOT NULL,
+  `friends` smallint(5) unsigned NOT NULL,
+  `weekend` smallint(5) unsigned NOT NULL,
+  `long_weekend` smallint(5) unsigned NOT NULL,
+  `weekish` smallint(5) unsigned NOT NULL,
+  `midweek` smallint(5) unsigned NOT NULL,
+  `two_weeks` smallint(5) unsigned NOT NULL,
+  `three_weeks` smallint(5) unsigned NOT NULL,
+  `four_weeks` smallint(5) unsigned NOT NULL,
+  `five_weeks` smallint(5) unsigned NOT NULL,
+  `beach` smallint(5) unsigned NOT NULL,
+  `city_life` smallint(5) unsigned NOT NULL,
+  `nature` smallint(5) unsigned NOT NULL,
+  `countryside` smallint(5) unsigned NOT NULL,
+  `surprise` smallint(5) unsigned NOT NULL,
+  `other` smallint(5) unsigned NOT NULL,
+  `adventures` smallint(5) unsigned NOT NULL,
+  `shopping` smallint(5) unsigned NOT NULL,
+  `romantic` smallint(5) unsigned NOT NULL,
+  `ski` smallint(5) unsigned NOT NULL,
+  `remote` smallint(5) unsigned NOT NULL,
+  `wildlife` smallint(5) unsigned NOT NULL,
+  `hiking` smallint(5) unsigned NOT NULL,
+  `road_trip` smallint(5) unsigned NOT NULL,
+  `festivals` smallint(5) unsigned NOT NULL,
+  `nightlife` smallint(5) unsigned NOT NULL,
+  `holidays` smallint(5) unsigned NOT NULL,
+  `vivid` smallint(5) unsigned NOT NULL,
+  `coltural_experience` smallint(5) unsigned NOT NULL,
+  `camping` smallint(5) unsigned NOT NULL,
+  `surfing` smallint(5) unsigned NOT NULL,
+  `honeymoon` smallint(5) unsigned NOT NULL,
+  `scuba_diving` smallint(5) unsigned NOT NULL,
+  `budget_low` smallint(5) unsigned NOT NULL,
+  `budget_normal` smallint(5) unsigned NOT NULL,
+  `budget_high` smallint(5) unsigned NOT NULL,
+  `one_passengers` smallint(5) unsigned NOT NULL,
+  `two_passengers` smallint(5) unsigned NOT NULL,
+  `three_passengers` smallint(5) unsigned NOT NULL,
+  `four_passengers` smallint(5) unsigned NOT NULL,
+  `five_passengers` smallint(5) unsigned NOT NULL,
+  `january` smallint(5) unsigned NOT NULL,
+  `february` smallint(5) unsigned NOT NULL,
+  `march` smallint(5) unsigned NOT NULL,
+  `april` smallint(5) unsigned NOT NULL,
+  `may` smallint(5) unsigned NOT NULL,
+  `june` smallint(5) unsigned NOT NULL,
+  `july` smallint(5) unsigned NOT NULL,
+  `august` smallint(5) unsigned NOT NULL,
+  `september` smallint(5) unsigned NOT NULL,
+  `october` smallint(5) unsigned NOT NULL,
+  `november` smallint(5) unsigned NOT NULL,
+  `december` smallint(5) unsigned NOT NULL,
+  `comp_allgirls` smallint(5) unsigned NOT NULL,
+  `comp_allboys` smallint(5) unsigned NOT NULL,
+  `comp_elderly` smallint(5) unsigned NOT NULL,
+  `comp_kids_babies` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+
+/*Data for the table `cities_features` */
+
+insert  into `cities_features`(`id`,`city_name`,`country`,`short_description`,`sites`,`picture`,`solo`,`couple`,`family`,`friends`,`weekend`,`long_weekend`,`weekish`,`midweek`,`two_weeks`,`three_weeks`,`four_weeks`,`five_weeks`,`beach`,`city_life`,`nature`,`countryside`,`surprise`,`other`,`adventures`,`shopping`,`romantic`,`ski`,`remote`,`wildlife`,`hiking`,`road_trip`,`festivals`,`nightlife`,`holidays`,`vivid`,`coltural_experience`,`camping`,`surfing`,`honeymoon`,`scuba_diving`,`budget_low`,`budget_normal`,`budget_high`,`one_passengers`,`two_passengers`,`three_passengers`,`four_passengers`,`five_passengers`,`january`,`february`,`march`,`april`,`may`,`june`,`july`,`august`,`september`,`october`,`november`,`december`,`comp_allgirls`,`comp_allboys`,`comp_elderly`,`comp_kids_babies`) values 
+(1,'New Orleans,  Louisiana','USA','From its world-class?gastronomy?and eclectic?art scene?to its distinctive?architecture?and?neighborhoods, New Orleans is like no other city. ?Add in its jazzy soundtrack and tropical climate, this is a destination everyone can enjoy.?','Mardi Gras festival and others, french quarter, St. Louis Cathedral, Jackson Square, New Orleans Mus','',0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0),
+(2,'Kerry','Ireland','Kerry renowned the world over for its beautiful scenery, mountains, lakes, beautiful sandy beaches, cliffs and rocky headlands','Blasket Islands, Lakes of Killarney, Skellig Michael, Carrauntoohil','',0,1,1,0,1,1,0,0,0,0,0,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,0,0,1,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1),
+(3,'Marrakesh','Morocco','Prepare for your senses to be slapped. Marrakesh\'s heady sights and sounds will dazzle, frazzle and enchant','Djemaa El Fna, Jardin Majorelle, Bahia Palace','',0,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,0,1,1,0),
+(4,'Sydney','Australia','Seek out some sunshine and good times in Australia\'s Harbour City','Beach, opera house, manly ferry','',1,1,1,1,1,1,0,0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0,1,1,1,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,1,1,1,1),
+(5,'The Maldives','The Maldives','Ilands know for their clear emerald waters and beautiful beaches that stretch as far as the eye can see','Maafushi, meeru island, Hulhumale','',0,1,1,0,1,1,0,0,0,0,0,0,1,0,1,0,1,1,0,0,1,0,1,0,0,0,0,0,1,0,0,0,1,1,1,0,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1),
+(6,'Paris','France','Paris is unarguably one of the most beautiful cities in the world, the capital of France, of art and of fashion','Eiffel tower, Lourve museum, Norte-Dame cathedral','',1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,1,1,1,1),
+(7,'Cape Town','South Africa','Known as the ?Mother City?, Cape Town is the oldest city in South Africa. Perched between the ocean and the mountain, with a national park as its heart, there is nowhere like Cape Town','Table mountain, beaches, pinguin-watching','',0,1,1,1,1,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,1,1,1,1),
+(8,'Dubai','U.A.E','This city of high-rises and shopping malls has transformed itself from a desert outpost to a destination du-jour, where tourists flock for sales bargains, sunshine, and family fun.?','Burj Khalifa, Dubai Mall,  Dubai Museum','',0,1,1,1,1,1,0,0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,1,1,1,0,1,0,1,0,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1),
+(9,'Bora Bora','French Polynesia','Bora Bora is one of the few places on earth that everyone hopes to witness in their lifetime?and once you see it, you are forever enamored.','Matira beach, Mount Otemanu, Turtle centre','',0,1,1,0,1,1,0,0,0,0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0,1,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,1,1,1,1),
+(10,'New York City, New York','USA','In addition to being called the ?Big Apple,??New York?City is known as being ?The City That?Never Sleeps.??The city is full of action-packed entertainment attractions.','Central park, Empire state Building, Statue of Liberty, Times square','Shanghai.jpg',1,1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,1,1,1,1,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,1),
+(11,'Dubrovnik','Croatia','it?s hard to imagine anyone becoming jaded by the city?s limestone streets, baroque buildings and the endless shimmer of the Adriatic, or failing to be inspired by a walk along the ancient city walls that protected the capital of a sophisticated republic for centuries.','Walls of Dubrovnik, Lokrum, Stradum','Yellowstone.jpg',1,1,1,1,1,1,0,0,1,0,0,0,1,1,0,1,1,1,1,1,1,0,0,0,0,1,0,0,1,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,1,1,1,1),
+(12,'Edinburgh','Scotland','Edinburgh is Scotland\'s compact, hilly capital. It has a medieval Old Town and elegant Georgian New Town with gardens and neoclassical buildings.?','Edinburgh Castle, Royal Mile ','Tel_Aviv.jpg',1,1,1,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1,0,1,0,0,0,0,0,1,0,1,1,1,1,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1),
+(13,'Rome','Italy','Rome?is?famous for?having amazing foods such as spaghetti, lasagna, pizza and gelato. This Capital of Italy is well known for historic sites such as the Colosseum, Trevi Fountain and Vatican City.','Colosseum, st. peter\'s Basilica, Vatican','Barcelona.jpg',1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1),
+(14,'Hawaii','USA','Whether you like hiking, biking, kayaking, sailing, swimming, or just sitting on the beach, Hawaii is the state for you. Near the water, you can relax as palm trees blow in the island breeze.?','Hawai\'i volcanoes national park, Diamond head, Hanauma bay ','Copenhagen.jpeg',1,1,1,1,1,1,0,0,1,0,0,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,0,0,1,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,0,0,1,1,1,1),
+(15,'Leh','india','Few places in India are at once so traveler friendly and enchanting as mountain-framed, Leh.','Pangong Tso, Thiksey Monastery, Shanti Stupa,  Stakna Monastery','Leh.jpg',1,1,0,1,0,1,0,0,1,0,0,0,0,0,1,1,1,1,1,0,0,0,1,0,1,1,0,0,0,1,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,1,1,0),
+(16,'Barbados','Barbabos','Barbados is know for its tropical beaches and pirate history. It is the birthplace of Rihanna and rum.','The Beaches of Carlisle Bay, Downtown Bridgetown, Bathsheba Bay, Animal Flower Cave','Barbados.jpeg',1,1,1,1,0,0,0,0,1,0,0,0,1,0,1,0,1,1,1,0,1,0,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,0,1,0,1),
+(17,'Amsterdam','Netherland','With its picturesque canal network, rich history and thrumming cultural scene, the capital of the Netherlands is one of the world?s most vibrant cities.','rijksmuseum, van gogh museum, the beach in amsterdam, vondelpark, anna frank\'s house','Amsterdam.jpeg',1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,1,1,1,1),
+(18,'Santiago','Chile','Surprising, cosmopolitan, energetic, sophisticated and worldly, Santiago is a city of syncopated cultural currents, madhouse parties, expansive museums and top-flight restaurants. No wonder 40% of Chileans call the leafy capital city home.','cerro san cristobal, museo chileno, cerro santa lucia, vina cousino macul','Santiago.jpeg',0,1,1,1,0,0,0,0,1,1,0,0,1,1,1,0,1,1,1,1,0,1,0,0,1,1,1,1,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,1,1,0,0),
+(19,'Cairo','Egypt','Cairo is magnificent, beautiful and, at time, infuriating. From above, the distorted roar of the muezzins\' call to prayer echoes out from duelling minarets. Below, car horns bellow tuneless symphonies amid avenues of faded 19th-century grandeur while donkey carts rattle down dusty lanes lined with colossal Fatimid and Mamluk monuments.','pyramids of giza, egyptian museum, khan al khalili, coptic museum, bab zuweila','Cairo.png',0,1,1,1,1,1,0,0,0,0,0,0,1,0,1,0,1,1,1,0,0,0,0,0,1,1,0,0,1,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,1,1,1,1),
+(20,'Copenhagen','Denmark','Copenhagen is the epitome of Scandi cool. Modernist lamps light New Nordic tables, bridges buzz with cycling commuters and eye-candy locals dive into pristine waterways.','nationalmuseet, torvehallerne KBH, tivoli gardens, rosenborg slot','Copenhagen.jpeg',1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,0,1,1,0,1,1,0,0,0,0,0,1,1,1,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,1,1,1,1),
+(21,'Seoul','Korea','Fashion- and technology-forward but also deeply traditional, this dynamic city mashes up palaces, temples, cutting-edge design and mountain trails, all to a nonstop K-Pop beat.','Seoul Tower, Bukchon Hanok Village, National Museum of Korea,Lotte World Tower, Gyeongbokgung Palace','',1,1,1,1,0,0,0,0,1,1,0,0,0,1,1,0,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,1),
+(22,'Laucala Island Resort','Fiji','exploring the archipelago?s exquisite beaches, undersea marvels, lush interiors and fascinating culture shouldn?t be rushed.','Blue Lagoon Cruise, Mamanuca Islands, Taveuni Island, Beqa Lagoon','',0,1,1,1,0,0,0,0,1,1,0,0,0,1,0,0,1,1,1,0,1,0,0,1,1,1,1,1,0,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,1),
+(23,'Shanghai','China','Shanghai: few cities in the world evoke so much history, excess, glamour, mystique and exotic promise in name alone.','The Bund, Yuyuan Gardens & Bazaar, Shanghai Tower, Jade Buddha Temple,  Tianzifang','Shanghai.jpg',1,1,1,0,0,0,0,0,1,1,0,0,0,1,0,1,0,0,1,1,1,0,1,0,0,0,1,1,0,1,1,0,0,0,0,0,1,0,1,1,1,1,1,0,0,0,1,1,1,0,0,1,1,0,0,0,0,0,0),
+(24,'Yellowstone','USA','Yellowstone National Park?is a?United States National Park?and a?UNESCO World Heritage Site.','National Park, geysers, hot springs and other thermal areas','Yellowstone.jpg',0,1,1,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,1,0,1,0,1,1,1,1,0,0,0,0,0,1,0,0,0,0,1,0,0,1,1,1,1,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,1),
+(25,'Tel Aviv','Israel','Tel Aviv, Israel?s largest metropolitan area, serves as a hub for innovation, culture and creativity. ?Tel Aviv Nonstop City? is more than just a slogan. With the city?s beautiful beaches, diverse cultural scene, top-notch cuisine, and vibrant nightlife, there?s always something to see and do here.','Carmel Market,Port of Jaffa, Neve Tzedek , Sharona Market\n','Tel_Aviv.jpg',1,1,1,1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,0,1,0,1,1,0,0,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,0,0,1,1,0,0),
+(26,'Jerusalem','Israel','Jerusalem is totally unique ? there is no other place like it. A city of tradition, religion, and history, but also, increasingly, of modern culture and heritage, it is a city with so much to offer that you could spend years here and still not see everything.','Jerusalem?s Old City, Western Wall, Via Dolorosa, Church of the Holy Sepulchre, Machane Yehuda Marke','',1,0,1,0,1,1,0,0,0,0,0,0,0,1,0,1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1,0,0,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1),
+(27,'Barcelona','Spain','Barcelona is the second largest city in Spain and is a vibrant city, full of entertainment and diverse nightlife.','Sagrada Familia, Park Guell, the Gothic Quarter, the Rambla and La Boqueria Market, the ?Magic Fount','Barcelona.jpg',1,1,1,1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,1,1,1,1,0,0,1,1,1,0,1,0,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,0,0,1,0,1,1),
+(28,'Berlin','Germany','Berlin, the capital of Germany and the country\'s largest city, is also a major center of politics, culture, media, and science.','The Brandenburg Gate, The Rebuilt Reichstag, Museum Island, Berlin Wall Memorial, German Historical ','',1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,0,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,0,1,0,1,1,1),
+(29,'Chiang Mai','Thailand','Chiang Mai is a land of misty mountains and colourful hill tribes, a playground for seasoned travellers, a paradise for shoppers and a delight for adventurers.','Doi Suthep, Chiang Mai Old City, Night Safari, Wiang Kum Kam, the Underground Ancient City, Karen Lo','Chiang_Mai.jpg',1,1,1,1,0,0,0,0,1,1,1,1,1,0,1,1,0,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,0,1,0,0,1,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0),
+(30,'Wanaka','New Zealand','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(31,'Aucklands','New Zealand','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(32,'Tokyo','Japan','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(33,'Antarctica','Antarctica','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(34,'Vancouver','Canada','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(35,'Los Angeles,  California','USA','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(36,'Kruger National Park','South Africa','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(37,'Santorini','Greece','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(38,'Singapore','Singapore','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(39,'London','England','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(40,'Petra','Jordan','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(41,'Hong Kong','Hong Kong','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(42,'Providencia','Colombia','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(43,'Virunga National Park','Democratic Republic of Congo','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(44,'Lisbon','Portugal','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(45,'Hanoi','Vietnam','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(46,'Paro Valley','Bhutan','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(47,'Ibiza','Spain','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(48,'Tulum','Mexico','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(49,'Moscow','Russia','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(50,'Rio de Janeiro','Brazil','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(51,'Havana','Cuba','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(52,'Machu Picchu','Peru','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(53,'Buenos Aires','Argentina','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(54,'Beijing','China','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(55,'Budapest','Hungary','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(56,'Cinque Terre','Italy','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(57,'Las Vegas,  Nevada','USA','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(58,'Matterhorn','Switzerland','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(59,'Aspen Mountain, Colorado','USA','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(60,'Whistler Blackcomb','Canada','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(61,'St Anton','Austria','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(62,'Val d\'Is?re','France','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(63,'Courchevel','France','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(64,'Toronto','Canada','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(65,'Venice','Italy','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+
 /*Table structure for table `django_admin_log` */
 
 DROP TABLE IF EXISTS `django_admin_log`;
@@ -258,7 +405,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 /*Data for the table `django_content_type` */
 
@@ -276,7 +423,9 @@ insert  into `django_content_type`(`id`,`app_label`,`model`) values
 (10,'socialaccount','socialaccount'),
 (11,'socialaccount','socialapp'),
 (12,'socialaccount','socialtoken'),
-(14,'vacation','vacation');
+(15,'vacation','city'),
+(14,'vacation','user'),
+(16,'vacation','usercity');
 
 /*Table structure for table `django_migrations` */
 
@@ -288,40 +437,44 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 /*Data for the table `django_migrations` */
 
 insert  into `django_migrations`(`id`,`app`,`name`,`applied`) values 
-(1,'contenttypes','0001_initial','2021-04-09 15:40:07.352094'),
-(2,'auth','0001_initial','2021-04-09 15:40:08.520161'),
-(3,'account','0001_initial','2021-04-09 15:40:14.818521'),
-(4,'account','0002_email_max_length','2021-04-09 15:40:17.888697'),
-(5,'admin','0001_initial','2021-04-09 15:40:18.084708'),
-(6,'admin','0002_logentry_remove_auto_add','2021-04-09 15:40:19.302778'),
-(7,'admin','0003_logentry_add_action_flag_choices','2021-04-09 15:40:19.333779'),
-(8,'contenttypes','0002_remove_content_type_name','2021-04-09 15:40:19.755803'),
-(9,'auth','0002_alter_permission_name_max_length','2021-04-09 15:40:21.146883'),
-(10,'auth','0003_alter_user_email_max_length','2021-04-09 15:40:22.695972'),
-(11,'auth','0004_alter_user_username_opts','2021-04-09 15:40:22.744974'),
-(12,'auth','0005_alter_user_last_login_null','2021-04-09 15:40:23.749032'),
-(13,'auth','0006_require_contenttypes_0002','2021-04-09 15:40:23.865038'),
-(14,'auth','0007_alter_validators_add_error_messages','2021-04-09 15:40:23.903041'),
-(15,'auth','0008_alter_user_username_max_length','2021-04-09 15:40:23.997046'),
-(16,'auth','0009_alter_user_last_name_max_length','2021-04-09 15:40:24.097052'),
-(17,'auth','0010_alter_group_name_max_length','2021-04-09 15:40:24.907098'),
-(18,'auth','0011_update_proxy_permissions','2021-04-09 15:40:24.935100'),
-(19,'authtoken','0001_initial','2021-04-09 15:40:25.134111'),
-(20,'authtoken','0002_auto_20160226_1747','2021-04-09 15:40:26.388183'),
-(21,'sessions','0001_initial','2021-04-09 15:40:26.990217'),
-(22,'sites','0001_initial','2021-04-09 15:40:27.438243'),
-(23,'sites','0002_alter_domain_unique','2021-04-09 15:40:27.730260'),
-(24,'socialaccount','0001_initial','2021-04-09 15:40:29.406355'),
-(25,'socialaccount','0002_token_max_lengths','2021-04-09 15:40:34.313636'),
-(26,'socialaccount','0003_extra_data_default_dict','2021-04-09 15:40:34.361639'),
-(27,'vacation','0001_initial','2021-04-09 15:40:34.534649'),
-(28,'vacation','0002_auto_20210409_2233','2021-04-09 15:40:34.721659'),
-(29,'vacation','0003_auto_20210409_2239','2021-04-09 15:40:37.254804');
+(1,'contenttypes','0001_initial','2021-05-18 08:00:58.443493'),
+(2,'auth','0001_initial','2021-05-18 08:00:59.587558'),
+(3,'account','0001_initial','2021-05-18 08:01:07.101988'),
+(4,'account','0002_email_max_length','2021-05-18 08:01:09.514126'),
+(5,'admin','0001_initial','2021-05-18 08:01:09.812143'),
+(6,'admin','0002_logentry_remove_auto_add','2021-05-18 08:01:10.893205'),
+(7,'admin','0003_logentry_add_action_flag_choices','2021-05-18 08:01:11.088216'),
+(8,'contenttypes','0002_remove_content_type_name','2021-05-18 08:01:11.719252'),
+(9,'auth','0002_alter_permission_name_max_length','2021-05-18 08:01:12.476296'),
+(10,'auth','0003_alter_user_email_max_length','2021-05-18 08:01:13.552357'),
+(11,'auth','0004_alter_user_username_opts','2021-05-18 08:01:13.606360'),
+(12,'auth','0005_alter_user_last_login_null','2021-05-18 08:01:14.036385'),
+(13,'auth','0006_require_contenttypes_0002','2021-05-18 08:01:14.059386'),
+(14,'auth','0007_alter_validators_add_error_messages','2021-05-18 08:01:14.090388'),
+(15,'auth','0008_alter_user_username_max_length','2021-05-18 08:01:14.161392'),
+(16,'auth','0009_alter_user_last_name_max_length','2021-05-18 08:01:14.244397'),
+(17,'auth','0010_alter_group_name_max_length','2021-05-18 08:01:15.585473'),
+(18,'auth','0011_update_proxy_permissions','2021-05-18 08:01:15.625476'),
+(19,'authtoken','0001_initial','2021-05-18 08:01:15.797486'),
+(20,'authtoken','0002_auto_20160226_1747','2021-05-18 08:01:17.010555'),
+(21,'sessions','0001_initial','2021-05-18 08:01:17.879605'),
+(22,'sites','0001_initial','2021-05-18 08:01:18.389634'),
+(23,'sites','0002_alter_domain_unique','2021-05-18 08:01:18.653649'),
+(24,'socialaccount','0001_initial','2021-05-18 08:01:20.294743'),
+(25,'socialaccount','0002_token_max_lengths','2021-05-18 08:01:23.926951'),
+(26,'socialaccount','0003_extra_data_default_dict','2021-05-18 08:01:24.002955'),
+(27,'vacation','0001_initial','2021-05-18 08:01:24.284971'),
+(28,'vacation','0002_auto_20210409_2233','2021-05-18 08:01:24.533985'),
+(29,'vacation','0003_auto_20210409_2239','2021-05-18 08:01:27.607161'),
+(30,'vacation','0004_auto_20210514_2133','2021-05-18 08:01:28.047186'),
+(31,'vacation','0005_auto_20210518_1457','2021-05-18 08:01:28.296200'),
+(32,'vacation','0006_city','2021-05-18 17:22:33.538742'),
+(33,'vacation','0007_usercity','2021-05-18 17:22:34.467795');
 
 /*Table structure for table `django_session` */
 
@@ -336,10 +489,6 @@ CREATE TABLE `django_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `django_session` */
-
-insert  into `django_session`(`session_key`,`session_data`,`expire_date`) values 
-('ty1mbl8t9ybvaajfvs7vwqsktvf1pdv8','MTYwZmVlZTY3Y2I1NWEzMTY1NmJiNGM4OGZkNzFkYzU3Y2RiYzAwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZTVlNGExN2EzNjcxZTY4ZGMxYTlkM2JlNjJiMzVhOGMxMDFlOGFkIn0=','2021-05-03 11:22:34.384076'),
-('w6z2o2whwiu6r1d07qqqvd9cjjhjgs6t','MTYwZmVlZTY3Y2I1NWEzMTY1NmJiNGM4OGZkNzFkYzU3Y2RiYzAwZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkZTVlNGExN2EzNjcxZTY4ZGMxYTlkM2JlNjJiMzVhOGMxMDFlOGFkIn0=','2021-04-29 00:16:17.192185');
 
 /*Table structure for table `django_site` */
 
@@ -431,36 +580,128 @@ CREATE TABLE `socialaccount_socialtoken` (
 
 /*Data for the table `socialaccount_socialtoken` */
 
-/*Table structure for table `vacation_reglist` */
+/*Table structure for table `user_cities_matching` */
 
-DROP TABLE IF EXISTS `vacation_reglist`;
+DROP TABLE IF EXISTS `user_cities_matching`;
 
-CREATE TABLE `vacation_reglist` (
+CREATE TABLE `user_cities_matching` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `object` varchar(150) DEFAULT NULL,
-  `number` varchar(10) DEFAULT NULL,
-  `theme` varchar(150) DEFAULT NULL,
-  `period` varchar(150) DEFAULT NULL,
-  `startDate` date DEFAULT NULL,
-  `endDate` date DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `city_name` varchar(150) NOT NULL,
+  `matching_score` int(11) NOT NULL,
+  `users_rating` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
-/*Data for the table `vacation_reglist` */
+/*Data for the table `user_cities_matching` */
 
-insert  into `vacation_reglist`(`id`,`object`,`number`,`theme`,`period`,`startDate`,`endDate`) values 
-(1,'Family','6+',NULL,NULL,'0000-00-00','2021-04-30'),
-(2,'Family','6+','Suprise me','Longer','2021-04-22','2021-04-28'),
-(3,'Family','4','Nature','Longer','2021-04-09','2021-04-16'),
-(4,'Family','5','Country side',NULL,'2021-04-09','2021-04-09'),
-(5,'Friends','5','City life','Long Weekend','2021-04-23','2021-04-29'),
-(6,'Friends','6+','Country side','Long Weekend','2021-04-24','2021-05-15'),
-(7,'',NULL,NULL,NULL,'2021-04-10','2021-04-10'),
-(8,'Friends','5','Country side','Long Weekend','2021-04-12','2021-04-30'),
-(9,'Friends','5','Country side','Long Weekend','2021-04-12','2021-04-30'),
-(10,'Friends','5','Country side','Weekish','2021-04-15','2021-04-30'),
-(11,'Family','4','Suprise me','Long Weekend','2021-05-27','2021-06-18'),
-(12,'Friends','6+','Beach','Weekend','2021-10-13','2021-10-29');
+insert  into `user_cities_matching`(`id`,`user_id`,`city_name`,`matching_score`,`users_rating`) values 
+(1,10,'Paris',94,4),
+(2,10,'New York',60,2),
+(3,10,'Rome',89,1),
+(4,10,'Berlin',80,5),
+(5,11,'Paris',44,1),
+(6,11,'New York',57,2),
+(7,11,'Rome',78,3),
+(8,11,'Berlin',34,4);
+
+/*Table structure for table `users_features` */
+
+DROP TABLE IF EXISTS `users_features`;
+
+CREATE TABLE `users_features` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_ip` char(39) NOT NULL,
+  `time_stamp` datetime(6) NOT NULL,
+  `solo` smallint(5) unsigned NOT NULL,
+  `couple` smallint(5) unsigned NOT NULL,
+  `family` smallint(5) unsigned NOT NULL,
+  `friends` smallint(5) unsigned NOT NULL,
+  `weekend` smallint(5) unsigned NOT NULL,
+  `long_weekend` smallint(5) unsigned NOT NULL,
+  `weekish` smallint(5) unsigned NOT NULL,
+  `midweek` smallint(5) unsigned NOT NULL,
+  `two_weeks` smallint(5) unsigned NOT NULL,
+  `three_weeks` smallint(5) unsigned NOT NULL,
+  `four_weeks` smallint(5) unsigned NOT NULL,
+  `five_weeks` smallint(5) unsigned NOT NULL,
+  `beach` smallint(5) unsigned NOT NULL,
+  `city_life` smallint(5) unsigned NOT NULL,
+  `nature` smallint(5) unsigned NOT NULL,
+  `countryside` smallint(5) unsigned NOT NULL,
+  `surprise` smallint(5) unsigned NOT NULL,
+  `other` smallint(5) unsigned NOT NULL,
+  `adventures` smallint(5) unsigned NOT NULL,
+  `shopping` smallint(5) unsigned NOT NULL,
+  `romantic` smallint(5) unsigned NOT NULL,
+  `ski` smallint(5) unsigned NOT NULL,
+  `remote` smallint(5) unsigned NOT NULL,
+  `wildlife` smallint(5) unsigned NOT NULL,
+  `hiking` smallint(5) unsigned NOT NULL,
+  `road_trip` smallint(5) unsigned NOT NULL,
+  `festivals` smallint(5) unsigned NOT NULL,
+  `nightlife` smallint(5) unsigned NOT NULL,
+  `holidays` smallint(5) unsigned NOT NULL,
+  `vivid` smallint(5) unsigned NOT NULL,
+  `coltural_experience` smallint(5) unsigned NOT NULL,
+  `camping` smallint(5) unsigned NOT NULL,
+  `surfing` smallint(5) unsigned NOT NULL,
+  `honeymoon` smallint(5) unsigned NOT NULL,
+  `budget_low` smallint(5) unsigned NOT NULL,
+  `budget_normal` smallint(5) unsigned NOT NULL,
+  `budget_high` smallint(5) unsigned NOT NULL,
+  `one_passengers` smallint(5) unsigned NOT NULL,
+  `two_passengers` smallint(5) unsigned NOT NULL,
+  `three_passengers` smallint(5) unsigned NOT NULL,
+  `four_passengers` smallint(5) unsigned NOT NULL,
+  `five_passengers` smallint(5) unsigned NOT NULL,
+  `january` smallint(5) unsigned NOT NULL,
+  `february` smallint(5) unsigned NOT NULL,
+  `march` smallint(5) unsigned NOT NULL,
+  `april` smallint(5) unsigned NOT NULL,
+  `may` smallint(5) unsigned NOT NULL,
+  `june` smallint(5) unsigned NOT NULL,
+  `july` smallint(5) unsigned NOT NULL,
+  `august` smallint(5) unsigned NOT NULL,
+  `september` smallint(5) unsigned NOT NULL,
+  `october` smallint(5) unsigned NOT NULL,
+  `november` smallint(5) unsigned NOT NULL,
+  `december` smallint(5) unsigned NOT NULL,
+  `comp_allgirls` smallint(5) unsigned NOT NULL,
+  `comp_allboys` smallint(5) unsigned NOT NULL,
+  `comp_elderly` smallint(5) unsigned NOT NULL,
+  `comp_kids_babies` smallint(5) unsigned NOT NULL,
+  `scuba_diving` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+
+/*Data for the table `users_features` */
+
+insert  into `users_features`(`id`,`user_ip`,`time_stamp`,`solo`,`couple`,`family`,`friends`,`weekend`,`long_weekend`,`weekish`,`midweek`,`two_weeks`,`three_weeks`,`four_weeks`,`five_weeks`,`beach`,`city_life`,`nature`,`countryside`,`surprise`,`other`,`adventures`,`shopping`,`romantic`,`ski`,`remote`,`wildlife`,`hiking`,`road_trip`,`festivals`,`nightlife`,`holidays`,`vivid`,`coltural_experience`,`camping`,`surfing`,`honeymoon`,`budget_low`,`budget_normal`,`budget_high`,`one_passengers`,`two_passengers`,`three_passengers`,`four_passengers`,`five_passengers`,`january`,`february`,`march`,`april`,`may`,`june`,`july`,`august`,`september`,`october`,`november`,`december`,`comp_allgirls`,`comp_allboys`,`comp_elderly`,`comp_kids_babies`,`scuba_diving`) values 
+(9,'127.0.0.1','2021-05-18 08:29:33.633596',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(10,'127.0.0.1','2021-05-18 08:30:21.840353',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(11,'127.0.0.1','2021-05-18 08:32:18.699037',1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(12,'127.0.0.1','2021-05-18 08:40:13.739208',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(13,'127.0.0.1','2021-05-18 08:40:44.222952',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(14,'127.0.0.1','2021-05-18 08:43:41.941117',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(15,'127.0.0.1','2021-05-18 08:49:15.737209',1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0),
+(16,'127.0.0.1','2021-05-18 08:51:02.100292',0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(17,'127.0.0.1','2021-05-18 08:52:59.897030',1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(18,'127.0.0.1','2021-05-18 08:54:31.233254',0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(19,'127.0.0.1','2021-05-18 08:54:53.754542',0,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(20,'127.0.0.1','2021-05-18 08:56:04.615595',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(21,'127.0.0.1','2021-05-18 08:56:44.139856',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(22,'127.0.0.1','2021-05-18 10:03:17.524264',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(23,'127.0.0.1','2021-05-18 10:04:22.887003',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(24,'127.0.0.1','2021-05-18 10:07:24.057365',0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(25,'127.0.0.1','2021-05-18 10:09:33.562773',0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(26,'127.0.0.1','2021-05-18 10:10:40.544604',1,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0),
+(27,'127.0.0.1','2021-05-18 13:56:32.299720',1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(28,'127.0.0.1','2021-05-19 04:59:42.190204',0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(29,'127.0.0.1','2021-05-19 05:08:02.468818',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(30,'127.0.0.1','2021-05-19 05:12:08.479889',1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(31,'127.0.0.1','2021-05-19 05:14:52.994299',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,1,0,0),
+(32,'127.0.0.1','2021-05-19 14:29:36.400441',1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

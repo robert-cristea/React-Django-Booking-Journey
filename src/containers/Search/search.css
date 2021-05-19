@@ -190,6 +190,14 @@ select {
 	background-color:#EBFAFF!important;
 }
 
+.custom-checkbox {
+	font-size: 0.8rem;
+	font-weight: 400;
+}
+.tagList-heading {
+	font-size: 0.8rem;
+	font-weight: 600;
+}
 /* Results list */
 
 .list-box {
@@ -197,4 +205,11 @@ select {
 	border-radius: 5px;
 	width: 76%;
 	min-width:600px; 
+}
+
+.showMoreBtn {
+	border: 1px solid #555555;
+	background-color: #e5e5e5;
+	color: #555555;
+	font-size: 1rem;
 }

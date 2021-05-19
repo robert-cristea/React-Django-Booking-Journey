@@ -1,32 +1,22 @@
 import json
 from datetime import datetime
-
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
-
 from .models import City, User
-
 from django.core import serializers
-
-
 
 # from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def storeData(request):
     if request.method == "POST":
-        print('POST method is existed!')
-
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-
         if x_forwarded_for:
             ipaddress = x_forwarded_for.split(',')[-1].strip()
         else:
             ipaddress = request.META.get('REMOTE_ADDR')
-        
+
         user = User()
         user.user_ip = ipaddress
-      
         json_data = json.loads(request.body)
         who = json_data['who']
         for i in range (0,len(who)):
@@ -99,8 +89,6 @@ def storeData(request):
 
 def updateData(request):
     if request.method == "POST":
-        print('---Update---')
-
         json_data = json.loads(request.body)
         userId = json_data['userId']
         budget = json_data['budget']
@@ -267,7 +255,6 @@ def updateData(request):
 def getCityInfo(request):
 
     cities = City.objects.all()[11:19].values()
-    print(cities[0]['january'])
     cities_list = list(cities)
 
     return JsonResponse(cities_list,safe=False)
