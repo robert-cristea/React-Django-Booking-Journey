@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { CircleButton } from "../../components/Home/CircleButton";
-import { CircularProgressBar } from '../../components/Home/CircularProgressBar';
-import MyComponent from '../../components/Home/myComponents'
+import { CircleButton } from '../../components/Home/CircleButton';
+import { CircularProgressBar } from "../../components/Home/CircularProgressBar";
+import MyComponent from '../../components/Home/myComponents';
 import SwitchComponent from '../../components/Home/SwitchComponent';
 
 import Search from '../Search';
