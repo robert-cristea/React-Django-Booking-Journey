@@ -24,13 +24,40 @@ const SiteCard = (props) => {
     }
 
     const displayBestTimeToVisit = (item) => {
+        const keys = ['january','february','march','april','may','june','july','august','september','october','november','december'];
         var months = _.pick(item,['january','february','march','april','may','june','july','august','september','october','november','december'])
-        var monthsWithOne = _.omitBy(months,(value,key)=>value === 0)
-        var arr = _.keys(monthsWithOne)
+        var finalArray = []
+        for(let i=0;i<12;i++){
+            if(i === 0){
+                console.log("new arr create")
+                var subarr = [];
+            }
+            if(months[keys[i]] === 1){
+                console.log("first array add")
+                subarr.push(keys[i])
+                console.log(subarr)
+            }else{
+                if(subarr.length !== 0 ){
+                    finalArray.push(subarr);
+                    var subarr = []
+                }
+            }
+            if(subarr.length === 12){
+                finalArray.push(subarr);
+                break;
+            }
+        }
+        console.log(finalArray);
         return (
-            arr.map((value,index)=>
-            <span style = {{fontSize: "1rem", fontWeight: "500", margin: "0",fontWeight:"bold"}} key={index} >{_.startCase(value)}</span>)
-        )
+            finalArray.map((value,index)=>
+                <span className="pr-3" style = {{fontSize: "1rem", fontWeight: "500", margin: "0",fontWeight:"bold"}} key={index} >{_.startCase(value[0]) + ((value.length > 1)?(" - "+_.startCase(value[(value.length-1)])):"")}</span>)
+            );
+        // var monthsWithOne = _.omitBy(months,(value,key)=>value === 0)
+        // var arr = _.keys(monthsWithOne)
+        // return (
+        //     arr.map((value,index)=>
+        //     <span style = {{fontSize: "1rem", fontWeight: "500", margin: "0",fontWeight:"bold"}} key={index} >{_.startCase(value)}</span>)
+        // )
     }
 
     return (
@@ -64,10 +91,10 @@ const SiteCard = (props) => {
                         <p style={{ fontSize: "0.9rem", fontWeight: "500", margin: "0", lineHeight: "1.2" }}>{item.short_description}</p>
                     </div>
                     <div className="d-flex align-items-center my-2">
-                        <i className="fa fa-calendar" style={{ fontSize: "1.5rem" }}></i><p className="pl-3" style={{ fontSize: "1rem", fontWeight: "500", margin: "0" }}>Budget: <span style={{fontWeight:"bold"}}>{item.budget_low === 1?"Low":""}{((item.budget_low === 1 && item.budget_normal === 1) || (item.budget_high === 1 && item.budget_low === 1)) && " - "}{item.budget_normal === 1?"Normal":""}{(item.budget_high === 1 && item.budget_normal === 1) && " - "}{item.budget_high === 1?"High":""}</span></p>
+                        <i className="fa fa-money" style={{ fontSize: "1.5rem" }}></i><p className="pl-3" style={{ fontSize: "1rem", fontWeight: "500", margin: "0" }}>Budget: <span style={{fontWeight:"bold"}}>{item.budget_low === 1?"Low":""}{((item.budget_low === 1 && item.budget_normal === 1) || (item.budget_high === 1 && item.budget_low === 1)) && " - "}{item.budget_normal === 1?"Normal":""}{(item.budget_high === 1 && item.budget_normal === 1) && " - "}{item.budget_high === 1?"High":""}</span></p>
                     </div>
                     <div className="d-flex align-items-center my-2">
-                        <i className="fa fa-calendar" style={{ fontSize: "1.5rem" }}></i><p className="pl-3" style={{ fontSize: "1rem", fontWeight: "500", margin: "0" }}>Known Sites: <span style={{fontWeight:"bold"}}>{item.sites}</span></p>
+                        <i className="fa fa-home" style={{ fontSize: "1.5rem" }}></i><p className="pl-3" style={{ fontSize: "1rem", fontWeight: "500", margin: "0" }}>Known Sites: <span style={{fontWeight:"bold"}}>{item.sites}</span></p>
                     </div>
                     <div className="d-flex align-items-center my-2">
                         <i className="fa fa-calendar" style={{ fontSize: "1.5rem" }}></i><p className="pl-3" style={{ fontSize: "1rem", fontWeight: "500", margin: "0" }}>Best time to visit: <span style={{fontWeight:"bold"}}>{displayBestTimeToVisit(item)}</span></p>

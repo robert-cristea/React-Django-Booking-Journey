@@ -380,10 +380,6 @@ const Search = (props) => {
                 </div>
                 <div className="ml-3 list-box p-2">
                     <Scrollbar style={{height:"55vh", paddingRight:"15px"}}>
-                        {/* <SiteCard />
-                        <SiteCard />
-                        <SiteCard />
-                        <SiteCard /> */}
                         {displaySiteCard(citiesInfo.slice(0,4))}
                     {showMeMore &&
                         displaySiteCard(citiesInfo.slice(4,8))
