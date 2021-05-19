@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useRef, useEffect } from 'react';
 import './search.css';
 
 import DateRangePicker from 'react-bootstrap-daterangepicker';
@@ -6,34 +6,236 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-daterangepicker/daterangepicker.css';
 
 import calendarIcon from "../../images/calendarIcon.png";
-import { Checkbox } from '@material-ui/core';
+import pic1 from "../../images/Cities/Amsterdam.jpeg";
+import moment from 'moment';
+import TagComponent from '../../components/Search/TagComponent'
+
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import Scrollbar from 'react-perfect-scrollbar'
+import axios from "axios";
+import { BACKEND_URL } from '../../utils/request';
+import _ from 'lodash';
+
+import ReactStars from "react-rating-stars-component";
+import 'font-awesome/css/font-awesome.min.css';
+import SiteCard from '../../components/Search/SiteCard'
 
 const Search = (props) => {
 
     const [budgetArr, setbudgetArr] = useState([]);
+    const [startDate, setStartDate] = useState()
+    const [endDate, setEndDate] = useState()
+
+    const [who, setWho] = useState(props.who)
+    const [number, setNumber] = useState(props.number)
+    const [themes, setThemes] = useState(props.theme)
+    const [howlong, setHowlong] = useState(props.howlong)
+
+    const [traveler, setTraveler] = useState([])
+    const [showMeMore, setShowMeMore] = useState(false)
+    const [citiesInfo, setCitiesInfo] = useState([])
+
+    const listAndGroups = {
+        'Other Themes': ['Adventures', 'Shopping', 'Romantic', 'Ski', 'Remote', 'Wildlife', 'Hiking', 'Road Trip', 'Festivals', 'Nightlife', 'Holidays', 'Vivid', 'Cultural Experience', 'Camping', 'Surfing', 'Honeymoon', 'Scuba Diving', 'Beach', 'City Life', 'Nature', 'Countryside', 'Surprise', 'Other'],
+        'How Long': ['Weekend', 'Long Weekend', 'Weekish', '2 Weeks', '3 Weeks', '4 Weeks', '5 Weeks'],
+        'How Many': [1, 2, 3, 4, 5, 6],
+        'Who is traveling': ['Solo', 'Couple', 'Friends', 'Family']
+    }
 
     const handleBudgetBtnClick = (budget) => {
-        if(!budgetArr.includes(budget)){
+        if (!budgetArr.includes(budget)) {
             setbudgetArr([...budgetArr, budget])
         }
     }
 
+    const toggleDropDown = () => {
+        setIsDropDownOpen(!isDropDownOpen)
+    }
+
+    const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+
+    useEffect(() => {
+        axios
+        .post(BACKEND_URL + '/api-vacation/getCityInfo', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(res => { return res.data; })
+        .then(res => { console.log(res); setCitiesInfo(res);})
+        .catch(err => console.log('Login error: ' + err))
+
+    }, [])
+
     const handleClearBtnClick = (parm) => {
-        switch(parm){
+        switch (parm) {
             case 0:
                 setbudgetArr([]);
+                setStartDate()
+                setEndDate()
+                setWho([]);
+                setNumber([]);
+                setHowlong([]);
+                setThemes([]);
+                setTraveler([]);
                 break;
             case 1:
-                setbudgetArr([]);
+                setStartDate()
+                setEndDate()
                 break;
             case 2:
+                setWho([]);
+                setNumber([]);
+                setHowlong([]);
+                setThemes([]);
                 break;
             case 3:
+                setTraveler([]);
                 break;
             default:
                 break;
-
         }
+    }
+
+    const handleDeleteTagBtnClick = (value) => {
+        _.remove(who, function (n) {
+            return n == value;
+        });
+        setWho(_.cloneDeep(who));
+
+        _.remove(number, function (n) {
+            return n == value;
+        });
+        setNumber(_.cloneDeep(number));
+
+        _.remove(howlong, function (n) {
+            return n == value;
+        });
+        setHowlong(_.cloneDeep(howlong));
+
+        _.remove(themes, function (n) {
+            return n == value;
+        });
+        setThemes(_.cloneDeep(themes));
+    }
+
+    const handleDateRangeCallback = (start, end, label) => {
+
+        setStartDate(start);
+        setEndDate(end)
+    }
+    var data;
+
+    const handleFilterBtnClick = () => {
+
+        data = {
+            'userId': props.userId,
+            'budget': budgetArr,
+            'startMonth': startDate ? moment(startDate, 'YYYY-MM-DD').format('M') : "",
+            'endMonth': endDate ? moment(endDate, 'YYYY-MM-DD').format('M') : "",
+            'who': who,
+            'howlong': howlong,
+            'themes': themes,
+            'number': number,
+            'traveler': traveler
+        }
+
+        handleClearBtnClick(0);
+
+        axios
+            .post(BACKEND_URL + '/api-vacation/updateData', data, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(res => { console.log('Results: ' + res);})
+            .catch(err => console.log('Login error: ' + err))
+    }
+
+    const handleTravelerCheck = (evt, where, tagItem) => {
+
+        const { name, checked } = evt.target;
+
+        if (where === "traveler" && checked && !_.includes(traveler, name)) {
+            setTraveler([...traveler, name])
+        }
+        if (where === "traveler" && !checked && _.includes(traveler, name)) {
+            _.remove(traveler, function (n) {
+                return n == name;
+            });
+            setTraveler(_.cloneDeep(traveler))
+        }
+
+        if (tagItem === 'themes' && where === "tagDropDown" && checked && !_.includes(themes, name)) {
+            setThemes([...themes, name])
+        }
+        if (tagItem === 'themes' && where === "tagDropDown" && !checked && _.includes(themes, name)) {
+            _.remove(themes, function (n) {
+                return n == name;
+            })
+            setThemes(_.cloneDeep(themes))
+        }
+
+        if (tagItem === 'who' && where === "tagDropDown" && checked && !_.includes(who, name)) {
+            setWho([...who, name]);
+        }
+        if (tagItem === 'who' && where === "tagDropDown" && !checked && _.includes(who, name)) {
+
+            _.remove(who, function (n) {
+                return n === name;
+            })
+            setWho(_.cloneDeep(who))
+        }
+
+        if (tagItem === 'howLong' && where === "tagDropDown" && !_.includes(howlong, name)) {
+
+            console.log("-----state-----", howlong)
+
+            setHowlong([...howlong, name])
+        }
+        if (tagItem === 'howLong' && where === "tagDropDown" && _.includes(howlong, name)) {
+            console.log("remove------");
+            _.remove(howlong, function (n) {
+                return n === name;
+            })
+            setHowlong(_.cloneDeep(howlong))
+        }
+
+        if (tagItem === 'howMany' && where === "tagDropDown" && checked && !_.includes(number, Number(name))) {
+            console.log("-----stateforadd-----", number);
+            setNumber([...number, Number(name)])
+        }
+        if (tagItem === 'howMany' && where === "tagDropDown" && !checked && _.includes(number, Number(name))) {
+            console.log("removedkfkfjslflksflksfklslksdfkl")
+            _.remove(number, function (n) {
+                return Number(n) === Number(name);
+            })
+            setNumber(_.cloneDeep(number))
+        }
+
+
+    }
+
+    const displayTag = (values) => {
+        return (
+            values.map((value, index) =>
+                <TagComponent name={value + (_.isNumber(value) ? (value === 1 ? " person" : " people") : "")} key={index} onClick={() => handleDeleteTagBtnClick(value)} case = "1" />
+            )
+        );
+    };
+
+    const handleTagSelectDone = () => {
+        setIsDropDownOpen(false);
+    }
+
+    const displaySiteCard = (values) => {
+        return (
+            values.map((value, index) =>
+                <SiteCard key={index} item = {value} />
+            )
+        );
     }
 
     return (
@@ -41,7 +243,7 @@ const Search = (props) => {
             <div className="d-flex justify-content-between">
                 <p className="page-title">Results (#)</p>
                 <div className="d-flex align-items-center">
-                    <label for="category" className="pr-4 filter-label">SORT BY</label>
+                    <label htmlFor="category" className="pr-4 filter-label">SORT BY</label>
                     <select id="category">
                         <option value="match">Match</option>
                         <option value="price">Price</option>
@@ -58,82 +260,139 @@ const Search = (props) => {
                         </div>
                         <hr className="select-title-underline" />
                         <div className="select-area">
-                            <div className="px-2 pb-2">
-                                <p className="select-item-name">Budget</p>
-                            </div>
-                            <div className="px-2 item-spacing">
-                                <div class="btn-group d-flex flex-wrap" role="group" aria-label="Basic example">
-                                    <button type="button" class={"btn "+ (budgetArr.includes("low")?"clicked":"")} onClick={()=>handleBudgetBtnClick("low")}>Low</button>
-                                    <button type="button" class={"btn "+ (budgetArr.includes("normal")?"clicked":"")} onClick={()=>handleBudgetBtnClick("normal")}>Normal</button>
-                                    <button type="button" class={"btn "+ (budgetArr.includes("high")?"clicked":"")} onClick={()=>handleBudgetBtnClick("high")}>High</button>
+                            <Scrollbar>
+                                <div className="" style={{ width: "95%" }}>
+                                    <div className="px-2 pb-2">
+                                        <p className="select-item-name">Budget</p>
+                                    </div>
+                                    <div className="px-2 item-spacing">
+                                        <div className="btn-group d-flex flex-wrap" role="group" aria-label="Basic example">
+                                            <button type="button" className={"btn " + (budgetArr.includes("low") ? "clicked" : "")} onClick={() => handleBudgetBtnClick("low")}>Low</button>
+                                            <button type="button" className={"btn " + (budgetArr.includes("normal") ? "clicked" : "")} onClick={() => handleBudgetBtnClick("normal")}>Normal</button>
+                                            <button type="button" className={"btn " + (budgetArr.includes("high") ? "clicked" : "")} onClick={() => handleBudgetBtnClick("high")}>High</button>
+                                        </div>
+                                    </div>
+                                    <div className="d-flex px-2 pb-2 justify-content-between align-items-center">
+                                        <p className="select-item-name">Time Frame</p>
+                                        <p className="clear" onClick={() => handleClearBtnClick(1)}>CLEAR</p>
+                                    </div>
+                                    <div className="px-2 item-spacing">
+                                        <DateRangePicker
+                                            initialSettings={{ startDate: startDate, endDate: endDate }}
+                                            onCallback={handleDateRangeCallback}
+                                        ><div>
+                                                <button className="d-flex align-items-center date-range-btn"><img src={calendarIcon} className="mr-4" alt="calendarIcon" /> {!startDate ? "Can Start From - Need to Return By" : (moment(startDate).format("ddd, MMM D") + " - " + (moment(endDate).format("ddd, MMM D")))} </button>
+                                            </div>
+                                        </DateRangePicker>
+                                    </div>
+                                    <div className="d-flex px-2 pb-2 justify-content-between align-items-center">
+                                        <p className="select-item-name">Vacation Tags</p>
+                                        <p className="clear" onClick={() => handleClearBtnClick(2)}>CLEAR</p>
+                                    </div>
+                                    <div className="px-2 pb-2">
+                                        <div className="custom-dropDownParent" style={{ position: "relative", width: "100%" }}>
+                                            <button className="tags" type="button" onClick={toggleDropDown}>
+                                                Tags
+                                            </button>
+                                            {isDropDownOpen &&
+                                                <div className="custom-dropDownMenu pl-2">
+                                                    <div className="w-100" style={{ height: "200px" }}>
+                                                        <Scrollbar style={{ paddingLeft: "5px", paddingRight: "15px" }}>
+                                                            <p className="my-2" style={{ fontSize: "0.8rem", fontWeight: "600" }}>Other Themes</p>
+                                                            {listAndGroups['Other Themes'].map((value, index) =>
+
+                                                                <div className="custom-control custom-checkbox" style={{ fontSize: "0.8rem", fontWeight: "400" }} key={index}>
+                                                                    <input type="checkbox" className="custom-control-input" name={value} id={value} checked={_.includes(themes, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'themes')} />
+                                                                    <label className="custom-control-label" htmlFor={value}>{value}</label>
+                                                                </div>)}
+                                                            <p className="my-2" style={{ fontSize: "0.8rem", fontWeight: "600" }}>How Long</p>
+                                                            {listAndGroups['How Long'].map((value, index) =>
+
+                                                                <div className="custom-control custom-checkbox" style={{ fontSize: "0.8rem", fontWeight: "400" }} key={index}>
+                                                                    <input type="checkbox" className="custom-control-input" name={value} id={value + "howlong"} checked={_.includes(howlong, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'howLong')} />
+                                                                    <label className="custom-control-label" htmlFor={value + "howlong"}>{value}</label>
+                                                                </div>)}
+
+                                                            <p className="my-2" style={{ fontSize: "0.8rem", fontWeight: "600" }}>How Many</p>
+                                                            {listAndGroups['How Many'].map((value, index) =>
+
+                                                                <div className="custom-control custom-checkbox" style={{ fontSize: "0.8rem", fontWeight: "400" }} key={index}>
+                                                                    <input type="checkbox" className="custom-control-input" name={value} id={value + "howMany"} checked={_.includes(number, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'howMany')} />
+                                                                    <label className="custom-control-label" htmlFor={value + "howMany"}>{value}</label>
+                                                                </div>)}
+
+                                                            <p className="mb-1" style={{ fontSize: "0.8rem", fontWeight: "600" }}>Who is traveling</p>
+                                                            {listAndGroups['Who is traveling'].map((value, index) =>
+
+                                                                <div className="custom-control custom-checkbox" style={{ fontSize: "0.8rem", fontWeight: "400" }} key={index}>
+                                                                    <input type="checkbox" className="custom-control-input" name={value} id={value} checked={_.includes(who, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'who')} />
+                                                                    <label className="custom-control-label" htmlFor={value}>{value}</label>
+                                                                </div>)}
+
+                                                        </Scrollbar>
+                                                    </div>
+                                                    <div className="d-flex justify-content-center align-items-center w-25 text-center px-2 py-1 mt-3 mb-1 mx-3" style={{ cursor: "default", backgroundColor: "#00DAF8", borderRadius: "10px", color: "white", fontSize: "12px", height: "23px", float: "right" }} onClick={handleTagSelectDone}>Done</div>
+                                                </div>}
+                                        </div>
+
+                                    </div>
+                                    {!isDropDownOpen &&
+                                        <div className="px-2 item-spacing">
+                                            <Scrollbar style={{ height: "100px" }} className="tag-area">
+                                                <div className="d-flex flex-wrap pt-2 px-2">
+                                                    {displayTag(who)}
+                                                    {displayTag(number)}
+                                                    {displayTag(themes)}
+                                                    {displayTag(howlong)}
+                                                </div>
+                                            </Scrollbar>
+                                        </div>}
+                                    <div className="d-flex px-2 pb-2 justify-content-between align-items-center">
+                                        <p className="select-item-name">Travelers Composition</p>
+                                        <p className="clear" onClick={() => handleClearBtnClick(3)}>CLEAR</p>
+                                    </div>
+                                    <div className="px-2">
+                                        <div className="custom-control custom-checkbox">
+                                            <input type="checkbox" className="custom-control-input" checked={_.includes(traveler, "boys")} name="boys" id="boys" onChange={(evt) => handleTravelerCheck(evt, 'traveler', '')} />
+                                            <label className="custom-control-label" htmlFor="boys">All Boys Travelers</label>
+                                        </div>
+                                        <div className="custom-control custom-checkbox">
+                                            <input type="checkbox" className="custom-control-input" checked={_.includes(traveler, "girls")} name="girls" id="girls" onChange={(evt) => handleTravelerCheck(evt, 'traveler', '')} />
+                                            <label className="custom-control-label" htmlFor="girls">All Girls Travelers</label>
+                                        </div>
+                                        <div className="custom-control custom-checkbox">
+                                            <input type="checkbox" className="custom-control-input" checked={_.includes(traveler, "elderly")} name="elderly" id="elderly" onChange={(evt) => handleTravelerCheck(evt, 'traveler', '')} />
+                                            <label className="custom-control-label" htmlFor="elderly">Suitable For The Elderly</label>
+                                        </div>
+                                        <div className="custom-control custom-checkbox">
+                                            <input type="checkbox" className="custom-control-input" checked={_.includes(traveler, "kids")} name="kids" id="kids" onChange={(evt) => handleTravelerCheck(evt, 'traveler', '')} />
+                                            <label className="custom-control-label" htmlFor="kids">Suitable For Kids And Babies</label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="d-flex px-2 pb-2 justify-content-between align-items-center">
-                                <p className="select-item-name">Time Frame</p>
-                                <p className="clear">CLEAR</p>
-                            </div>
-                            <div className="px-2 item-spacing">
-                                <DateRangePicker
-                                    initialSettings={{ startDate: '1/1/2014', endDate: '3/1/2014' }}
-                                >
-                                    <button className="d-flex align-items-center date-range-btn"><img src={calendarIcon} className="mr-4" alt="calendarIcon" /> Can Start From - Need to Return By</button>
-                                </DateRangePicker>
-                            </div>
-                            <div className="d-flex px-2 pb-2 justify-content-between align-items-center">
-                                <p className="select-item-name">Vacation Tags</p>
-                                <p className="clear">CLEAR</p>
-                            </div>
-                            <div className="px-2 pb-2">
-                                <select id="tags">
-                                    <option value="match">Match</option>
-                                    <option value="price">Price</option>
-                                </select>
-                            </div>
-                            <div className="px-2 item-spacing">
-                                <div className="d-flex flex-wrap pt-2 px-2 tag-area">
-                                    <div className="px-2 py-1 my-2 mx-1" style={{ backgroundColor: "#00DAF8", borderRadius: "4px", color: "white", fontSize: "10px" }}>Friends &times;</div>
-                                    <div className="px-2 py-1 my-2 mx-1" style={{ backgroundColor: "#00DAF8", borderRadius: "4px", color: "white", fontSize: "10px" }}>Friends &times;</div>
-                                    <div className="px-2 py-1 my-2 mx-1" style={{ backgroundColor: "#00DAF8", borderRadius: "4px", color: "white", fontSize: "10px" }}>Friends &times;</div>
-                                    <div className="px-2 py-1 my-2 mx-1" style={{ backgroundColor: "#00DAF8", borderRadius: "4px", color: "white", fontSize: "10px" }}>Friends &times;</div>
-                                    <div className="px-2 py-1 my-2 mx-1" style={{ backgroundColor: "#00DAF8", borderRadius: "4px", color: "white", fontSize: "10px" }}>Friends &times;</div>
-                                    <div className="px-2 py-1 my-2 mx-1" style={{ backgroundColor: "#00DAF8", borderRadius: "4px", color: "white", fontSize: "10px" }}>Friends &times;</div>
-                                    <div className="px-2 py-1 my-2 mx-1" style={{ backgroundColor: "#00DAF8", borderRadius: "4px", color: "white", fontSize: "10px" }}>Friends &times;</div>
-                                    <div className="px-2 py-1 my-2 mx-1" style={{ backgroundColor: "#00DAF8", borderRadius: "4px", color: "white", fontSize: "10px" }}>Friends &times;</div>
-                                    <div className="px-2 py-1 my-2 mx-1" style={{ backgroundColor: "#00DAF8", borderRadius: "4px", color: "white", fontSize: "10px" }}>Friends &times;</div>
-                                    <div className="px-2 py-1 my-2 mx-1" style={{ backgroundColor: "#00DAF8", borderRadius: "4px", color: "white", fontSize: "10px" }}>Friends &times;</div>
-                                </div>
-                            </div>
-                            <div className="d-flex px-2 pb-2 justify-content-between align-items-center">
-                                <p className="select-item-name">Travelers Composition</p>
-                                <p className="clear">CLEAR</p>
-                            </div>
-                            <div className="px-2">
-                                {/* <div style={{ width: "100%" }}> */}
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="boys" />
-                                        <label class="custom-control-label" for="boys">All Boys Travelers</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="girls" />
-                                        <label class="custom-control-label" for="girls">All Girls Travelers</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="elderly" />
-                                        <label class="custom-control-label" for="elderly">Suitable For The Elderly</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="kids" />
-                                        <label class="custom-control-label" for="kids">Suitable For Kids And Babies</label>
-                                    </div>
-                                {/* </div> */}
-                            </div>
+
+                            </Scrollbar>
                         </div>
                     </div>
                     <div className="w-full" style={{ zIndex: "1" }}>
-                        <button className="btn w-100 filter-btn">Filter</button>
+                        <button className="btn w-100 filter-btn" onClick={handleFilterBtnClick}>Filter</button>
                     </div>
                 </div>
-                <div style={{ border: "2px solid red", width: "76%" }}>ffdfdfssaf</div>
+                <div className="ml-3 list-box p-2">
+                    <Scrollbar style={{height:"55vh", paddingRight:"15px"}}>
+                        {/* <SiteCard />
+                        <SiteCard />
+                        <SiteCard />
+                        <SiteCard /> */}
+                        {displaySiteCard(citiesInfo.slice(0,4))}
+                    {showMeMore &&
+                        displaySiteCard(citiesInfo.slice(4,8))
+                    }
+                    <div className="d-flex justify-content-center mt-4">
+                        <button className="btn btn-success shadow-lg" style={{border:"1px solid #555555",backgroundColor:"#e5e5e5", color:"#555555", fontSize:"1rem"}} onClick={()=>{setShowMeMore(true)}}>Show me more</button>
+                    </div>
+                    </Scrollbar>
+                </div>
             </div>
         </div>
 

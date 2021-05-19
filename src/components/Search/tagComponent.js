@@ -1,7 +1,9 @@
 import React, {Component,useState} from "react";
 
-const tagComponent = (props) => {
+const TagComponent = (props) => {
     return (
-        <div className="px-2 py-1 my-2 mx-1" style={{backgroundColor:"#00DAF8", borderRadius:"8px",color:"white", fontSize:"10px" }}>{props.name}</div>
+        <div className="d-flex justify-content-center align-items-center px-2 py-1 my-1 mx-1" style={{ backgroundColor:"#00DAF8", borderRadius:"0.7rem",color:"white", fontSize:"0.8rem",height:"1.5rem" }}><span className="">{props.name}</span>{ props.case === "1"?<span className="pl-2" onClick={props.onClick} style={{cursor:"default"}}> &times;</span>:""}</div>
     );
 }
+
+export default TagComponent;

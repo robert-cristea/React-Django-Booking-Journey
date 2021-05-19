@@ -13,7 +13,7 @@
 
 .select-area {
 	height: 45vh;
-	overflow-y: scroll;
+	min-height:45vh;
 }
 
 .page-title {
@@ -49,12 +49,11 @@ select {
 	border: 1px solid #555555;
 	background-color: white;
 	border-radius: 4px;
-	height: 70px;
-	overflow-y: scroll;
+	/* height: 70px; */
 }
 
 .clear {
-	cursor: pointer;
+	cursor: default;
 	font-size: 0.8rem;
 	margin-bottom: 0; 
 	color: rgba(0,0,0,0.3);
@@ -77,7 +76,7 @@ select {
 	position: relative;
 	border: 1px solid #555555;
 	border-radius: 5px;
-	width: 21%;
+	width: 22%;
 	min-width: 150px;
 }
 
@@ -114,6 +113,7 @@ select {
 	background-color: #F5F5F5;
 	color: #555555;
 	border: 1px solid #555555;
+	cursor:"default"
 }
 
 .btn-group .btn:hover, .btn.clicked{
@@ -134,18 +134,67 @@ select {
 	background-color: #F5F5F5;
 }
 
-select#tags {
-	border: none;
-	font-size: 14px;
+.tags {
+	display:flex;
+	align-items:center;
+	font-size: 1rem;
 	width: 100%;
 	border: 1px solid #555555;
 	height: 2rem;
 	border-radius: 4px;
 	background-color: #F5F5F5;
-	color: rgba(0,0,0,0.7)
+	color: rgba(0,0,0,0.7);
+	padding-left:5px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: transparent;
+	background-image: url(../../images/expandArrow.png);
+	background-repeat: no-repeat;
+	background-position-x: 98%;
+	background-position-y: 50%;
+}
+
+.custom-dropDownMenu {
+	position:absolute;
+	width:100%!important;
+	top:2rem; 
+	z-index:100;
+	border: 1px solid #555555!important;
+	background-color:#FEFEFE!important;
+	border-radius:4px;
+	margin-bottom:2.5rem;
 }
 
 .filter-btn {
 	background-color: #02529B!important;
 	color: white!important;
+}
+
+.ps__rail-y:hover > .ps__thumb-y, .ps__rail-y:focus > .ps__thumb-y, .ps__rail-y.ps--clicking .ps__thumb-y{
+	width:6px!important;
+}
+
+.ps__rail-y {
+	width:0px!important;
+}
+
+.applyBtn, .cancelBtn {
+	display:none!important;
+}
+
+.daterangepicker .drp-buttons {
+	text-align:center!important;
+}
+
+.custom-checkbox:hover {
+	background-color:#EBFAFF!important;
+}
+
+/* Results list */
+
+.list-box {
+	border: 1px solid #555555;
+	border-radius: 5px;
+	width: 76%;
+	min-width:600px; 
 }

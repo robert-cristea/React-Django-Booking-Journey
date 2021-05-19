@@ -28,6 +28,8 @@ const Home = (props) => {
     const [multiNumber, setMultiNumber] = useState([])
     const [multiPeriod, setMultiPeriod] = useState([])
     const [multiTheme, setMultiTheme] = useState([])
+
+    const [userId, setUserId] = useState()
     
     const isMounted = useMounted();
     const [isMultiple, setIsMultiple] = useState(false)
@@ -338,7 +340,8 @@ const Home = (props) => {
                     'Content-Type': 'application/json',
                 },
             })
-            .then(res => console.log('Results: ' + res))
+            .then(res => {return res.data;})
+            .then(res => {setUserId(res)})
             .catch(err => console.log('Login error: ' + err))
     }
 
@@ -359,7 +362,7 @@ const Home = (props) => {
                         <p className="bg-white text-center rounded-lg py-1 notify">Find your next destination</p>
                     </div>
                 </div>
-                {showAdvancedSearchPage?
+                { showAdvancedSearchPage?
                 <div className="w-full d-flex align-items-center justify-content-center px-4 form-card">
                     {step < 5 ?
                         <div className="w-full mx-auto shadow-lg br-card" style={{ display: 'flex', flexDirection: 'column', width: "40vw", minWidth: "400px", position: 'relative' }}>
@@ -421,7 +424,7 @@ const Home = (props) => {
                                 </div>
                             </div>
                         </div> : <p className="text-center font-weight-medium font-greeting">Searching <span style={{ display: "block" }}>for the best vacation</span> for you</p>}
-                </div>:<div className="w-full pt-2 px-5 form-card"><Search /></div>}
+                </div>:<div className="w-full pt-2 px-5 form-card"><Search userId = {userId} who={multiWho} number={multiNumber} howlong={multiPeriod} theme={multiTheme} /></div>}
             </div>
         </div>
     )
