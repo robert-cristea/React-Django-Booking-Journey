@@ -207,7 +207,6 @@ const Home = (props) => {
                 setMultiWho([]);
                 break;
             case 2:
-                setIsMultiple(false);
                 setMultiNumber([]);
                 break;
             case 3:
@@ -266,8 +265,15 @@ const Home = (props) => {
                 setStep(1);
                 break;
             case 3:
+                console.log("case 3 test")
                 setMultiPeriod([]);
-                setStep(2);
+                if((multiWho.length === 1 && (_.includes(multiWho,_.startCase('solo')) || _.includes(multiWho,_.startCase('couple')))) || (multiWho.length === 2 && (_.includes(multiWho,_.startCase('solo')) && _.includes(multiWho,_.startCase('couple'))))){
+                    console.log("================here======================"+multiWho)
+                    setStep(2);
+                    setStep(1);
+                }else{
+                    setStep(2);
+                }
                 break;
             case 4:
                 setMultiTheme([]);
@@ -292,6 +298,7 @@ const Home = (props) => {
                 });
                 setMultiWho(_.cloneDeep(multiWho));
             }
+            console.log("test"+_.includes(multiWho,['Couple','Solo']))
         }
         if (x === 2) {
             setMultiNumber(_.union(multiNumber, [buttonArray[x][y]['name']]))
@@ -419,8 +426,8 @@ const Home = (props) => {
 
                                 <div className="pb-3 px-3" style={{ width: "100%", position: 'absolute', bottom: 0 }}>
                                     <div className="d-flex justify-content-between w-full align-items-center">
-                                        {step > 1 ? <img src={backArrow} alt="backArrow" onClick={handleBackBtnClick} style={{ width: "1.8rem" }} /> : <div></div>}
-                                        <div><img src={forwardArrow} alt="forwardArrow" onClick={handleForwardBtnClick} style={{ width: "1.8rem" }} /></div>
+                                        {step > 1 ? <img src={backArrow} alt="backArrow" className="back-forward-arrow" onClick={handleBackBtnClick} /> : <div></div>}
+                                        <div><img src={forwardArrow} alt="forwardArrow" className="back-forward-arrow" onClick={handleForwardBtnClick} /></div>
                                     </div>
                                 </div>
                             </div> : <p className="text-center font-weight-medium font-greeting">Searching <span style={{ display: "block" }}>for the best vacation</span> for you</p>}
