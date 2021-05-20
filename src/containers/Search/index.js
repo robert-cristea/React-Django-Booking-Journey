@@ -37,8 +37,13 @@ const Search = (props) => {
     }
 
     const handleBudgetBtnClick = (budget) => {
-        if (!budgetArr.includes(budget)) {
+        if (!_.includes(budgetArr,budget)) {
             setbudgetArr([...budgetArr, budget])
+        }else{
+            _.remove(budgetArr,function(n){
+                return n === budget;
+            })
+            setbudgetArr(_.cloneDeep(budgetArr));
         }
     }
 
@@ -119,6 +124,16 @@ const Search = (props) => {
         setStartDate(start);
         setEndDate(end)
     }
+
+    // const widgetShow = (event,picker) => {
+    //     console.log("==========picker===============")
+    //     console.log(picker)
+    //     // picker.oldStartDate = startDate;
+    //     // picker.oldEndDate = endDate;
+    //     picker.minDate = true;
+    //     // picker.minDate.format = "2021-05-21";
+    // }
+
     var data;
 
     const handleFilterBtnClick = () => {
@@ -274,6 +289,7 @@ const Search = (props) => {
                                         <DateRangePicker
                                             initialSettings={{ startDate: startDate, endDate: endDate }}
                                             onCallback={handleDateRangeCallback}
+                                            // onShow = {widgetShow}
                                         ><div>
                                                 <button className="d-flex align-items-center date-range-btn"><img src={calendarIcon} className="mr-4" alt="calendarIcon" /> {!startDate ? "Can Start From - Need to Return By" : (moment(startDate).format("ddd, MMM D") + " - " + (moment(endDate).format("ddd, MMM D")))} </button>
                                             </div>
@@ -348,7 +364,7 @@ const Search = (props) => {
                                     <div className="px-2">
                                         <div className="custom-control custom-checkbox">
                                             <input type="checkbox" className="custom-control-input" checked={_.includes(traveler, "boys")} name="boys" id="boys" onChange={(evt) => handleTravelerCheck(evt, 'traveler', '')} />
-                                            <label className="custom-control-label" htmlFor="boys">All Boys Travelers</label>
+                                            <label className="custom-control-label w-100" htmlFor="boys">All Boys Travelers</label>
                                         </div>
                                         <div className="custom-control custom-checkbox">
                                             <input type="checkbox" className="custom-control-input" checked={_.includes(traveler, "girls")} name="girls" id="girls" onChange={(evt) => handleTravelerCheck(evt, 'traveler', '')} />

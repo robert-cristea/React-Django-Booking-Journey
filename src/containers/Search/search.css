@@ -52,6 +52,10 @@ select {
 	background-color: #00daf8 !important;
 }
 
+.custom-control-label {
+	width:100%;
+}
+
 .title-underline {
 	width: 100%;
 	margin-top: 0;
@@ -103,7 +107,7 @@ select {
 	cursor:"default"
 }
 
-.btn-group .btn:hover, .btn.clicked{
+.btn-group .btn.clicked{
 	background-color: #00daf8;
 	color:#fff;
 }
@@ -166,12 +170,13 @@ select {
 }
 
 .applyBtn, .cancelBtn {
-	display:none!important;
+	/* display:none!important; */
 }
 
-.daterangepicker .drp-buttons {
-	text-align:center!important;
+.daterangepicker .drp-selected {
+	padding-right:3rem!important;
 }
+
 
 .custom-checkbox:hover {
 	background-color:#EBFAFF!important;
