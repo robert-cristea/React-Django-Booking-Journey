@@ -12,7 +12,7 @@ import _ from 'lodash';
 import calendarIcon from "../../images/calendarIcon.png";
 import { BACKEND_URL } from '../../utils/request';
 import SiteCard from '../../components/Search/SiteCard'
-import TagComponent from '../../components/Search/TagComponent'
+import TagComponent from '../../components/Search/tagComponent'
 
 const Search = (props) => {
 
