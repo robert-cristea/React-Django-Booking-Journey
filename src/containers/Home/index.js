@@ -16,18 +16,19 @@ import forwardArrow from "../../images/forwardArrow.png";
 import "./home.css";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import _ from 'lodash';
 
 const Home = (props) => {
 
     // set user info
     const [step, setStep] = useState(1)
-    
+
     const [multiWho, setMultiWho] = useState([])
     const [multiNumber, setMultiNumber] = useState([])
     const [multiPeriod, setMultiPeriod] = useState([])
     const [multiTheme, setMultiTheme] = useState([])
     const [userId, setUserId] = useState()
-    
+
     const isMounted = useMounted();
     const [isMultiple, setIsMultiple] = useState(false)
     const [showLongerPeriod, setShowLongerPeriod] = useState(false)
@@ -115,7 +116,7 @@ const Home = (props) => {
                 return (
                     stage3_arr.map((item, index) =>
                         <CircleButton name={item.name} className="child" key={index} sel={index} clicked={item.clickable} onClick={() => { if (index < 4) handleClickBtn(step, index); else handleClickBtn(step, index + 1); }} />
-                ));
+                    ));
             }
         }
     }
@@ -201,7 +202,7 @@ const Home = (props) => {
     }, [multiTheme])
 
     useEffect(() => {
-        switch(step){
+        switch (step) {
             case 1:
                 setMultiWho([]);
                 break;
@@ -217,7 +218,7 @@ const Home = (props) => {
                 break;
             case 5:
                 handleTransmitData();
-                setTimeout(function(){setShowAdvancedSearchPage(true)},2000)
+                setTimeout(function () { setShowAdvancedSearchPage(true) }, 2000)
                 break;
             default:
                 break;
@@ -278,27 +279,51 @@ const Home = (props) => {
     }
 
     const handleClickBtn = (x, y) => {
-        buttonArray[x][y]['clickable'] = true;
+        buttonArray[x][y]['clickable'] = !buttonArray[x][y]['clickable'];
         setbuttonArray({ ...buttonArray })
 
-        if (x === 1 && !multiWho.includes(buttonArray[x][y]['name'])) {
-            setMultiWho([...multiWho, buttonArray[x][y]['name']])
+        if (x === 1) {
+            if (!_.includes(multiWho, buttonArray[x][y]['name'])) {
+                setMultiWho(_.union(multiWho, [buttonArray[x][y]['name']]));
+            }
+            else {
+                _.remove(multiWho, function (n) {
+                    return n === buttonArray[x][y]['name'];
+                });
+                setMultiWho(_.cloneDeep(multiWho));
+            }
         }
         if (x === 2) {
-            setMultiNumber([...multiNumber, buttonArray[x][y]['name']])
+            setMultiNumber(_.union(multiNumber, [buttonArray[x][y]['name']]))
             setStep(3);
             setIsMultiple(false)
         }
-        if (x === 3 && !multiPeriod.includes(buttonArray[x][y]['name'])) {
-            if (buttonArray[x][y]['name'] === "Longer") {
-                setShowLongerPeriod(true);
-            } else {
-                setMultiPeriod([...multiPeriod, buttonArray[x][y]['name']])
+        if (x === 3) {
+            if (!_.includes(multiPeriod, buttonArray[x][y]['name'])) {
+                if (buttonArray[x][y]['name'] === "Longer") {
+                    setShowLongerPeriod(true);
+                } else {
+                    setMultiPeriod(_.union(multiPeriod, [buttonArray[x][y]['name']]));
+                }
             }
-
+            else {
+                _.remove(multiPeriod, function (n) {
+                    return n === buttonArray[x][y]['name'];
+                });
+                setMultiPeriod(_.cloneDeep(multiPeriod));
+            }
         }
-        if (x === 4 && !multiTheme.includes(buttonArray[x][y]['name'])) {
-            setMultiTheme([...multiTheme, buttonArray[x][y]['name']])
+
+        if (x === 4) {
+            if (!_.includes(multiTheme, buttonArray[x][y]['name'])) {
+                setMultiTheme(_.union(multiTheme, [buttonArray[x][y]['name']]));
+            }
+            else {
+                _.remove(multiTheme, function (n) {
+                    return n === buttonArray[x][y]['name'];
+                });
+                setMultiTheme(_.cloneDeep(multiTheme));
+            }
         }
     }
 
@@ -315,8 +340,8 @@ const Home = (props) => {
                     'Content-Type': 'application/json',
                 },
             })
-            .then(res => {return res.data;})
-            .then(res => {setUserId(res)})
+            .then(res => { return res.data; })
+            .then(res => { setUserId(res) })
             .catch(err => console.log('Login error: ' + err))
     }
 
@@ -337,69 +362,69 @@ const Home = (props) => {
                         <p className="bg-white text-center rounded-lg py-1 notify">Find your next destination</p>
                     </div>
                 </div>
-                { !showAdvancedSearchPage?
-                <div className="w-full d-flex align-items-center justify-content-center px-4 form-card">
-                    {step < 5 ?
-                        <div className="w-full mx-auto shadow-lg br-card" style={{ display: 'flex', flexDirection: 'column', width: "40vw", minWidth: "400px", position: 'relative' }}>
-                            <div className="py-3 px-4">
-                                <div className="d-flex justify-content-between">
-                                    <p style={{ fontWeight: "300", fontSize: "1.2rem" }}>Adjust your search:</p>
-                                    <div>
-                                        {step === 1 && <CircularProgressBar percentage={0} />}
-                                        {step > 1 && <CircularProgressBar percentage={25 * (step-1)} />}
+                {!showAdvancedSearchPage ?
+                    <div className="w-full d-flex align-items-center justify-content-center px-4 form-card">
+                        {step < 5 ?
+                            <div className="w-full mx-auto shadow-lg br-card" style={{ display: 'flex', flexDirection: 'column', width: "40vw", minWidth: "400px", position: 'relative' }}>
+                                <div className="py-3 px-4">
+                                    <div className="d-flex justify-content-between">
+                                        <p style={{ fontWeight: "300", fontSize: "1.2rem" }}>Adjust your search:</p>
+                                        <div>
+                                            {step === 1 && <CircularProgressBar percentage={0} />}
+                                            {step > 1 && <CircularProgressBar percentage={25 * (step - 1)} />}
+                                        </div>
+                                    </div>
+                                    <h2 className="text-center">
+                                        {step === 1 && "Who is travelling?"}
+                                        {step === 2 && "How Many?"}
+                                        {step === 3 && "How long?"}
+                                        {step === 4 && "Vacation Theme"}
+                                    </h2>
+                                    <hr style={{ width: "30%", marginTop: "10px", marginBottom: "10px" }} />
+                                    <div className="d-flex justify-content-between">
+                                        <div></div>
+                                        {step !== 2 && <SwitchComponent onChange={handleSwitchChange} checked={isMultiple} />}
                                     </div>
                                 </div>
-                                <h2 className="text-center">
-                                    {step === 1 && "Who is travelling?"}
-                                    {step === 2 && "How Many?"}
-                                    {step === 3 && "How long?"}
-                                    {step === 4 && "Vacation Theme"}
-                                </h2>
-                                <hr style={{ width: "30%", marginTop: "10px", marginBottom: "10px" }} />
-                                <div className="d-flex justify-content-between">
-                                    <div></div>
-                                    <SwitchComponent onChange={handleSwitchChange} checked={isMultiple} />
+                                <div className="circle-field w-full" style={{ height: "64%" }}>
+                                    {(step === 1) &&
+                                        <MyComponent>
+                                            {displaybuttons(1, 0)}
+                                        </MyComponent>
+                                    }
+                                    {(step === 2) &&
+                                        <MyComponent>
+                                            {displaybuttons(2, 0)}
+                                        </MyComponent>
+                                    }
+                                    {(step === 3 && !isMultiple) && (showLongerPeriod ?
+                                        <MyComponent>
+                                            {displaybuttons(3, 2)}
+                                        </MyComponent> :
+                                        <MyComponent>
+                                            {displaybuttons(3, 1)}
+                                        </MyComponent>)
+                                    }
+                                    {(step === 3 && isMultiple) &&
+                                        <MyComponent>
+                                            {displaybuttons(3, 3)}
+                                        </MyComponent>
+                                    }
+                                    {(step === 4) &&
+                                        <MyComponent>
+                                            {displaybuttons(4, 0)}
+                                        </MyComponent>
+                                    }
                                 </div>
-                            </div>
-                            <div className="circle-field w-full" style={{ height: "64%" }}>
-                                {(step === 1) &&
-                                    <MyComponent>
-                                        {displaybuttons(1, 0)}
-                                    </MyComponent>
-                                }
-                                {(step === 2) &&
-                                    <MyComponent>
-                                        {displaybuttons(2, 0)}
-                                    </MyComponent>
-                                }
-                                {(step === 3 && !isMultiple) && (showLongerPeriod ?
-                                    <MyComponent>
-                                        {displaybuttons(3, 2)}
-                                    </MyComponent> :
-                                    <MyComponent>
-                                        {displaybuttons(3, 1)}
-                                    </MyComponent>)
-                                }
-                                {(step === 3 && isMultiple) &&
-                                    <MyComponent>
-                                        {displaybuttons(3, 3)}
-                                    </MyComponent>
-                                }
-                                {(step === 4) &&
-                                    <MyComponent>
-                                        {displaybuttons(4, 0)}
-                                    </MyComponent>
-                                }
-                            </div>
 
-                            <div className="pb-3 px-3" style={{ width: "100%", position: 'absolute', bottom: 0 }}>
-                                <div className="d-flex justify-content-between w-full align-items-center">
-                                    {step > 1 ? <img src={backArrow} alt="backArrow" onClick={handleBackBtnClick} style={{ width: "1.8rem" }} /> : <div></div>}
-                                    <div><img src={forwardArrow} alt="forwardArrow" onClick={handleForwardBtnClick} style={{ width: "1.8rem" }} /></div>
+                                <div className="pb-3 px-3" style={{ width: "100%", position: 'absolute', bottom: 0 }}>
+                                    <div className="d-flex justify-content-between w-full align-items-center">
+                                        {step > 1 ? <img src={backArrow} alt="backArrow" onClick={handleBackBtnClick} style={{ width: "1.8rem" }} /> : <div></div>}
+                                        <div><img src={forwardArrow} alt="forwardArrow" onClick={handleForwardBtnClick} style={{ width: "1.8rem" }} /></div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div> : <p className="text-center font-weight-medium font-greeting">Searching <span style={{ display: "block" }}>for the best vacation</span> for you</p>}
-                </div>:<div className="w-full pt-2 px-5 form-card"><Search userId = {userId} who={multiWho} number={multiNumber} howlong={multiPeriod} theme={multiTheme} /></div>}
+                            </div> : <p className="text-center font-weight-medium font-greeting">Searching <span style={{ display: "block" }}>for the best vacation</span> for you</p>}
+                    </div> : <div className="w-full pt-2 px-5 form-card"><Search userId={userId} who={multiWho} number={multiNumber} howlong={multiPeriod} theme={multiTheme} /></div>}
             </div>
         </div>
     )
