@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Scrollbar from 'react-perfect-scrollbar'
-import DateRangePicker from 'react-bootstrap-daterangepicker';
+// import DateRangePicker from 'react-bootstrap-daterangepicker';
 import './search.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-daterangepicker/daterangepicker.css';
+// import 'bootstrap-daterangepicker/daterangepicker.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import moment from 'moment';
@@ -13,6 +13,13 @@ import calendarIcon from "../../images/calendarIcon.png";
 import { BACKEND_URL } from '../../utils/request';
 import SiteCard from '../../components/Search/SiteCard'
 import TagComponent from '../../components/Search/tagComponent'
+
+import DateRangePicker from '../../components/Home/CustomDateRangePicker';
+import dateFormat from 'dateformat'
+import { addDays } from 'date-fns';
+
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 
 const Search = (props) => {
 
@@ -119,17 +126,25 @@ const Search = (props) => {
         setThemes(_.cloneDeep(themes));
     }
 
-    const handleDateRangeCallback = (start, end, label) => {
+    // const handleDateRangeCallback = (start, end, label) => {
 
-        setStartDate(start);
-        setEndDate(end)
-    }
+    //     setStartDate(start);
+    //     setEndDate(end)
+    // }
 
-    const widgetShow = (event, picker) => {
-        console.log("==========picker===============")
-        console.log(picker)
-        picker.timePicker = true;
-    }
+    // const widgetShow = (event, picker) => {
+    //     console.log("==========picker===============")
+    //     console.log(picker)
+    //     picker.timePicker = true;
+    // }
+
+    const [date, setDate] = useState(
+        {
+            startDate: new Date(),
+            endDate: addDays(new Date(), 0),
+            key: 'selection'
+        }
+    );
 
     var data;
 
@@ -283,15 +298,26 @@ const Search = (props) => {
                                         <p className="clear" onClick={() => handleClearBtnClick(1)}>CLEAR</p>
                                     </div>
                                     <div className="px-2 item-spacing">
-                                        <DateRangePicker
+                                        {/* <DateRangePicker
                                             initialSettings={{ startDate: startDate, endDate: endDate }}
                                             onCallback={handleDateRangeCallback}
                                             onShow = {widgetShow}
                                         ><div>
                                                 <button className="d-flex align-items-center date-range-btn"><img src={calendarIcon} className="mr-4" alt="calendarIcon" /> {!startDate ? "Can Start From - Need to Return By" : (moment(startDate).format("ddd, MMM D") + " - " + (moment(endDate).format("ddd, MMM D")))} </button>
                                             </div>
-                                        </DateRangePicker>
-                                     
+                                        </DateRangePicker> */}
+                                        <DateRangePicker
+                                            onChange={handleDatePickerChange}
+                                            showSelectionPreview={true}
+                                            moveRangeOnFirstSelection={false}
+                                            months={1}
+                                            ranges={[date]}
+                                            direction="vertical"
+                                            rangeColors={["#DC5921"]}
+                                            weekdayDisplayFormat={"EEEEEE"}
+                                            scroll={{ enabled: true }}
+                                            minDate={new Date()}
+                                        />
 
                                     </div>
                                     <div className="d-flex px-2 pb-2 justify-content-between align-items-center">
