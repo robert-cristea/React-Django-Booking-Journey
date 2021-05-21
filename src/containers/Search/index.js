@@ -64,18 +64,21 @@ const Search = (props) => {
 
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
-    useEffect(() => {
+    const getCityInfos = () => {
         axios
-            .post(BACKEND_URL + '/api-vacation/getCityInfo', {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(res => { return res.data; })
-            .then(res => { console.log(res); setCitiesInfo(res); setActiveCitiesInfo(_.slice(res,0,4)) })
-            .catch(err => console.log('Login error: ' + err))
+        .post(BACKEND_URL + '/api-vacation/getCityInfo', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(res => { return res.data; })
+        .then(res => { console.log(res); setCitiesInfo(res); setActiveCitiesInfo(_.slice(res,0,4)) })
+        .catch(err => console.log('Login error: ' + err))
+    }
 
+    useEffect(() => {
+        getCityInfos();
     }, [])
 
     const handleShowMoreBtn = () => {
@@ -171,6 +174,8 @@ const Search = (props) => {
             })
             .then(res => { console.log('Results: ' + res); })
             .catch(err => console.log('Login error: ' + err))
+        
+        getCityInfos();
     }
 
     const handleTravelerCheck = (evt, where, tagItem) => {
