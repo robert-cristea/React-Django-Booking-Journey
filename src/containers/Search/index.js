@@ -277,7 +277,7 @@ const Search = (props) => {
                                 options={{ wheelSpeed: 0.2, wheelPropagation: false }}
                                 containerRef={el => (parent.current = el)}
                             >
-                                <div className="" style={{ width: "95%" }}>
+                                <div className="mb-4" style={{ width: "95%" }}>
                                     <div className="px-2 pb-2">
                                         <p className="select-item-name">Budget</p>
                                     </div>
@@ -407,7 +407,9 @@ const Search = (props) => {
                     <Scrollbar style={{ height: "55vh", paddingRight: "15px" }}>
                         {displaySiteCard(activeCitiesInfo)}
                         <div className="d-flex justify-content-center mt-4">
-                            <button className="btn shadow-lg showMoreBtn" onClick={handleShowMoreBtn}>Show me more</button>
+                            {
+                                activeCitiesInfo.length !== citiesInfo.length && <button className="btn shadow-lg showMoreBtn" onClick={handleShowMoreBtn}>Show me more</button>
+                            }
                         </div>
                     </Scrollbar>
                 </div>
