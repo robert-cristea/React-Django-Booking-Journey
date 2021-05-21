@@ -37,7 +37,7 @@ select {
 	border: 1px solid #555555;
 	background-color: white;
 	border-radius: 4px;
-	/* height: 70px; */
+	height:130px;
 }
 
 .clear {
@@ -170,14 +170,9 @@ select {
 	width:0px!important;
 }
 
-.applyBtn, .cancelBtn {
-	/* display:none!important; */
-}
-
 .daterangepicker .drp-selected {
 	padding-right:3rem!important;
 }
-
 
 .custom-checkbox:hover {
 	background-color:#EBFAFF!important;
@@ -206,4 +201,19 @@ select {
 	background-color: #e5e5e5;
 	color: #555555;
 	font-size: 1rem;
+}
+
+.tag-select-done-btn {
+	cursor: default;
+	background-color: #00DAF8;
+	border-radius: 10px;
+	color: white;
+	font-size: 12px;
+	height: 24px;
+	float: right;
+}
+
+.custom-control-label::before, .custom-file-label, .custom-select {
+    /* transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; */
+	transition:none!important
 }

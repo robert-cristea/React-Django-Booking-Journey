@@ -19,6 +19,7 @@ const Search = (props) => {
 
     const parent = useRef(null);
     const daterange = useRef(null)
+    const tagBox = useRef(null)
 
     const [budgetArr, setbudgetArr] = useState([]);
     const [startDate, setStartDate] = useState()
@@ -55,7 +56,7 @@ const Search = (props) => {
 
         const curr = parent.current
         if (curr) {
-          curr.scrollTop = curr.clientHeight
+            curr.scrollTop = curr.clientHeight
         }
 
         setIsDropDownOpen(!isDropDownOpen)
@@ -137,12 +138,11 @@ const Search = (props) => {
 
         setStartDate(start);
         setEndDate(end)
-        
+
     }
 
     const widgetShow = (event, picker) => {
-        console.log("==========picker===============")
-        console.log(picker)
+        
     }
 
     const handleFilterBtnClick = () => {
@@ -273,7 +273,7 @@ const Search = (props) => {
                         <hr className="select-title-underline" />
                         <div className="select-area">
                             <Scrollbar
-                                options={{ wheelSpeed: 0.2, wheelPropagation:false }}
+                                options={{ wheelSpeed: 0.2, wheelPropagation: false }}
                                 containerRef={el => (parent.current = el)}
                             >
                                 <div className="" style={{ width: "95%" }}>
@@ -293,7 +293,7 @@ const Search = (props) => {
                                     </div>
                                     <div className="px-2 item-spacing">
                                         <DateRangePicker
-                                            initialSettings={{ startDate: startDate, endDate: endDate, minDate: new Date(), cancelButtonClasses:"bg-secondary",oldStartDate:false}}
+                                            initialSettings={{ startDate: startDate, endDate: endDate, minDate: new Date(), cancelButtonClasses: "bg-secondary", oldStartDate: false }}
                                             onCallback={handleDateRangeCallback}
                                             onShow={widgetShow}
                                             autoApply={true}
@@ -316,20 +316,20 @@ const Search = (props) => {
                                             {isDropDownOpen &&
                                                 <div className="custom-dropDownMenu pl-2">
                                                     <div className="w-100" style={{ height: "200px" }}>
-                                                        <Scrollbar style={{ paddingLeft: "5px", paddingRight: "15px", position: "relative" }}
-                                                            options={{ wheelSpeed: 1, wheelPropagation:false }}
+                                                        <Scrollbar style={{ paddingLeft: "5px", paddingRight: "15px" }}
+                                                            options={{ wheelSpeed: 0.2, wheelPropagation: false }}
                                                         >
                                                             <p className="my-2 tagList-heading">Other Themes</p>
                                                             {listAndGroups['Other Themes'].map((value, index) =>
 
-                                                                <div className="custom-control custom-checkbox" key={index}>
+                                                                <div className="d-flex align-items-center custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value} checked={_.includes(themes, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'themes')} />
                                                                     <label className="custom-control-label" htmlFor={value}>{value}</label>
                                                                 </div>)}
                                                             <p className="my-2 tagList-heading">How Long</p>
                                                             {listAndGroups['How Long'].map((value, index) =>
 
-                                                                <div className="custom-control custom-checkbox" key={index}>
+                                                                <div className="d-flex align-items-center custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value + "howlong"} checked={_.includes(howlong, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'howLong')} />
                                                                     <label className="custom-control-label" htmlFor={value + "howlong"}>{value}</label>
                                                                 </div>)}
@@ -337,7 +337,7 @@ const Search = (props) => {
                                                             <p className="my-2 tagList-heading">How Many</p>
                                                             {listAndGroups['How Many'].map((value, index) =>
 
-                                                                <div className="custom-control custom-checkbox" key={index}>
+                                                                <div className="d-flex align-items-center custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value + "howMany"} checked={_.includes(number, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'howMany')} />
                                                                     <label className="custom-control-label" htmlFor={value + "howMany"}>{value}</label>
                                                                 </div>)}
@@ -345,51 +345,52 @@ const Search = (props) => {
                                                             <p className="my-2 tagList-heading">Who is traveling</p>
                                                             {listAndGroups['Who is traveling'].map((value, index) =>
 
-                                                                <div className="custom-control custom-checkbox" key={index}>
+                                                                <div className="d-flex align-items-center custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value} checked={_.includes(who, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'who')} />
                                                                     <label className="custom-control-label" htmlFor={value}>{value}</label>
                                                                 </div>)}
-
                                                         </Scrollbar>
                                                     </div>
-                                                    <div className="d-flex justify-content-center align-items-center w-25 text-center px-2 py-1 mt-3 mb-1 mx-3" style={{ cursor: "default", backgroundColor: "#00DAF8", borderRadius: "10px", color: "white", fontSize: "12px", height: "23px", float: "right" }} onClick={handleTagSelectDone}>Done</div>
-                                                </div>}
+                                                    <div className="w-25 text-center px-2 pt-1 mt-3 mb-1 mx-3 tag-select-done-btn" onClick={handleTagSelectDone}>Done</div>
+                                                </div>
+                                            }
                                         </div>
 
                                     </div>
                                     {!isDropDownOpen &&
                                         <div className="px-2 item-spacing">
-                                            <Scrollbar
-                                                style={{ height: "100px" }}
-                                                className="tag-area"
-                                                options={{ wheelSpeed: 0.2 }}
-                                            >
-                                                <div className="d-flex flex-wrap pt-2 px-2">
-                                                    {displayTag(who)}
-                                                    {displayTag(number)}
-                                                    {displayTag(themes)}
-                                                    {displayTag(howlong)}
-                                                </div>
-                                            </Scrollbar>
+                                            <div className="tag-area">
+                                                <Scrollbar
+                                                    options={{ wheelSpeed: 0.2, wheelPropagation: (!_.isEmpty(who) || !_.isEmpty(number) || !_.isEmpty(themes) ||  !_.isEmpty(howlong))?false:true }}
+                                                    // options={{ wheelSpeed: 0.2, wheelPropagation: tagBox.current.clientHeight >= "130px"?false:true }}
+                                                >
+                                                    <div className="d-flex flex-wrap pt-2 px-2" ref={tagBox}>
+                                                        {displayTag(who)}
+                                                        {displayTag(number)}
+                                                        {displayTag(themes)}
+                                                        {displayTag(howlong)}
+                                                    </div>
+                                                </Scrollbar>
+                                            </div>
                                         </div>}
                                     <div className="d-flex px-2 pb-2 justify-content-between align-items-center">
                                         <p className="select-item-name">Travelers Composition</p>
                                         <p className="clear" onClick={() => handleClearBtnClick(3)}>CLEAR</p>
                                     </div>
                                     <div className="px-2">
-                                        <div className="custom-control custom-checkbox">
+                                        <div className="d-flex align-items-center custom-control custom-checkbox">
                                             <input type="checkbox" className="custom-control-input" checked={_.includes(traveler, "boys")} name="boys" id="boys" onChange={(evt) => handleTravelerCheck(evt, 'traveler', '')} />
                                             <label className="custom-control-label" htmlFor="boys">All Boys Travelers</label>
                                         </div>
-                                        <div className="custom-control custom-checkbox">
+                                        <div className="d-flex align-items-center custom-control custom-checkbox">
                                             <input type="checkbox" className="custom-control-input" checked={_.includes(traveler, "girls")} name="girls" id="girls" onChange={(evt) => handleTravelerCheck(evt, 'traveler', '')} />
                                             <label className="custom-control-label" htmlFor="girls">All Girls Travelers</label>
                                         </div>
-                                        <div className="custom-control custom-checkbox">
+                                        <div className="d-flex align-items-center custom-control custom-checkbox">
                                             <input type="checkbox" className="custom-control-input" checked={_.includes(traveler, "elderly")} name="elderly" id="elderly" onChange={(evt) => handleTravelerCheck(evt, 'traveler', '')} />
                                             <label className="custom-control-label" htmlFor="elderly">Suitable For The Elderly</label>
                                         </div>
-                                        <div className="custom-control custom-checkbox">
+                                        <div className="d-flex align-items-center custom-control custom-checkbox">
                                             <input type="checkbox" className="custom-control-input" checked={_.includes(traveler, "kids")} name="kids" id="kids" onChange={(evt) => handleTravelerCheck(evt, 'traveler', '')} />
                                             <label className="custom-control-label" htmlFor="kids">Suitable For Kids And Babies</label>
                                         </div>
