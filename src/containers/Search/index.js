@@ -259,11 +259,13 @@ const Search = (props) => {
 
     return (
         <div className="w-full">
-            <div className="d-flex justify-content-between">
-                <p className="page-title">Results ({citiesInfo.length})</p>
-                <SelectSort />
+            <div  style={{minWidth:"760px"}}>
+                <div className="d-flex justify-content-between">
+                    <p className="page-title">Results ({citiesInfo.length})</p>
+                    <SelectSort />
+                </div>
+                <hr className="title-underline" />
             </div>
-            <hr className="title-underline" />
             <div className="d-flex justify-content-between">
                 <div className="pt-3 select-box">
                     <div className="px-1 pb-2">

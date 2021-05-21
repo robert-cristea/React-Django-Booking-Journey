@@ -19,8 +19,8 @@ select {
 	background: transparent;
 	background-image: url(../../images/expandArrow.png);
 	background-repeat: no-repeat;
-	background-position-x: 98%;
-	background-position-y: 10px;
+	background-position-x: 100%;
+	background-position-y: 8px;
 	/* padding-left:50px; */
 }
 

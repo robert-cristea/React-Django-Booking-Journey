@@ -8,9 +8,11 @@ import _ from "lodash";
 const SiteCard = (props) => {
     const item = props.item;
     const [pic, setPic] = useState("")
-    import(`../../images/Cities/${item.picture}`).then((module) => {
-        setPic(module.default);
-    });
+    if(item.picture !== ""){
+        import(`../../images/Cities/${item.picture}`).then((module) => {
+            setPic(module.default);
+        });
+    }
 
     const displayTagsInList = (item) => {
         var keys = _.pickBy(item, (value,key) => value === 1)
