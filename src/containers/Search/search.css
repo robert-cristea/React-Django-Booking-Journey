@@ -217,3 +217,13 @@ select {
     /* transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; */
 	transition:none!important
 }
+
+.applyButton {
+	background-color: #02529B!important;
+	color:white!important;
+}
+
+.cancelButton {
+	background-color:#6c757d !important;
+	color:white!important;
+}

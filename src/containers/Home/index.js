@@ -340,7 +340,7 @@ const Home = (props) => {
                         <p className="bg-white text-center rounded-lg py-1 notify">Find your next destination</p>
                     </div>
                 </div>
-                {!showAdvancedSearchPage ?
+                {showAdvancedSearchPage ?
                     <div className="w-full d-flex align-items-center justify-content-center px-4 form-card">
                         {step < 5 ?
                             <div className="w-full mx-auto shadow-lg br-card" style={{ display: 'flex', flexDirection: 'column', width: "40vw", minWidth: "400px", position: 'relative' }}>

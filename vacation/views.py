@@ -259,7 +259,7 @@ def getCityInfo(request):
 
     json_data = json.loads(request.body)
 
-    cities = City.objects.all().values()
+    cities = City.objects.all().order_by('?').values()
 
     # print(cities[0]['city_name'])
     # print('=========================')

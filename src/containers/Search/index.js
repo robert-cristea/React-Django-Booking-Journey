@@ -262,7 +262,7 @@ const Search = (props) => {
         <div className="w-full">
             <div  style={{minWidth:"760px"}}>
                 <div className="d-flex justify-content-between">
-                    <p className="page-title">Results ({citiesInfo.length})</p>
+                    <p className="page-title">Results ({activeCitiesInfo.length})</p>
                     <SelectSort />
                 </div>
                 <hr className="title-underline" />
@@ -297,7 +297,7 @@ const Search = (props) => {
                                     </div>
                                     <div className="px-2 item-spacing">
                                         <DateRangePicker
-                                            initialSettings={{ startDate: startDate, endDate: endDate, minDate: new Date(), cancelButtonClasses: "bg-secondary", oldStartDate: false }}
+                                            initialSettings={{ startDate: startDate, endDate: endDate, minDate: new Date(), applyButtonClasses:"applyButton", cancelButtonClasses: "cancelButton", oldStartDate: false }}
                                             onCallback={handleDateRangeCallback}
                                             autoApply={true}
                                             ref={daterange}
