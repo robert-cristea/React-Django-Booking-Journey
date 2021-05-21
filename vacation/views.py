@@ -254,7 +254,7 @@ def updateData(request):
 
 def getCityInfo(request):
 
-    cities = City.objects.all()[11:19].values()
+    cities = City.objects.all().values()
     cities_list = list(cities)
 
     return JsonResponse(cities_list,safe=False)

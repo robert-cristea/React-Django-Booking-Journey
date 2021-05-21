@@ -31,8 +31,8 @@ const Search = (props) => {
     const [howlong, setHowlong] = useState(props.howlong)
 
     const [traveler, setTraveler] = useState([])
-    const [showMeMore, setShowMeMore] = useState(false)
     const [citiesInfo, setCitiesInfo] = useState([])
+    const [activeCitiesInfo, setActiveCitiesInfo] = useState([])
 
     const listAndGroups = {
         'Other Themes': ['Adventures', 'Shopping', 'Romantic', 'Ski', 'Remote', 'Wildlife', 'Hiking', 'Road Trip', 'Festivals', 'Nightlife', 'Holidays', 'Vivid', 'Cultural Experience', 'Camping', 'Surfing', 'Honeymoon', 'Scuba Diving', 'Beach', 'City Life', 'Nature', 'Countryside', 'Surprise', 'Other'],
@@ -73,10 +73,15 @@ const Search = (props) => {
                 },
             })
             .then(res => { return res.data; })
-            .then(res => { console.log(res); setCitiesInfo(res); })
+            .then(res => { console.log(res.length); setCitiesInfo(res); setActiveCitiesInfo(_.slice(res,0,4)) })
             .catch(err => console.log('Login error: ' + err))
 
     }, [])
+
+    const handleShowMoreBtn = () => {
+        setActiveCitiesInfo(_.union(activeCitiesInfo,_.slice(citiesInfo,activeCitiesInfo.length,activeCitiesInfo.length+4)));
+        console.log('activeCItiey================',activeCitiesInfo);
+    }
 
     const handleClearBtnClick = (parm) => {
         switch (parm) {
@@ -139,10 +144,6 @@ const Search = (props) => {
         setStartDate(start);
         setEndDate(end)
 
-    }
-
-    const widgetShow = (event, picker) => {
-        
     }
 
     const handleFilterBtnClick = () => {
@@ -259,7 +260,7 @@ const Search = (props) => {
     return (
         <div className="w-full">
             <div className="d-flex justify-content-between">
-                <p className="page-title">Results (#)</p>
+                <p className="page-title">Results ({citiesInfo.length})</p>
                 <SelectSort />
             </div>
             <hr className="title-underline" />
@@ -295,7 +296,6 @@ const Search = (props) => {
                                         <DateRangePicker
                                             initialSettings={{ startDate: startDate, endDate: endDate, minDate: new Date(), cancelButtonClasses: "bg-secondary", oldStartDate: false }}
                                             onCallback={handleDateRangeCallback}
-                                            onShow={widgetShow}
                                             autoApply={true}
                                             ref={daterange}
                                         ><div>
@@ -362,7 +362,6 @@ const Search = (props) => {
                                             <div className="tag-area">
                                                 <Scrollbar
                                                     options={{ wheelSpeed: 0.2, wheelPropagation: (!_.isEmpty(who) || !_.isEmpty(number) || !_.isEmpty(themes) ||  !_.isEmpty(howlong))?false:true }}
-                                                    // options={{ wheelSpeed: 0.2, wheelPropagation: tagBox.current.clientHeight >= "130px"?false:true }}
                                                 >
                                                     <div className="d-flex flex-wrap pt-2 px-2" ref={tagBox}>
                                                         {displayTag(who)}
@@ -406,12 +405,9 @@ const Search = (props) => {
                 </div>
                 <div className="ml-3 list-box p-2">
                     <Scrollbar style={{ height: "55vh", paddingRight: "15px" }}>
-                        {displaySiteCard(citiesInfo.slice(0, 4))}
-                        {showMeMore &&
-                            displaySiteCard(citiesInfo.slice(4, 8))
-                        }
+                        {displaySiteCard(activeCitiesInfo)}
                         <div className="d-flex justify-content-center mt-4">
-                            <button className="btn shadow-lg showMoreBtn" onClick={() => { setShowMeMore(true) }}>Show me more</button>
+                            <button className="btn shadow-lg showMoreBtn" onClick={handleShowMoreBtn}>Show me more</button>
                         </div>
                     </Scrollbar>
                 </div>
