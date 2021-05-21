@@ -251,14 +251,24 @@ def updateData(request):
                 user.november = 1
             if(startMonth == "12" or endMonth == "12"):
                 user.december = 1
-            
 
         user.save()
         return HttpResponse(11111)
 
 def getCityInfo(request):
 
+    json_data = json.loads(request.body)
+
     cities = City.objects.all().values()
+
+    # print(cities[0]['city_name'])
+    # print('=========================')
+    # print(json_data['userId'])
+    # print(UserCity.objects.get(user_id=37,city_name = 'Kerry').users_rating)
+
+    # for i in range (0,len(cities)):
+    #     cities[i]['rating'] = UserCity.objects.get(user_id = json_data['userId'],city_name = cities[i]['city_name']).users_rating
+
     cities_list = list(cities)
 
     return JsonResponse(cities_list,safe=False)

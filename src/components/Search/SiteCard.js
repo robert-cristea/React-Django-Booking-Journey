@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ReactStars from "react-rating-stars-component";
 import TagComponent from "./tagComponent";
 import 'font-awesome/css/font-awesome.min.css';
@@ -8,6 +8,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../../utils/request";
 
 const SiteCard = (props) => {
+    const starRef = useRef(null)
     const item = props.item;
     const [pic, setPic] = useState("")
     const [rating, setRating] = useState(0)
@@ -58,8 +59,6 @@ const SiteCard = (props) => {
 
     const ratingChanged = (city,newRating) => {
         // setRating(newRating);
-
-        console.log(rating)
 
         const data = {
             'userId': props.userId,

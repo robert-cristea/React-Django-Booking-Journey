@@ -73,7 +73,7 @@ const Search = (props) => {
                 },
             })
             .then(res => { return res.data; })
-            .then(res => { console.log(res.length); setCitiesInfo(res); setActiveCitiesInfo(_.slice(res,0,4)) })
+            .then(res => { console.log(res); setCitiesInfo(res); setActiveCitiesInfo(_.slice(res,0,4)) })
             .catch(err => console.log('Login error: ' + err))
 
     }, [])

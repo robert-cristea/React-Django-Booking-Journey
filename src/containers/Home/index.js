@@ -53,11 +53,9 @@ const Home = (props) => {
             { 'name': 'Weekish', 'clickable': false },
             { 'name': 'Long Weekend', 'clickable': false },
             { 'name': 'Midweek', 'clickable': false },
-            { 'name': 'Longer', 'clickable': false },
             { 'name': '2 Weeks', 'clickable': false },
             { 'name': '3 Weeks', 'clickable': false },
-            { 'name': '4 Weeks', 'clickable': false },
-            { 'name': '5 Weeks', 'clickable': false }
+            { 'name': '4 Weeks', 'clickable': false }
         ],
         4: [
             { 'name': 'Beach', 'clickable': false },
@@ -90,35 +88,13 @@ const Home = (props) => {
         }
     }
 
-    const displaybuttons = (step, subStage) => {
-        if (step !== 3) {
-            return (
-                buttonArray[step].map((item, index) =>
-                    <CircleButton name={item.name} className="child" key={index} sel={index} clicked={item.clickable} onClick={() => handleClickBtn(step, index)} />
-                ));
-        } else {
-            if (subStage === 1) {
-                const stage1_arr = buttonArray[step].slice(0, 5);
-                return (
-                    stage1_arr.map((item, index) =>
-                        <CircleButton name={item.name} className="child" key={index} sel={index} clicked={item.clickable} onClick={() => handleClickBtn(step, index)} />
-                    ));
-            }
-            if (subStage === 2) {
-                const stage2_arr = buttonArray[step].slice(4, 9);
-                return (
-                    stage2_arr.map((item, index) =>
-                        <CircleButton name={item.name} className="child" key={index} sel={index} clicked={item.clickable} onClick={() => handleClickBtn(step, index + 4)} />
-                    ));
-            }
-            if (subStage === 3) {
-                const stage3_arr = buttonArray[step].slice(0, 4).concat(buttonArray[step].slice(5, 8));
-                return (
-                    stage3_arr.map((item, index) =>
-                        <CircleButton name={item.name} className="child" key={index} sel={index} clicked={item.clickable} onClick={() => { if (index < 4) handleClickBtn(step, index); else handleClickBtn(step, index + 1); }} />
-                    ));
-            }
-        }
+    const displaybuttons = (step) => {
+
+        return (
+            buttonArray[step].map((item, index) =>
+                <CircleButton name={item.name} className="child" key={index} sel={index} clicked={item.clickable} onClick={() => handleClickBtn(step, index)} />
+            ));
+
     }
 
     function useMounted() {
@@ -267,11 +243,11 @@ const Home = (props) => {
             case 3:
                 console.log("case 3 test")
                 setMultiPeriod([]);
-                if((multiWho.length === 1 && (_.includes(multiWho,_.startCase('solo')) || _.includes(multiWho,_.startCase('couple')))) || (multiWho.length === 2 && (_.includes(multiWho,_.startCase('solo')) && _.includes(multiWho,_.startCase('couple'))))){
-                    console.log("================here======================"+multiWho)
+                if ((multiWho.length === 1 && (_.includes(multiWho, _.startCase('solo')) || _.includes(multiWho, _.startCase('couple')))) || (multiWho.length === 2 && (_.includes(multiWho, _.startCase('solo')) && _.includes(multiWho, _.startCase('couple'))))) {
+                    console.log("================here======================" + multiWho)
                     setStep(2);
                     setStep(1);
-                }else{
+                } else {
                     setStep(2);
                 }
                 break;
@@ -298,7 +274,6 @@ const Home = (props) => {
                 });
                 setMultiWho(_.cloneDeep(multiWho));
             }
-            console.log("test"+_.includes(multiWho,['Couple','Solo']))
         }
         if (x === 2) {
             setMultiNumber(_.union(multiNumber, [buttonArray[x][y]['name']]))
@@ -307,11 +282,7 @@ const Home = (props) => {
         }
         if (x === 3) {
             if (!_.includes(multiPeriod, buttonArray[x][y]['name'])) {
-                if (buttonArray[x][y]['name'] === "Longer") {
-                    setShowLongerPeriod(true);
-                } else {
-                    setMultiPeriod(_.union(multiPeriod, [buttonArray[x][y]['name']]));
-                }
+                setMultiPeriod(_.union(multiPeriod, [buttonArray[x][y]['name']]));
             }
             else {
                 _.remove(multiPeriod, function (n) {
@@ -396,30 +367,22 @@ const Home = (props) => {
                                 <div className="circle-field w-full" style={{ height: "64%" }}>
                                     {(step === 1) &&
                                         <MyComponent>
-                                            {displaybuttons(1, 0)}
+                                            {displaybuttons(1)}
                                         </MyComponent>
                                     }
                                     {(step === 2) &&
                                         <MyComponent>
-                                            {displaybuttons(2, 0)}
+                                            {displaybuttons(2)}
                                         </MyComponent>
                                     }
-                                    {(step === 3 && !isMultiple) && (showLongerPeriod ?
+                                    {(step === 3) &&
                                         <MyComponent>
-                                            {displaybuttons(3, 2)}
-                                        </MyComponent> :
-                                        <MyComponent>
-                                            {displaybuttons(3, 1)}
-                                        </MyComponent>)
-                                    }
-                                    {(step === 3 && isMultiple) &&
-                                        <MyComponent>
-                                            {displaybuttons(3, 3)}
+                                            {displaybuttons(3)}
                                         </MyComponent>
                                     }
                                     {(step === 4) &&
                                         <MyComponent>
-                                            {displaybuttons(4, 0)}
+                                            {displaybuttons(4)}
                                         </MyComponent>
                                     }
                                 </div>
