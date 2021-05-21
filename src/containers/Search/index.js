@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Scrollbar from 'react-perfect-scrollbar'
-// import DateRangePicker from 'react-bootstrap-daterangepicker';
+import DateRangePicker from 'react-bootstrap-daterangepicker';
 import './search.css';
 import 'bootstrap/dist/css/bootstrap.css';
-// import 'bootstrap-daterangepicker/daterangepicker.css';
+import 'bootstrap-daterangepicker/daterangepicker.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import moment from 'moment';
@@ -13,15 +13,12 @@ import calendarIcon from "../../images/calendarIcon.png";
 import { BACKEND_URL } from '../../utils/request';
 import SiteCard from '../../components/Search/SiteCard'
 import TagComponent from '../../components/Search/tagComponent'
-
-import DateRangePicker from '../../components/Home/CustomDateRangePicker';
-import dateFormat from 'dateformat'
-import { addDays } from 'date-fns';
-
-import 'react-date-range/dist/styles.css';
-import 'react-date-range/dist/theme/default.css';
+import SelectSort from '../../components/Search/SelectSort';
 
 const Search = (props) => {
+
+    const parent = useRef(null);
+    const daterange = useRef(null)
 
     const [budgetArr, setbudgetArr] = useState([]);
     const [startDate, setStartDate] = useState()
@@ -55,6 +52,12 @@ const Search = (props) => {
     }
 
     const toggleDropDown = () => {
+
+        const curr = parent.current
+        if (curr) {
+          curr.scrollTop = curr.clientHeight
+        }
+
         setIsDropDownOpen(!isDropDownOpen)
     }
 
@@ -80,6 +83,8 @@ const Search = (props) => {
                 setbudgetArr([]);
                 setStartDate()
                 setEndDate()
+                daterange.current.setStartDate(new Date())
+                daterange.current.setEndDate(new Date())
                 setWho([]);
                 setNumber([]);
                 setHowlong([]);
@@ -89,6 +94,8 @@ const Search = (props) => {
             case 1:
                 setStartDate()
                 setEndDate()
+                daterange.current.setStartDate(new Date())
+                daterange.current.setEndDate(new Date())
                 break;
             case 2:
                 setWho([]);
@@ -126,31 +133,21 @@ const Search = (props) => {
         setThemes(_.cloneDeep(themes));
     }
 
-    // const handleDateRangeCallback = (start, end, label) => {
+    const handleDateRangeCallback = (start, end, label) => {
 
-    //     setStartDate(start);
-    //     setEndDate(end)
-    // }
+        setStartDate(start);
+        setEndDate(end)
+        
+    }
 
-    // const widgetShow = (event, picker) => {
-    //     console.log("==========picker===============")
-    //     console.log(picker)
-    //     picker.timePicker = true;
-    // }
-
-    const [date, setDate] = useState(
-        {
-            startDate: new Date(),
-            endDate: addDays(new Date(), 0),
-            key: 'selection'
-        }
-    );
-
-    var data;
+    const widgetShow = (event, picker) => {
+        console.log("==========picker===============")
+        console.log(picker)
+    }
 
     const handleFilterBtnClick = () => {
 
-        data = {
+        const data = {
             'userId': props.userId,
             'budget': budgetArr,
             'startMonth': startDate ? moment(startDate, 'YYYY-MM-DD').format('M') : "",
@@ -263,13 +260,7 @@ const Search = (props) => {
         <div className="w-full">
             <div className="d-flex justify-content-between">
                 <p className="page-title">Results (#)</p>
-                <div className="d-flex align-items-center">
-                    <label htmlFor="category" className="pr-4 filter-label">SORT BY</label>
-                    <select id="category">
-                        <option value="match">Match</option>
-                        <option value="price">Price</option>
-                    </select>
-                </div>
+                <SelectSort />
             </div>
             <hr className="title-underline" />
             <div className="d-flex justify-content-between">
@@ -281,7 +272,10 @@ const Search = (props) => {
                         </div>
                         <hr className="select-title-underline" />
                         <div className="select-area">
-                            <Scrollbar>
+                            <Scrollbar
+                                options={{ wheelSpeed: 0.2, wheelPropagation:false }}
+                                containerRef={el => (parent.current = el)}
+                            >
                                 <div className="" style={{ width: "95%" }}>
                                     <div className="px-2 pb-2">
                                         <p className="select-item-name">Budget</p>
@@ -298,26 +292,16 @@ const Search = (props) => {
                                         <p className="clear" onClick={() => handleClearBtnClick(1)}>CLEAR</p>
                                     </div>
                                     <div className="px-2 item-spacing">
-                                        {/* <DateRangePicker
-                                            initialSettings={{ startDate: startDate, endDate: endDate }}
+                                        <DateRangePicker
+                                            initialSettings={{ startDate: startDate, endDate: endDate, minDate: new Date(), cancelButtonClasses:"bg-secondary",oldStartDate:false}}
                                             onCallback={handleDateRangeCallback}
-                                            onShow = {widgetShow}
+                                            onShow={widgetShow}
+                                            autoApply={true}
+                                            ref={daterange}
                                         ><div>
                                                 <button className="d-flex align-items-center date-range-btn"><img src={calendarIcon} className="mr-4" alt="calendarIcon" /> {!startDate ? "Can Start From - Need to Return By" : (moment(startDate).format("ddd, MMM D") + " - " + (moment(endDate).format("ddd, MMM D")))} </button>
                                             </div>
-                                        </DateRangePicker> */}
-                                        <DateRangePicker
-                                            onChange={handleDatePickerChange}
-                                            showSelectionPreview={true}
-                                            moveRangeOnFirstSelection={false}
-                                            months={1}
-                                            ranges={[date]}
-                                            direction="vertical"
-                                            rangeColors={["#DC5921"]}
-                                            weekdayDisplayFormat={"EEEEEE"}
-                                            scroll={{ enabled: true }}
-                                            minDate={new Date()}
-                                        />
+                                        </DateRangePicker>
 
                                     </div>
                                     <div className="d-flex px-2 pb-2 justify-content-between align-items-center">
@@ -332,7 +316,9 @@ const Search = (props) => {
                                             {isDropDownOpen &&
                                                 <div className="custom-dropDownMenu pl-2">
                                                     <div className="w-100" style={{ height: "200px" }}>
-                                                        <Scrollbar style={{ paddingLeft: "5px", paddingRight: "15px" }}>
+                                                        <Scrollbar style={{ paddingLeft: "5px", paddingRight: "15px", position: "relative" }}
+                                                            options={{ wheelSpeed: 1, wheelPropagation:false }}
+                                                        >
                                                             <p className="my-2 tagList-heading">Other Themes</p>
                                                             {listAndGroups['Other Themes'].map((value, index) =>
 
@@ -373,7 +359,11 @@ const Search = (props) => {
                                     </div>
                                     {!isDropDownOpen &&
                                         <div className="px-2 item-spacing">
-                                            <Scrollbar style={{ height: "100px" }} className="tag-area">
+                                            <Scrollbar
+                                                style={{ height: "100px" }}
+                                                className="tag-area"
+                                                options={{ wheelSpeed: 0.2 }}
+                                            >
                                                 <div className="d-flex flex-wrap pt-2 px-2">
                                                     {displayTag(who)}
                                                     {displayTag(number)}
@@ -425,7 +415,7 @@ const Search = (props) => {
                     </Scrollbar>
                 </div>
             </div>
-        </div>
+        </div >
 
     )
 }
