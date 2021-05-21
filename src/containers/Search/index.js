@@ -163,7 +163,7 @@ const Search = (props) => {
             'traveler': traveler
         }
 
-        handleClearBtnClick(0);
+        // handleClearBtnClick(0);
 
         axios
             .post(BACKEND_URL + '/api-vacation/updateData', data, {
