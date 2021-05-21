@@ -4,10 +4,14 @@ import TagComponent from "./tagComponent";
 import 'font-awesome/css/font-awesome.min.css';
 import './SiteCard.css'
 import _ from "lodash";
+import axios from "axios";
+import { BACKEND_URL } from "../../utils/request";
 
 const SiteCard = (props) => {
     const item = props.item;
     const [pic, setPic] = useState("")
+    const [rating, setRating] = useState(0)
+
     if(item.picture !== ""){
         import(`../../images/Cities/${item.picture}`).then((module) => {
             setPic(module.default);
@@ -16,7 +20,7 @@ const SiteCard = (props) => {
 
     const displayTagsInList = (item) => {
         var keys = _.pickBy(item, (value,key) => value === 1)
-        var keysExceptMonth = _.omit(keys,['id','january','february','march','april','may','june','july','august','september','october','november','december','budget_low','budget_normal','budget_high'])
+        var keysExceptMonth = _.omit(keys,['solo','couple','friends','family','weekend','long_weekend','weekish','midweek','two_weeks','three_weeks','four_weeks','five_weeks','other','one_passengers','two_passengers','three_passengers','four_passengers','five_passengers','six_passengers','one_weeks','comp_allgirls','comp_allboys','comp_elderly','comp_kids_babies','id','january','february','march','april','may','june','july','august','september','october','november','december','budget_low','budget_normal','budget_high','holidays','surprise'])
         var arr = _.keys(keysExceptMonth)
         return (
             arr.map((value, index) =>
@@ -52,6 +56,28 @@ const SiteCard = (props) => {
             );
     }
 
+    const ratingChanged = (city,newRating) => {
+        // setRating(newRating);
+
+        console.log(rating)
+
+        const data = {
+            'userId': props.userId,
+            'users_rating': newRating,
+            'city_name':city
+        }
+
+        axios
+            .post(BACKEND_URL + '/api-vacation/add-rating-matching', data, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(res => { console.log('Results: ' + res); })
+            .catch(err => console.log('Login error: ' + err))
+      }
+
     return (
         <div className="mx-auto w-100 d-flex my-2 custom-card-border">
             <div className="d-flex align-items-center px-2 pb-2 pic-wrapper">
@@ -66,8 +92,8 @@ const SiteCard = (props) => {
                             <div className="d-flex justify-content-center align-items-centerm" style={{ marginTop: "-15px" }}>
                                 <ReactStars
                                     count={5}
-                                    // onChange={ratingChanged}
-                                    value={4}
+                                    onChange={(raty)=>{setRating(raty); ratingChanged(item.city_name,raty);}}
+                                    value={rating}
                                     size={30}
                                     edit={true}
                                     activeColor="#00DAF8"

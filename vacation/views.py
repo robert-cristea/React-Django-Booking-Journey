@@ -1,8 +1,12 @@
 import json
+import random
 from datetime import datetime
-from django.http import HttpResponse, JsonResponse
-from .models import City, User
+
 from django.core import serializers
+from django.http import HttpResponse, JsonResponse
+from vacation.models import UserCity
+
+from .models import City, User
 
 # from django.views.decorators.csrf import csrf_exempt
 
@@ -258,3 +262,20 @@ def getCityInfo(request):
     cities_list = list(cities)
 
     return JsonResponse(cities_list,safe=False)
+
+def addRatingMatching(request):
+
+    json_data = json.loads(request.body)
+
+    try:
+        userCity = UserCity.objects.get(user_id=json_data['userId'],city_name=json_data['city_name'])
+    except:
+        userCity = UserCity()
+    userCity.city_name = json_data['city_name']
+    userCity.user_id = json_data['userId']
+    userCity.users_rating = json_data['users_rating']
+    userCity.matching_score = random.randint(0,100)
+    
+    userCity.save()
+    
+    return HttpResponse("Success save into user_matching_table")

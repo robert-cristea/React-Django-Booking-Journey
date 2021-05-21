@@ -250,9 +250,10 @@ const Search = (props) => {
     }
 
     const displaySiteCard = (values) => {
+        
         return (
             values.map((value, index) =>
-                <SiteCard key={index} item={value} />
+                <SiteCard key={index} item={value} userId={20} />
             )
         );
     }
