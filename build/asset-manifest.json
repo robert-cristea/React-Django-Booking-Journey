@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.9f8734c6.chunk.css",
-    "main.js": "/static/js/main.5fa9230f.chunk.js",
-    "main.js.map": "/static/js/main.5fa9230f.chunk.js.map",
+    "main.css": "/static/css/main.e2f2fc83.chunk.css",
+    "main.js": "/static/js/main.378c92f4.chunk.js",
+    "main.js.map": "/static/js/main.378c92f4.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.1dbbf76e.js",
     "runtime-main.js.map": "/static/js/runtime-main.1dbbf76e.js.map",
     "static/css/2.f353d5c0.chunk.css": "/static/css/2.f353d5c0.chunk.css",
-    "static/js/2.3c7449e4.chunk.js": "/static/js/2.3c7449e4.chunk.js",
-    "static/js/2.3c7449e4.chunk.js.map": "/static/js/2.3c7449e4.chunk.js.map",
+    "static/js/2.7daf031a.chunk.js": "/static/js/2.7daf031a.chunk.js",
+    "static/js/2.7daf031a.chunk.js.map": "/static/js/2.7daf031a.chunk.js.map",
     "static/js/3.4a65a18c.chunk.js": "/static/js/3.4a65a18c.chunk.js",
     "static/js/3.4a65a18c.chunk.js.map": "/static/js/3.4a65a18c.chunk.js.map",
     "static/js/4.e76763b5.chunk.js": "/static/js/4.e76763b5.chunk.js",
@@ -37,11 +37,11 @@
     "static/js/16.d3f02e92.chunk.js": "/static/js/16.d3f02e92.chunk.js",
     "static/js/16.d3f02e92.chunk.js.map": "/static/js/16.d3f02e92.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.178a7d7b7bb49957aee0744bc70c6198.js": "/precache-manifest.178a7d7b7bb49957aee0744bc70c6198.js",
+    "precache-manifest.988c36b89fab31c504760404a3e91aab.js": "/precache-manifest.988c36b89fab31c504760404a3e91aab.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.f353d5c0.chunk.css.map": "/static/css/2.f353d5c0.chunk.css.map",
-    "static/css/main.9f8734c6.chunk.css.map": "/static/css/main.9f8734c6.chunk.css.map",
-    "static/js/2.3c7449e4.chunk.js.LICENSE.txt": "/static/js/2.3c7449e4.chunk.js.LICENSE.txt",
+    "static/css/main.e2f2fc83.chunk.css.map": "/static/css/main.e2f2fc83.chunk.css.map",
+    "static/js/2.7daf031a.chunk.js.LICENSE.txt": "/static/js/2.7daf031a.chunk.js.LICENSE.txt",
     "static/media/Amsterdam.jpeg": "/static/media/Amsterdam.51872558.jpeg",
     "static/media/Barbados.jpeg": "/static/media/Barbados.0b9639c9.jpeg",
     "static/media/Barcelona.jpg": "/static/media/Barcelona.295c2ee6.jpg",
@@ -61,8 +61,8 @@
   "entrypoints": [
     "static/js/runtime-main.1dbbf76e.js",
     "static/css/2.f353d5c0.chunk.css",
-    "static/js/2.3c7449e4.chunk.js",
-    "static/css/main.9f8734c6.chunk.css",
-    "static/js/main.5fa9230f.chunk.js"
+    "static/js/2.7daf031a.chunk.js",
+    "static/css/main.e2f2fc83.chunk.css",
+    "static/js/main.378c92f4.chunk.js"
   ]
 }

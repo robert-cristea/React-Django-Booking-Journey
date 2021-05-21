@@ -253,7 +253,7 @@ const Search = (props) => {
         
         return (
             values.map((value, index) =>
-                <SiteCard key={index} item={value} userId={20} />
+                <SiteCard key={index} item={value} userId={props.userId} />
             )
         );
     }
