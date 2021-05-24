@@ -178,9 +178,12 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `auth_user` */
+
+insert  into `auth_user`(`id`,`password`,`last_login`,`is_superuser`,`username`,`first_name`,`last_name`,`email`,`is_staff`,`is_active`,`date_joined`) values 
+(1,'pbkdf2_sha256$150000$mlIxOSiqj1sX$sj74ue0Vpou2sFdl+iZR8oj5bfv5ZVcGa+2EwXets5g=','2021-05-24 08:25:19.382523',1,'admin','','','admin@viet.com',1,1,'2021-05-24 08:25:07.699855');
 
 /*Table structure for table `auth_user_groups` */
 
@@ -491,6 +494,9 @@ CREATE TABLE `django_session` (
 
 /*Data for the table `django_session` */
 
+insert  into `django_session`(`session_key`,`session_data`,`expire_date`) values 
+('apu4jq1xb6wvw9f74ca3k9e5z12zlrhm','MGM4YmI1ODE2MmYyZTA1YzE5M2VmMjI0NmJjMzM4NThkMWU1ZmQ5Mjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzNzlmNWU2ZmI2Mzk5MTZkODUzMGE5MmY0ZmMyZTE5NzRlZjJiOWZlIn0=','2021-06-07 08:25:19.415525');
+
 /*Table structure for table `django_site` */
 
 DROP TABLE IF EXISTS `django_site`;
@@ -681,7 +687,7 @@ CREATE TABLE `users_features` (
   `comp_kids_babies` smallint(5) unsigned NOT NULL,
   `scuba_diving` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 /*Data for the table `users_features` */
 
@@ -698,7 +704,12 @@ insert  into `users_features`(`id`,`user_ip`,`time_stamp`,`solo`,`couple`,`famil
 (42,'127.0.0.1','2021-05-21 15:22:39.455140',0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
 (43,'127.0.0.1','2021-05-21 15:23:22.832621',0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
 (44,'127.0.0.1','2021-05-21 15:23:51.812278',1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
-(45,'127.0.0.1','2021-05-21 17:00:53.141239',1,1,0,1,1,0,1,1,1,0,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,1);
+(45,'127.0.0.1','2021-05-21 17:00:53.141239',1,1,0,1,1,0,1,1,1,0,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,1),
+(46,'127.0.0.1','2021-05-21 17:48:51.157852',1,1,1,1,0,0,0,1,1,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1,1,1,0,0),
+(47,'127.0.0.1','2021-05-21 17:52:29.993369',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(48,'127.0.0.1','2021-05-21 17:53:41.408454',0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(49,'127.0.0.1','2021-05-21 18:26:41.544711',0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0),
+(50,'127.0.0.1','2021-05-24 07:58:17.192739',1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
