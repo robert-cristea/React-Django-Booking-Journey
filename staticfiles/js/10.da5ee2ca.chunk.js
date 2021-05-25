@@ -1,0 +1,2 @@
+(this["webpackJsonpdjango-react-boilerplate"]=this["webpackJsonpdjango-react-boilerplate"]||[]).push([[10],{109:function(e,a,p){e.exports=p.p+"static/media/Jerusalem.598dfbcd.jpg"}}]);
+//# sourceMappingURL=10.da5ee2ca.chunk.js.map
