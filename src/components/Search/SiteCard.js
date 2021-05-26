@@ -10,14 +10,7 @@ import { BACKEND_URL } from "../../utils/request";
 const SiteCard = (props) => {
     const starRef = useRef(null)
     const item = props.item;
-    const [pic, setPic] = useState("")
     const [rating, setRating] = useState(0)
-
-    if(item.picture !== ""){
-        import(`../../images/Cities/${item.picture}`).then((module) => {
-            setPic(module.default);
-        });
-    }
 
     const displayTagsInList = (item) => {
         var keys = _.pickBy(item, (value,key) => value === 1)
@@ -80,7 +73,7 @@ const SiteCard = (props) => {
     return (
         <div className="mx-auto w-100 d-flex my-2 custom-card-border">
             <div className="d-flex align-items-center px-2 pb-2 pic-wrapper">
-                <img src={pic} className="pic" alt="pic" />
+                <img src={item.picture} className="pic" alt="pic" />
             </div>
             <div className="custom-card-body">
                 <div className="d-flex align-items-center justify-content-between h-25 custom-card-body-header">

@@ -1,2 +1,0 @@
-(this["webpackJsonpdjango-react-boilerplate"]=this["webpackJsonpdjango-react-boilerplate"]||[]).push([[8],{107:function(e,a,p){e.exports=p.p+"static/media/Copenhagen.3860d56c.jpeg"}}]);
-//# sourceMappingURL=8.8d80a286.chunk.js.map

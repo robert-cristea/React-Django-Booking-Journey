@@ -7,8 +7,6 @@ import SwitchComponent from '../../components/Home/SwitchComponent';
 import Search from '../Search';
 
 import axios from "axios";
-// import dateFormat from 'dateformat'
-// import { addDays } from 'date-fns';
 import { BACKEND_URL } from '../../utils/request';
 import logo from "../../images/logo.png";
 import backArrow from "../../images/backArrow.png";
