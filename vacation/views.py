@@ -4,9 +4,7 @@ from datetime import datetime
 
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
-from vacation.models import UserCity
-
-from .models import City, User
+from vacation.models import CityFeature, UserCity, UserFeature
 
 # from django.views.decorators.csrf import csrf_exempt
 
@@ -19,7 +17,7 @@ def storeData(request):
         else:
             ipaddress = request.META.get('REMOTE_ADDR')
 
-        user = User()
+        user = UserFeature()
         user.user_ip = ipaddress
         json_data = json.loads(request.body)
         who = json_data['who']
@@ -101,7 +99,7 @@ def updateData(request):
         number = json_data['number']
         traveler = json_data['traveler']
 
-        user = User.objects.get(id=userId)
+        user = UserFeature.objects.get(id=userId)
         user.delete()
 
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -111,7 +109,7 @@ def updateData(request):
         else:
             ipaddress = request.META.get('REMOTE_ADDR')
 
-        user = User()
+        user = UserFeature()
         user.id = userId
         user.user_ip = ipaddress
 
@@ -243,7 +241,7 @@ def getCityInfo(request):
 
     json_data = json.loads(request.body)
 
-    cities = City.objects.all().order_by('?').values()
+    cities = CityFeature.objects.all().order_by('?').values()
 
     # print(cities[0]['city_name'])
     # print('=========================')

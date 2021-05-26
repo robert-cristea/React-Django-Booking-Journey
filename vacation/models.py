@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class User(models.Model):
+class UserFeature(models.Model):
     user_ip = models.GenericIPAddressField()
     time_stamp = models.DateTimeField(auto_now_add=True)
     solo = models.PositiveSmallIntegerField(default=0)
@@ -68,7 +68,7 @@ class User(models.Model):
     class Meta:
         db_table = "users_features"
 
-class City(models.Model):
+class CityFeature(models.Model):
     city_name = models.CharField(max_length = 150)
     country = models.CharField(max_length = 150)
     short_description = models.CharField(max_length = 1000)

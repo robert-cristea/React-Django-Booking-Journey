@@ -1,8 +1,7 @@
 from django.contrib import admin
-
-from .models import City, User, UserCity
+from vacation.models import CityFeature, UserFeature, UserCity
 
 # Register your models here.
-admin.site.register(User)
-admin.site.register(City)
+admin.site.register(UserFeature)
+admin.site.register(CityFeature)
 admin.site.register(UserCity)
