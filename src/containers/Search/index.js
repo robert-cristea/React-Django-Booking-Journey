@@ -36,7 +36,7 @@ const Search = (props) => {
 
     const listAndGroups = {
         'Other Themes': ['Adventures', 'Shopping', 'Romantic', 'Ski', 'Remote', 'Wildlife', 'Hiking', 'Road Trip', 'Festivals', 'Nightlife', 'Holidays', 'Vivid', 'Cultural Experience', 'Camping', 'Surfing', 'Honeymoon', 'Scuba Diving', 'Beach', 'City Life', 'Nature', 'Countryside', 'Surprise', 'Other'],
-        'How Long': ['Weekend', 'Long Weekend', 'Weekish', '2 Weeks', '3 Weeks', '4 Weeks', '5 Weeks'],
+        'How Long': ['Weekend','Midweek','Long Weekend', 'Weekish', '2 Weeks', '3 Weeks', '4 Weeks'],
         'How Many': [1, 2, 3, 4, 5, 6],
         'Who is traveling': ['Solo', 'Couple', 'Friends', 'Family']
     }
@@ -151,19 +151,50 @@ const Search = (props) => {
 
     const handleFilterBtnClick = () => {
 
+        var startMonth = startDate ? moment(startDate, 'YYYY-MM-DD').format('M') : "";
+        var startYear = startDate ? moment(startDate, 'YYYY-MM-DD').format('Y') : "";
+        var endMonth = endDate ? moment(endDate, 'YYYY-MM-DD').format('M') : ""
+        var endYear = endDate ? moment(endDate, 'YYYY-MM-DD').format('Y') : ""
+        var months = [0,0,0,0,0,0,0,0,0,0,0,0];
+        if(startMonth !== "" && endMonth !== "" && startYear !== "" && endYear !== ""){
+            var sm = Number(startMonth);
+            var em = Number(endMonth);
+            var sy = Number(startYear);
+            var ey = Number(endYear);
+            
+            if(ey-sy === 0){
+                for(let i = sm; i <= em; i++){
+                    months[i-1] = 1;
+                }
+            }
+
+            if(ey-sy === 1){
+                for(let i = sm; i <= 12; i++){
+                    months[i-1] = 1;
+                }
+
+                for(let i = 1; i <= em; i++){
+                    months[i-1] = 1;
+                }
+            }
+
+            if(ey-sy > 1){
+                months = [1,1,1,1,1,1,1,1,1,1,1,1];
+            }
+        }
+
+        console.log(months)
+
         const data = {
             'userId': props.userId,
             'budget': budgetArr,
-            'startMonth': startDate ? moment(startDate, 'YYYY-MM-DD').format('M') : "",
-            'endMonth': endDate ? moment(endDate, 'YYYY-MM-DD').format('M') : "",
+            'months':months,
             'who': who,
             'howlong': howlong,
             'themes': themes,
             'number': number,
             'traveler': traveler
         }
-
-        // handleClearBtnClick(0);
 
         axios
             .post(BACKEND_URL + '/api-vacation/updateData', data, {

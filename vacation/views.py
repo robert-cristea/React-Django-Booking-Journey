@@ -80,8 +80,6 @@ def storeData(request):
                 user.three_weeks= 1
             if(howlong[i].lower() == "4 weeks"):
                 user.four_weeks= 1
-            if(howlong[i].lower() == "5 weeks"):
-                user.five_weeks= 1
 
         user.save()
         # obj = User.objects.filter(id=1)[0].solo
@@ -96,8 +94,7 @@ def updateData(request):
         json_data = json.loads(request.body)
         userId = json_data['userId']
         budget = json_data['budget']
-        startMonth = json_data['startMonth']
-        endMonth = json_data['endMonth']
+        months = json_data['months']
         who = json_data['who']
         howlong = json_data['howlong']
         theme = json_data['themes']
@@ -157,8 +154,6 @@ def updateData(request):
                 user.three_weeks= 1
             if(howlong[i].lower() == "4 weeks"):
                 user.four_weeks= 1
-            if(howlong[i].lower() == "5 weeks"):
-                user.five_weeks= 1
         
         for i in range (0,len(budget)):
             if(budget[i].lower() == "low"):
@@ -226,34 +221,23 @@ def updateData(request):
             if(theme[i].lower() == "other"):
                 user.other= 1
         
-        if startMonth is not "" and endMonth is not "":
-            if(startMonth == "1" or endMonth == "1"):
-                user.january = 1
-            if(startMonth == "2" or endMonth == "2"):
-                user.february = 1
-            if(startMonth == "3" or endMonth == "3"):
-                user.march = 1
-            if(startMonth == "4" or endMonth == "4"):
-                user.april = 1
-            if(startMonth == "5" or endMonth == "5"):
-                user.may = 1
-            if(startMonth == "6" or endMonth == "6"):
-                user.june = 1
-            if(startMonth == "7" or endMonth == "7"):
-                user.july = 1
-            if(startMonth == "8" or endMonth == "8"):
-                user.august = 1
-            if(startMonth == "9" or endMonth == "9"):
-                user.september = 1
-            if(startMonth == "10" or endMonth == "10"):
-                user.october = 1
-            if(startMonth == "11" or endMonth == "11"):
-                user.november = 1
-            if(startMonth == "12" or endMonth == "12"):
-                user.december = 1
+# setting months
+
+        user.january = months[0]
+        user.february = months[1]
+        user.march = months[2]
+        user.april = months[3]
+        user.may = months[4]
+        user.june = months[5]
+        user.july = months[6]
+        user.august = months[7]
+        user.september = months[8]
+        user.october = months[9]
+        user.november = months[10]
+        user.december = months[11]
 
         user.save()
-        return HttpResponse(11111)
+        return HttpResponse("Successfully Updated")
 
 def getCityInfo(request):
 

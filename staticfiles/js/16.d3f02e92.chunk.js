@@ -1,2 +1,0 @@
-(this["webpackJsonpdjango-react-boilerplate"]=this["webpackJsonpdjango-react-boilerplate"]||[]).push([[16],{115:function(e,a,t){e.exports=t.p+"static/media/Yellowstone.3e89523a.jpg"}}]);
-//# sourceMappingURL=16.d3f02e92.chunk.js.map

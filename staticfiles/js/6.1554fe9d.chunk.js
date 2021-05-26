@@ -1,2 +1,0 @@
-(this["webpackJsonpdjango-react-boilerplate"]=this["webpackJsonpdjango-react-boilerplate"]||[]).push([[6],{105:function(a,e,p){a.exports=p.p+"static/media/Cairo.df15ef8c.png"}}]);
-//# sourceMappingURL=6.1554fe9d.chunk.js.map
