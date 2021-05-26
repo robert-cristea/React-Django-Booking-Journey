@@ -1,0 +1,160 @@
+/*
+SQLyog Community v13.1.5  (32 bit)
+MySQL - 10.4.13-MariaDB : Database - natoosa
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*Table structure for table `cities_features` */
+
+DROP TABLE IF EXISTS `cities_features`;
+
+CREATE TABLE `cities_features` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `city_name` varchar(150) NOT NULL,
+  `country` varchar(150) NOT NULL,
+  `short_description` varchar(1000) NOT NULL,
+  `sites` varchar(100) NOT NULL,
+  `picture` varchar(150) NOT NULL DEFAULT 'null',
+  `solo` smallint(5) unsigned NOT NULL,
+  `couple` smallint(5) unsigned NOT NULL,
+  `family` smallint(5) unsigned NOT NULL,
+  `friends` smallint(5) unsigned NOT NULL,
+  `weekend` smallint(5) unsigned NOT NULL,
+  `long_weekend` smallint(5) unsigned NOT NULL,
+  `weekish` smallint(5) unsigned NOT NULL,
+  `midweek` smallint(5) unsigned NOT NULL,
+  `two_weeks` smallint(5) unsigned NOT NULL,
+  `three_weeks` smallint(5) unsigned NOT NULL,
+  `four_weeks` smallint(5) unsigned NOT NULL,
+  `beach` smallint(5) unsigned NOT NULL,
+  `city_life` smallint(5) unsigned NOT NULL,
+  `nature` smallint(5) unsigned NOT NULL,
+  `countryside` smallint(5) unsigned NOT NULL,
+  `surprise` smallint(5) unsigned NOT NULL,
+  `other` smallint(5) unsigned NOT NULL,
+  `adventures` smallint(5) unsigned NOT NULL,
+  `shopping` smallint(5) unsigned NOT NULL,
+  `romantic` smallint(5) unsigned NOT NULL,
+  `ski` smallint(5) unsigned NOT NULL,
+  `remote` smallint(5) unsigned NOT NULL,
+  `wildlife` smallint(5) unsigned NOT NULL,
+  `hiking` smallint(5) unsigned NOT NULL,
+  `road_trip` smallint(5) unsigned NOT NULL,
+  `festivals` smallint(5) unsigned NOT NULL,
+  `nightlife` smallint(5) unsigned NOT NULL,
+  `holidays` smallint(5) unsigned NOT NULL,
+  `vivid` smallint(5) unsigned NOT NULL,
+  `cultural_experience` smallint(5) unsigned NOT NULL,
+  `camping` smallint(5) unsigned NOT NULL,
+  `surfing` smallint(5) unsigned NOT NULL,
+  `honeymoon` smallint(5) unsigned NOT NULL,
+  `scuba_diving` smallint(5) unsigned NOT NULL,
+  `budget_low` smallint(5) unsigned NOT NULL,
+  `budget_normal` smallint(5) unsigned NOT NULL,
+  `budget_high` smallint(5) unsigned NOT NULL,
+  `one_passengers` smallint(5) unsigned NOT NULL,
+  `two_passengers` smallint(5) unsigned NOT NULL,
+  `three_passengers` smallint(5) unsigned NOT NULL,
+  `four_passengers` smallint(5) unsigned NOT NULL,
+  `five_passengers` smallint(5) unsigned NOT NULL,
+  `six_passengers` smallint(5) unsigned NOT NULL,
+  `january` smallint(5) unsigned NOT NULL,
+  `february` smallint(5) unsigned NOT NULL,
+  `march` smallint(5) unsigned NOT NULL,
+  `april` smallint(5) unsigned NOT NULL,
+  `may` smallint(5) unsigned NOT NULL,
+  `june` smallint(5) unsigned NOT NULL,
+  `july` smallint(5) unsigned NOT NULL,
+  `august` smallint(5) unsigned NOT NULL,
+  `september` smallint(5) unsigned NOT NULL,
+  `october` smallint(5) unsigned NOT NULL,
+  `november` smallint(5) unsigned NOT NULL,
+  `december` smallint(5) unsigned NOT NULL,
+  `comp_allgirls` smallint(5) unsigned NOT NULL,
+  `comp_allboys` smallint(5) unsigned NOT NULL,
+  `comp_elderly` smallint(5) unsigned NOT NULL,
+  `comp_kids_babies` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+
+/*Data for the table `cities_features` */
+
+insert  into `cities_features`(`id`,`city_name`,`country`,`short_description`,`sites`,`picture`,`solo`,`couple`,`family`,`friends`,`weekend`,`long_weekend`,`weekish`,`midweek`,`two_weeks`,`three_weeks`,`four_weeks`,`beach`,`city_life`,`nature`,`countryside`,`surprise`,`other`,`adventures`,`shopping`,`romantic`,`ski`,`remote`,`wildlife`,`hiking`,`road_trip`,`festivals`,`nightlife`,`holidays`,`vivid`,`cultural_experience`,`camping`,`surfing`,`honeymoon`,`scuba_diving`,`budget_low`,`budget_normal`,`budget_high`,`one_passengers`,`two_passengers`,`three_passengers`,`four_passengers`,`five_passengers`,`six_passengers`,`january`,`february`,`march`,`april`,`may`,`june`,`july`,`august`,`september`,`october`,`november`,`december`,`comp_allgirls`,`comp_allboys`,`comp_elderly`,`comp_kids_babies`) values 
+(1,'New Orleans,  Louisiana','USA','From its world-class?gastronomy?and eclectic?art scene?to its distinctive?architecture?and?neighborhoods, New Orleans is like no other city. ?Add in its jazzy soundtrack and tropical climate, this is a destination everyone can enjoy.?','Mardi Gras festival and others, french quarter, St. Louis Cathedral, Jackson Square, New Orleans Mus','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',0,1,0,1,1,1,0,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0),
+(2,'Kerry','Ireland','Kerry renowned the world over for its beautiful scenery, mountains, lakes, beautiful sandy beaches, cliffs and rocky headlands','Blasket Islands, Lakes of Killarney, Skellig Michael, Carrauntoohil','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',0,1,1,0,1,1,0,0,0,0,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,0,0,1,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1),
+(3,'Marrakesh','Morocco','Prepare for your senses to be slapped. Marrakesh\'s heady sights and sounds will dazzle, frazzle and enchant','Djemaa El Fna, Jardin Majorelle, Bahia Palace','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',0,1,1,1,1,1,0,0,0,0,0,0,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,0,1,1,0),
+(4,'Sydney','Australia','Seek out some sunshine and good times in Australia\'s Harbour City','Beach, opera house, manly ferry','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,1,1,0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0,1,1,1,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,1,1,1,1),
+(5,'The Maldives','The Maldives','Ilands know for their clear emerald waters and beautiful beaches that stretch as far as the eye can see','Maafushi, meeru island, Hulhumale','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',0,1,1,0,1,1,0,0,0,0,0,1,0,1,0,1,1,0,0,1,0,1,0,0,0,0,0,1,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1),
+(6,'Paris','France','Paris is unarguably one of the most beautiful cities in the world, the capital of France, of art and of fashion','Eiffel tower, Lourve museum, Norte-Dame cathedral','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,1,1,0,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,1,1,1,1),
+(7,'Cape Town','South Africa','Known as the ?Mother City?, Cape Town is the oldest city in South Africa. Perched between the ocean and the mountain, with a national park as its heart, there is nowhere like Cape Town','Table mountain, beaches, pinguin-watching','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',0,1,1,1,1,1,0,0,1,0,0,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,1,1,1,1),
+(8,'Dubai','U.A.E','This city of high-rises and shopping malls has transformed itself from a desert outpost to a destination du-jour, where tourists flock for sales bargains, sunshine, and family fun.?','Burj Khalifa, Dubai Mall,  Dubai Museum','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',0,1,1,1,1,1,0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,1,1,1,0,1,0,1,0,0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1),
+(9,'Bora Bora','French Polynesia','Bora Bora is one of the few places on earth that everyone hopes to witness in their lifetime?and once you see it, you are forever enamored.','Matira beach, Mount Otemanu, Turtle centre','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',0,1,1,0,1,1,0,0,0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0,1,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,1,1,1,1),
+(10,'New York City, New York','USA','In addition to being called the ?Big Apple,??New York?City is known as being ?The City That?Never Sleeps.??The city is full of action-packed entertainment attractions.','Central park, Empire state Building, Statue of Liberty, Times square','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,1,1,0,0,1,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,1,1,1,1,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,1),
+(11,'Dubrovnik','Croatia','it?s hard to imagine anyone becoming jaded by the city?s limestone streets, baroque buildings and the endless shimmer of the Adriatic, or failing to be inspired by a walk along the ancient city walls that protected the capital of a sophisticated republic for centuries.','Walls of Dubrovnik, Lokrum, Stradum','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,1,1,0,0,1,0,0,1,1,0,1,1,1,1,1,1,0,0,0,0,1,0,0,1,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,1,1,1,1),
+(12,'Edinburgh','Scotland','Edinburgh is Scotland\'s compact, hilly capital. It has a medieval Old Town and elegant Georgian New Town with gardens and neoclassical buildings.?','Edinburgh Castle, Royal Mile ','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,1,1,0,0,0,0,0,1,1,0,1,1,1,0,1,0,0,0,0,0,1,0,1,1,1,1,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1),
+(13,'Rome','Italy','Rome?is?famous for?having amazing foods such as spaghetti, lasagna, pizza and gelato. This Capital of Italy is well known for historic sites such as the Colosseum, Trevi Fountain and Vatican City.','Colosseum, st. peter\'s Basilica, Vatican','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,1,1,0,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1),
+(14,'Hawaii','USA','Whether you like hiking, biking, kayaking, sailing, swimming, or just sitting on the beach, Hawaii is the state for you. Near the water, you can relax as palm trees blow in the island breeze.?','Hawai\'i volcanoes national park, Diamond head, Hanauma bay ','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,1,1,0,0,1,0,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,0,0,1,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,0,0,1,1,1,1),
+(15,'Leh','india','Few places in India are at once so traveler friendly and enchanting as mountain-framed, Leh.','Pangong Tso, Thiksey Monastery, Shanti Stupa,  Stakna Monastery','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,0,1,0,1,0,0,1,0,0,0,0,1,1,1,1,1,0,0,0,1,0,1,1,0,0,0,1,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,1,1,0),
+(16,'Barbados','Barbabos','Barbados is know for its tropical beaches and pirate history. It is the birthplace of Rihanna and rum.','The Beaches of Carlisle Bay, Downtown Bridgetown, Bathsheba Bay, Animal Flower Cave','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,0,0,0,0,1,0,0,1,0,1,0,1,1,1,0,1,0,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,0,1,0,1),
+(17,'Amsterdam','Netherland','With its picturesque canal network, rich history and thrumming cultural scene, the capital of the Netherlands is one of the world?s most vibrant cities.','rijksmuseum, van gogh museum, the beach in amsterdam, vondelpark, anna frank\'s house','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,1,1,1,1),
+(18,'Santiago','Chile','Surprising, cosmopolitan, energetic, sophisticated and worldly, Santiago is a city of syncopated cultural currents, madhouse parties, expansive museums and top-flight restaurants. No wonder 40% of Chileans call the leafy capital city home.','cerro san cristobal, museo chileno, cerro santa lucia, vina cousino macul','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',0,1,1,1,0,0,0,0,1,1,0,1,1,1,0,1,1,1,1,0,1,0,0,1,1,1,1,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,1,1,0,0),
+(19,'Cairo','Egypt','Cairo is magnificent, beautiful and, at time, infuriating. From above, the distorted roar of the muezzins\' call to prayer echoes out from duelling minarets. Below, car horns bellow tuneless symphonies amid avenues of faded 19th-century grandeur while donkey carts rattle down dusty lanes lined with colossal Fatimid and Mamluk monuments.','pyramids of giza, egyptian museum, khan al khalili, coptic museum, bab zuweila','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',0,1,1,1,1,1,0,0,0,0,0,1,0,1,0,1,1,1,0,0,0,0,0,1,1,0,0,1,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,1,1,1,1),
+(20,'Copenhagen','Denmark','Copenhagen is the epitome of Scandi cool. Modernist lamps light New Nordic tables, bridges buzz with cycling commuters and eye-candy locals dive into pristine waterways.','nationalmuseet, torvehallerne KBH, tivoli gardens, rosenborg slot','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,1,1,0,0,0,0,0,0,1,1,0,1,1,0,1,1,0,0,0,0,0,1,1,1,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,1,1,1,1),
+(21,'Seoul','Korea','Fashion- and technology-forward but also deeply traditional, this dynamic city mashes up palaces, temples, cutting-edge design and mountain trails, all to a nonstop K-Pop beat.','Seoul Tower, Bukchon Hanok Village, National Museum of Korea,Lotte World Tower, Gyeongbokgung Palace','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,0,0,0,0,1,1,0,0,1,1,0,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,1),
+(22,'Laucala Island Resort','Fiji','exploring the archipelago?s exquisite beaches, undersea marvels, lush interiors and fascinating culture shouldn?t be rushed.','Blue Lagoon Cruise, Mamanuca Islands, Taveuni Island, Beqa Lagoon','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',0,1,1,1,0,0,0,0,1,1,0,0,1,0,0,1,1,1,0,1,0,0,1,1,1,1,1,0,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,1),
+(23,'Shanghai','China','Shanghai: few cities in the world evoke so much history, excess, glamour, mystique and exotic promise in name alone.','The Bund, Yuyuan Gardens & Bazaar, Shanghai Tower, Jade Buddha Temple,  Tianzifang','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,0,0,0,0,0,1,1,0,0,1,0,1,0,0,1,1,1,0,1,0,0,0,1,1,0,1,1,0,0,0,0,0,1,0,1,1,1,1,1,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0,0,0),
+(24,'Yellowstone','USA','Yellowstone National Park?is a?United States National Park?and a?UNESCO World Heritage Site.','National Park, geysers, hot springs and other thermal areas','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',0,1,1,0,0,0,0,0,1,1,0,0,0,1,1,0,0,1,0,1,0,1,1,1,1,0,0,0,0,0,1,0,0,0,0,1,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,1),
+(25,'Tel Aviv','Israel','Tel Aviv, Israel?s largest metropolitan area, serves as a hub for innovation, culture and creativity. ?Tel Aviv Nonstop City? is more than just a slogan. With the city?s beautiful beaches, diverse cultural scene, top-notch cuisine, and vibrant nightlife, there?s always something to see and do here.','Carmel Market,Port of Jaffa, Neve Tzedek , Sharona Market\n','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,0,1,0,1,1,0,0,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,0,0,1,1,0,0),
+(26,'Jerusalem','Israel','Jerusalem is totally unique ? there is no other place like it. A city of tradition, religion, and history, but also, increasingly, of modern culture and heritage, it is a city with so much to offer that you could spend years here and still not see everything.','Jerusalem?s Old City, Western Wall, Via Dolorosa, Church of the Holy Sepulchre, Machane Yehuda Marke','',1,0,1,0,1,1,0,0,0,0,0,0,1,0,1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1,0,0,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1),
+(27,'Barcelona','Spain','Barcelona is the second largest city in Spain and is a vibrant city, full of entertainment and diverse nightlife.','Sagrada Familia, Park Guell, the Gothic Quarter, the Rambla and La Boqueria Market, the ?Magic Fount','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,1,1,1,1,0,0,1,1,1,0,1,0,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,0,0,1,0,1,1),
+(28,'Berlin','Germany','Berlin, the capital of Germany and the country\'s largest city, is also a major center of politics, culture, media, and science.','The Brandenburg Gate, The Rebuilt Reichstag, Museum Island, Berlin Wall Memorial, German Historical ','',1,1,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,0,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,0,1,0,1,1,1),
+(29,'Chiang Mai','Thailand','Chiang Mai is a land of misty mountains and colourful hill tribes, a playground for seasoned travellers, a paradise for shoppers and a delight for adventurers.','Doi Suthep, Chiang Mai Old City, Night Safari, Wiang Kum Kam, the Underground Ancient City, Karen Lo','https://hubdevstore.blob.core.windows.net/pictures/medium/14417522278113282-5128325-4906.jpg',1,1,1,1,0,0,0,0,1,1,1,1,0,1,1,0,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,0,1,0,0,1,0,1,1,1,1,1,0,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0),
+(30,'Wanaka','New Zealand','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(31,'Aucklands','New Zealand','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(32,'Tokyo','Japan','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(33,'Antarctica','Antarctica','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(34,'Vancouver','Canada','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(35,'Los Angeles,  California','USA','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(36,'Kruger National Park','South Africa','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(37,'Santorini','Greece','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(38,'Singapore','Singapore','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(39,'London','England','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(40,'Petra','Jordan','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(41,'Hong Kong','Hong Kong','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(42,'Providencia','Colombia','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(43,'Virunga National Park','Democratic Republic of Congo','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(44,'Lisbon','Portugal','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(45,'Hanoi','Vietnam','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(46,'Paro Valley','Bhutan','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(47,'Ibiza','Spain','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(48,'Tulum','Mexico','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(49,'Moscow','Russia','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(50,'Rio de Janeiro','Brazil','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(51,'Havana','Cuba','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(52,'Machu Picchu','Peru','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(53,'Buenos Aires','Argentina','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(54,'Beijing','China','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(55,'Budapest','Hungary','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(56,'Cinque Terre','Italy','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(57,'Las Vegas,  Nevada','USA','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(58,'Matterhorn','Switzerland','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(59,'Aspen Mountain, Colorado','USA','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(60,'Whistler Blackcomb','Canada','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(61,'St Anton','Austria','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(62,'Val d\'Is?re','France','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(63,'Courchevel','France','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(64,'Toronto','Canada','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(65,'Venice','Italy','','','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
