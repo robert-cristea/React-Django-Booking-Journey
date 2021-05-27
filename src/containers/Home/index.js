@@ -8,9 +8,6 @@ import Search from '../Search';
 
 import axios from "axios";
 import { BACKEND_URL } from '../../utils/request';
-import logo from "../../images/logo.png";
-import backArrow from "../../images/backArrow.png";
-import forwardArrow from "../../images/forwardArrow.png";
 import "./home.css";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
@@ -326,7 +323,7 @@ const Home = (props) => {
             <div className="w-full mx-auto">
                 <div className="header bg-img">
                     <div className="d-flex justify-content-between align-items-center mx-5" style={{ paddingTop: "14px" }}>
-                        <a className="logo" href="#home"><img src={logo} alt="logo" /></a>
+                        <a className="logo" href="#home"><img src={"/static/images/logo.png"} alt="logo" /></a>
 
                         <div className="d-flex topnav" style={{ flexGrow: "0" }}>
                             <a href="#home" style={{ color: "brown" }}>Home</a>
@@ -387,8 +384,8 @@ const Home = (props) => {
 
                                 <div className="pb-3 px-3" style={{ width: "100%", position: 'absolute', bottom: 0 }}>
                                     <div className="d-flex justify-content-between w-full align-items-center">
-                                        {step > 1 ? <img src={backArrow} alt="backArrow" className="back-forward-arrow" onClick={handleBackBtnClick} /> : <div></div>}
-                                        <div><img src={forwardArrow} alt="forwardArrow" className="back-forward-arrow" onClick={handleForwardBtnClick} /></div>
+                                        {step > 1 ? <img src={"/static/images/backArrow.png"} alt="backArrow" className="back-forward-arrow" onClick={handleBackBtnClick} /> : <div></div>}
+                                        <div><img src={"/static/images/forwardArrow.png"} alt="forwardArrow" className="back-forward-arrow" onClick={handleForwardBtnClick} /></div>
                                     </div>
                                 </div>
                             </div> : <p className="text-center font-weight-medium font-greeting">Searching <span style={{ display: "block" }}>for the best vacation</span> for you</p>}

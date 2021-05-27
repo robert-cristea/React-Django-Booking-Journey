@@ -17,7 +17,7 @@ select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	background: transparent;
-	background-image: url(../../images/expandArrow.png);
+	background-image: url(/static/images/expandArrow.png);
 	background-repeat: no-repeat;
 	background-position-x: 100%;
 	background-position-y: 8px;
@@ -140,7 +140,7 @@ select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	background: transparent;
-	background-image: url(../../images/expandArrow.png);
+	background-image: url(/static/images/expandArrow.png);
 	background-repeat: no-repeat;
 	background-position-x: 98%;
 	background-position-y: 50%;
