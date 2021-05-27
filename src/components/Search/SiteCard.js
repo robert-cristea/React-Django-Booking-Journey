@@ -66,7 +66,7 @@ const SiteCard = (props) => {
                     'Content-Type': 'application/json',
                 },
             })
-            .then(res => { console.log('Results: ' + res); })
+            .then(res => { return res; })
             .catch(err => console.log('Login error: ' + err))
       }
 
