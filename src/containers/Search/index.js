@@ -72,7 +72,7 @@ const Search = (props) => {
             },
         })
         .then(res => { return res.data; })
-        .then(res => { setCitiesInfo(res); setActiveCitiesInfo(_.slice(res,0,4)) })
+        .then(res => { setCitiesInfo(res); setActiveCitiesInfo(_.slice(res,0,4)); console.log(res); })
         .catch(err => console.log('Login error: ' + err))
     }
 
@@ -260,7 +260,6 @@ const Search = (props) => {
             })
             setNumber(_.cloneDeep(number))
         }
-
 
     }
 

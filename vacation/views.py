@@ -71,7 +71,7 @@ def storeData(request):
             if(howlong[i].lower() == "long weekend"):
                 user.long_weekend= 1
             if(howlong[i].lower() == "midweek"):
-                user.midweek= 1
+                user.mid_week= 1
             if(howlong[i].lower() == "2 weeks"):
                 user.two_weeks= 1
             if(howlong[i].lower() == "3 weeks"):
@@ -81,9 +81,9 @@ def storeData(request):
 
         user.save()
        
-        print("useriD================="+str(user.id))
+        print("useriD================="+str(user.user_id))
        
-        return HttpResponse(str(user.id))
+        return HttpResponse(str(user.user_id))
 
 def updateData(request):
     if request.method == "POST":
@@ -97,7 +97,7 @@ def updateData(request):
         number = json_data['number']
         traveler = json_data['traveler']
 
-        user = UserFeature.objects.get(id=userId)
+        user = UserFeature.objects.get(user_id=userId)
         user.delete()
 
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -108,7 +108,7 @@ def updateData(request):
             ipaddress = request.META.get('REMOTE_ADDR')
 
         user = UserFeature()
-        user.id = userId
+        user.user_id = userId
         user.user_ip = ipaddress
 
         for i in range (0,len(who)):
@@ -143,7 +143,7 @@ def updateData(request):
             if(howlong[i].lower() == "long weekend"):
                 user.long_weekend= 1
             if(howlong[i].lower() == "midweek"):
-                user.midweek= 1
+                user.mid_week= 1
             if(howlong[i].lower() == "2 weeks"):
                 user.two_weeks= 1
             if(howlong[i].lower() == "3 weeks"):

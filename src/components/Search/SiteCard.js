@@ -13,50 +13,50 @@ const SiteCard = (props) => {
     const [rating, setRating] = useState(0)
 
     const displayTagsInList = (item) => {
-        var keys = _.pickBy(item, (value,key) => value === 1)
-        var keysExceptMonth = _.omit(keys,['solo','couple','friends','family','weekend','long_weekend','weekish','midweek','two_weeks','three_weeks','four_weeks','five_weeks','other','one_passengers','two_passengers','three_passengers','four_passengers','five_passengers','six_passengers','one_weeks','comp_allgirls','comp_allboys','comp_elderly','comp_kids_babies','id','january','february','march','april','may','june','july','august','september','october','november','december','budget_low','budget_normal','budget_high','holidays','surprise'])
+        var keys = _.pickBy(item, (value, key) => value === 1)
+        var keysExceptMonth = _.omit(keys, ['solo', 'couple', 'friends', 'family', 'weekend', 'long_weekend', 'weekish', 'midweek', 'two_weeks', 'three_weeks', 'four_weeks', 'five_weeks', 'other', 'one_passengers', 'two_passengers', 'three_passengers', 'four_passengers', 'five_passengers', 'six_passengers', 'one_weeks', 'comp_allgirls', 'comp_allboys', 'comp_elderly', 'comp_kids_babies', 'id', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', 'budget_low', 'budget_normal', 'budget_high', 'holidays', 'surprise'])
         var arr = _.keys(keysExceptMonth)
         return (
             arr.map((value, index) =>
-                <TagComponent name={_.startCase(_.camelCase(value)) + (_.isNumber(value) ? (value === 1 ? " person" : " people") : "")} key={index} case = "2" />
+                <TagComponent name={_.startCase(_.camelCase(value)) + (_.isNumber(value) ? (value === 1 ? " person" : " people") : "")} key={index} case="2" />
             )
         );
     }
 
     const displayBestTimeToVisit = (item) => {
-        const keys = ['january','february','march','april','may','june','july','august','september','october','november','december'];
-        var months = _.pick(item,['january','february','march','april','may','june','july','august','september','october','november','december'])
+        const keys = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+        var months = _.pick(item, ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'])
         var finalArray = []
-        for(let i=0;i<12;i++){
-            if(i === 0){
+        for (let i = 0; i < 12; i++) {
+            if (i === 0) {
                 var subarr = [];
             }
-            if(months[keys[i]] === 1){
+            if (months[keys[i]] === 1) {
                 subarr.push(keys[i])
-            }else{
-                if(subarr.length !== 0 ){
+            } else {
+                if (subarr.length !== 0) {
                     finalArray.push(subarr);
                     subarr = []
                 }
             }
-            if(subarr.length === 12){
+            if (subarr.length === 12) {
                 finalArray.push(subarr);
                 break;
             }
         }
         return (
-            finalArray.map((value,index)=>
-                <span className="pr-3 best-time-content" key={index} >{_.startCase(value[0]) + ((value.length > 1)?(" - "+_.startCase(value[(value.length-1)])):"")}</span>)
-            );
+            finalArray.map((value, index) =>
+                <span className="pr-3 best-time-content" key={index} >{_.startCase(value[0]) + ((value.length > 1) ? (" - " + _.startCase(value[(value.length - 1)])) : "")}</span>)
+        );
     }
 
-    const ratingChanged = (city,newRating) => {
+    const ratingChanged = (city, newRating) => {
         // setRating(newRating);
 
         const data = {
             'userId': props.userId,
             'users_rating': newRating,
-            'city_name':city
+            'city_name': city
         }
 
         axios
@@ -68,7 +68,7 @@ const SiteCard = (props) => {
             })
             .then(res => { return res; })
             .catch(err => console.log('Login error: ' + err))
-      }
+    }
 
     return (
         <div className="mx-auto w-100 d-flex my-2 custom-card-border">
@@ -84,7 +84,7 @@ const SiteCard = (props) => {
                             <div className="d-flex justify-content-center align-items-centerm" style={{ marginTop: "-15px" }}>
                                 <ReactStars
                                     count={5}
-                                    onChange={(raty)=>{setRating(raty); ratingChanged(item.city_name,raty);}}
+                                    onChange={(raty) => { setRating(raty); ratingChanged(item.city_name, raty); }}
                                     value={rating}
                                     size={30}
                                     edit={true}
@@ -101,7 +101,7 @@ const SiteCard = (props) => {
                         <p className="custom-card-body-description">{item.short_description}</p>
                     </div>
                     <div className="d-flex align-items-center my-2">
-                        <i className="fa fa-money" style={{ fontSize: "1.5rem" }}></i><p className="pl-3 card-body-icon-title">Budget: <span className="font-weight-bold">{item.budget_low === 1?"Low":""}{((item.budget_low === 1 && item.budget_normal === 1) || (item.budget_high === 1 && item.budget_low === 1)) && " - "}{item.budget_normal === 1?"Normal":""}{(item.budget_high === 1 && item.budget_normal === 1) && " - "}{item.budget_high === 1?"High":""}</span></p>
+                        <i className="fa fa-money" style={{ fontSize: "1.5rem" }}></i><p className="pl-3 card-body-icon-title">Budget: <span className="font-weight-bold">{item.budget_low === 1 ? "Low" : ""}{((item.budget_low === 1 && item.budget_normal === 1) || (item.budget_high === 1 && item.budget_low === 1)) && " - "}{item.budget_normal === 1 ? "Normal" : ""}{(item.budget_high === 1 && item.budget_normal === 1) && " - "}{item.budget_high === 1 ? "High" : ""}</span></p>
                     </div>
                     <div className="d-flex align-items-center my-2">
                         <i className="fa fa-home" style={{ fontSize: "1.5rem" }}></i><p className="pl-3 card-body-icon-title">Known Sites: <span className="font-weight-bold">{item.sites}</span></p>
