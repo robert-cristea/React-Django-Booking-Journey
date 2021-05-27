@@ -321,10 +321,10 @@ const Home = (props) => {
             <div className="w-full mx-auto">
                 <div className="header bg-img">
                     <div className="d-flex justify-content-between align-items-center mx-5" style={{ paddingTop: "14px" }}>
-                        <a className="logo" href="#home"><img src={"/static/images/logo.png"} alt="logo" /></a>
+                        <a className="logo" href="/"><img src={"/static/images/logo.png"} alt="logo" /></a>
 
                         <div className="d-flex topnav" style={{ flexGrow: "0" }}>
-                            <a href="#home" style={{ color: "brown" }}>Home</a>
+                            <a href="/" style={{ color: "brown" }}>Home</a>
                             <a href="#about">About</a>
                             <a href="#contact">Contact</a>
                         </div>
