@@ -9,7 +9,6 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import moment from 'moment';
 import axios from "axios";
 import _ from 'lodash';
-import calendarIcon from "../../images/calendarIcon.png";
 import { BACKEND_URL } from '../../utils/request';
 import SiteCard from '../../components/Search/SiteCard'
 import TagComponent from '../../components/Search/tagComponent'
@@ -338,7 +337,7 @@ const Search = (props) => {
                                             autoApply={true}
                                             ref={daterange}
                                         ><div>
-                                                <button className="d-flex align-items-center date-range-btn"><img src={calendarIcon} className="mr-4" alt="calendarIcon" /> {!startDate ? "Can Start From - Need to Return By" : (moment(startDate).format("ddd, MMM D") + " - " + (moment(endDate).format("ddd, MMM D")))} </button>
+                                                <button className="d-flex align-items-center date-range-btn"><img src={"static/images/calendarIcon.png"} className="mr-4" alt="calendarIcon" /> {!startDate ? "Can Start From - Need to Return By" : (moment(startDate).format("ddd, MMM D") + " - " + (moment(endDate).format("ddd, MMM D")))} </button>
                                             </div>
                                         </DateRangePicker>
 
