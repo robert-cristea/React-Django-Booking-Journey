@@ -72,7 +72,7 @@ const Search = (props) => {
             },
         })
         .then(res => { return res.data; })
-        .then(res => { console.log(res); setCitiesInfo(res); setActiveCitiesInfo(_.slice(res,0,4)) })
+        .then(res => { setCitiesInfo(res); setActiveCitiesInfo(_.slice(res,0,4)) })
         .catch(err => console.log('Login error: ' + err))
     }
 
@@ -82,7 +82,6 @@ const Search = (props) => {
 
     const handleShowMoreBtn = () => {
         setActiveCitiesInfo(_.union(activeCitiesInfo,_.slice(citiesInfo,activeCitiesInfo.length,activeCitiesInfo.length+4)));
-        console.log('activeCItiey================',activeCitiesInfo);
     }
 
     const handleClearBtnClick = (parm) => {
@@ -182,8 +181,6 @@ const Search = (props) => {
             }
         }
 
-        console.log(months)
-
         const data = {
             'userId': props.userId,
             'budget': budgetArr,
@@ -245,12 +242,9 @@ const Search = (props) => {
 
         if (tagItem === 'howLong' && where === "tagDropDown" && !_.includes(howlong, name)) {
 
-            console.log("-----state-----", howlong)
-
             setHowlong([...howlong, name])
         }
         if (tagItem === 'howLong' && where === "tagDropDown" && _.includes(howlong, name)) {
-            console.log("remove------");
             _.remove(howlong, function (n) {
                 return n === name;
             })
@@ -258,11 +252,9 @@ const Search = (props) => {
         }
 
         if (tagItem === 'howMany' && where === "tagDropDown" && checked && !_.includes(number, Number(name))) {
-            console.log("-----stateforadd-----", number);
             setNumber([...number, Number(name)])
         }
         if (tagItem === 'howMany' && where === "tagDropDown" && !checked && _.includes(number, Number(name))) {
-            console.log("removedkfkfjslflksflksfklslksdfkl")
             _.remove(number, function (n) {
                 return Number(n) === Number(name);
             })

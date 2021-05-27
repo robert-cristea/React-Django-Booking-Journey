@@ -236,10 +236,8 @@ const Home = (props) => {
                 setStep(1);
                 break;
             case 3:
-                console.log("case 3 test")
                 setMultiPeriod([]);
                 if ((multiWho.length === 1 && (_.includes(multiWho, _.startCase('solo')) || _.includes(multiWho, _.startCase('couple')))) || (multiWho.length === 2 && (_.includes(multiWho, _.startCase('solo')) && _.includes(multiWho, _.startCase('couple'))))) {
-                    console.log("================here======================" + multiWho)
                     setStep(2);
                     setStep(1);
                 } else {
@@ -314,7 +312,7 @@ const Home = (props) => {
                 },
             })
             .then(res => { return res.data; })
-            .then(res => { setUserId(res) })
+            .then(res => { setUserId(res); console.log('Successfully record created!') })
             .catch(err => console.log('Login error: ' + err))
     }
 

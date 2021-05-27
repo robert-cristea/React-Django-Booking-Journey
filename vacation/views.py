@@ -80,9 +80,7 @@ def storeData(request):
                 user.four_weeks= 1
 
         user.save()
-        # obj = User.objects.filter(id=1)[0].solo
-        # print("============================================")
-        # print(obj)
+       
         print("useriD================="+str(user.id))
        
         return HttpResponse(str(user.id))
