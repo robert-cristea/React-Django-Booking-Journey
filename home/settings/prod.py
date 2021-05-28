@@ -4,7 +4,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS += ["localhost",'natoosa.com']
+ALLOWED_HOSTS += ["localhost",'https://www.natoosa.com','https://natoosa.com']
 WSGI_APPLICATION = 'home.wsgi.application'
 
 DATABASES = {
@@ -25,12 +25,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-# CORS_ORIGIN_WHITELIST = (
-#     'http://3.23.24.90',
-#     'http://localhost:3000',
-#     'http://*'
-# )
 
