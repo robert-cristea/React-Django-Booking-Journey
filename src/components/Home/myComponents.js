@@ -27,8 +27,8 @@ const MyComponent = (props) => {
 	})
 
 	const options = {
-		"size": breakpoint === 0 ? 100 : (breakpoint === 1 ? 90 : (breakpoint === 2 ? 80 : 70)),
-		"minSize": breakpoint === 0 ? 100 : (breakpoint === 1 ? 90 : (breakpoint === 2 ? 80 : 70)),
+		"size": breakpoint === 0 ? 110 : (breakpoint === 1 ? 95 : (breakpoint === 2 ? 85 : 75)),
+		"minSize": breakpoint === 0 ? 110 : (breakpoint === 1 ? 95 : (breakpoint === 2 ? 85 : 75)),
 		"gutter": 1,
 		"provideProps": true,
 		"numCols": 3,

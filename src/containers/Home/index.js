@@ -56,8 +56,8 @@ const Home = (props) => {
             { 'name': 'Beach', 'clickable': false },
             { 'name': 'City Life', 'clickable': false },
             { 'name': 'Nature', 'clickable': false },
-            { 'name': 'Surprise me', 'clickable': false },
-            { 'name': 'Country side', 'clickable': false },
+            { 'name': 'Surprise', 'clickable': false },
+            { 'name': 'Countryside', 'clickable': false },
             { 'name': 'Other', 'clickable': false }
         ],
     }

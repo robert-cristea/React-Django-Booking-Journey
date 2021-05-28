@@ -55,9 +55,9 @@ def storeData(request):
                 user.city_life= 1
             if(theme[i].lower() == "nature"):
                 user.nature= 1
-            if(theme[i].lower() == "surprise me"):
+            if(theme[i].lower() == "surprise"):
                 user.surprise= 1
-            if(theme[i].lower() == "country side"):
+            if(theme[i].lower() == "countryside"):
                 user.countryside= 1
             if(theme[i].lower() == "other"):
                 user.other= 1
