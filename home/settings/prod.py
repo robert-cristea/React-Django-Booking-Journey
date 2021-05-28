@@ -4,7 +4,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS += ["localhost",'https://www.natoosa.com','https://natoosa.com']
+ALLOWED_HOSTS += ["localhost",'www.natoosa.com','natoosa.com']
 WSGI_APPLICATION = 'home.wsgi.application'
 
 DATABASES = {
