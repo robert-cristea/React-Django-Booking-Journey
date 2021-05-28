@@ -600,7 +600,7 @@ CREATE TABLE `users_features` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_ip` char(39) NOT NULL,
   `time_stamp` datetime(6) NOT NULL,
-  `solo` smallint(5) unsigned NOT NULL,
+  `solo` smallint(5) NOT NULL,
   `couple` smallint(5) unsigned NOT NULL,
   `family` smallint(5) unsigned NOT NULL,
   `friends` smallint(5) unsigned NOT NULL,
@@ -660,9 +660,14 @@ CREATE TABLE `users_features` (
   `comp_elderly` smallint(5) unsigned NOT NULL,
   `comp_kids_babies` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `users_features` */
+
+insert  into `users_features`(`user_id`,`user_ip`,`time_stamp`,`solo`,`couple`,`family`,`friends`,`mid_week`,`weekend`,`long_weekend`,`weekish`,`2_weeks`,`3_weeks`,`4_weeks`,`beach`,`city_life`,`nature`,`countryside`,`surprise`,`other`,`adventures`,`shopping`,`romantic`,`ski`,`remote`,`wildlife`,`hiking`,`road_trip`,`festivals`,`nightlife`,`holidays`,`vivid`,`cultural_experience`,`camping`,`surfing`,`honeymoon`,`scuba_diving`,`budget_low`,`budget_normal`,`budget_high`,`1_passengers`,`2_passengers`,`3_passengers`,`4_passengers`,`5_passengers`,`6_passengers`,`january`,`february`,`march`,`april`,`may`,`june`,`july`,`august`,`september`,`october`,`november`,`december`,`comp_allgirls`,`comp_allboys`,`comp_elderly`,`comp_kids_babies`) values 
+(1,'127.0.0.1','2021-05-27 16:16:58.228471',0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+(2,'127.0.0.1','2021-05-27 16:17:49.252389',1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,1,1,1,1,1,1,1,1,0,0,0,0),
+(3,'127.0.0.1','2021-05-27 17:06:11.392382',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
