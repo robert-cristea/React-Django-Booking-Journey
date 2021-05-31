@@ -11,7 +11,6 @@ import axios from "axios";
 import _ from 'lodash';
 import { BACKEND_URL } from '../../utils/request';
 import SiteCard from '../../components/Search/SiteCard'
-import TagComponent from '../../components/Search/tagComponent'
 import SelectSort from '../../components/Search/SelectSort';
 import TagBox from 'components/Search/TagBox';
 
@@ -262,14 +261,6 @@ const Search = (props) => {
         }
 
     }
-
-    const displayTag = (values) => {
-        return (
-            values.map((value, index) =>
-                <TagComponent name={value + (_.isNumber(value) ? (value === 1 ? " person" : " people") : "")} key={index} onClick={() => handleDeleteTagBtnClick(value)} case="1" />
-            )
-        );
-    };
 
     const handleTagSelectDone = () => {
         setIsDropDownOpen(false);
