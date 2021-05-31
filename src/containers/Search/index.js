@@ -393,7 +393,6 @@ const Search = (props) => {
                                                         onClick = {handleDeleteTagBtnClick}
                                                     />
                                                 </div>
-
                                             }
                                         </div>
                                     </div>
