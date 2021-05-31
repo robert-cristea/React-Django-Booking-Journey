@@ -23,13 +23,13 @@ select {
 	background-position-y: 8px;
 	/* padding-left:50px; */
 }
-
+/* 
 #category {
 	border: none;
 	font-size: 14px;
 	width: 60px;
 	color: rgba(0, 0, 0, 0.7);
-}
+} */
 
 .tag-area {
 	background: #ccc;
@@ -150,7 +150,7 @@ select {
 	position:absolute;
 	width:100%!important;
 	top:2rem; 
-	z-index:100;
+	z-index:10;
 	border: 1px solid #555555!important;
 	background-color:#FEFEFE!important;
 	border-radius:4px;

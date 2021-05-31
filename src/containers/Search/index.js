@@ -336,19 +336,19 @@ const Search = (props) => {
                                             {isDropDownOpen?
                                                 <div className="custom-dropDownMenu pl-2">
                                                     <div className="w-100" style={{ height: "200px" }}>
-                                                        <Scrollbar style={{ paddingLeft: "5px", paddingRight: "15px" }}
+                                                        <Scrollbar 
+                                                            style={{ paddingLeft: "5px", paddingRight: "15px" }}
                                                             options={{ wheelSpeed: 0.2, wheelPropagation: false }}
                                                         >
                                                             <p className="my-2 tagList-heading">Other Themes</p>
                                                             {listAndGroups['Other Themes'].map((value, index) =>
-
                                                                 <div className="d-flex align-items-center custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value} checked={_.includes(themes, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'themes')} />
                                                                     <label className="custom-control-label" htmlFor={value}>{value}</label>
                                                                 </div>)}
+
                                                             <p className="my-2 tagList-heading">How Long</p>
                                                             {listAndGroups['How Long'].map((value, index) =>
-
                                                                 <div className="d-flex align-items-center custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value + "howlong"} checked={_.includes(howlong, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'howLong')} />
                                                                     <label className="custom-control-label" htmlFor={value + "howlong"}>{value}</label>
@@ -356,15 +356,13 @@ const Search = (props) => {
 
                                                             <p className="my-2 tagList-heading">How Many</p>
                                                             {listAndGroups['How Many'].map((value, index) =>
-
                                                                 <div className="d-flex align-items-center custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value + "howMany"} checked={_.includes(number, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'howMany')} />
                                                                     <label className="custom-control-label" htmlFor={value + "howMany"}>{value}</label>
                                                                 </div>)}
-
+                                                                
                                                             <p className="my-2 tagList-heading">Who is traveling</p>
                                                             {listAndGroups['Who is traveling'].map((value, index) =>
-
                                                                 <div className="d-flex align-items-center custom-control custom-checkbox" key={index}>
                                                                     <input type="checkbox" className="custom-control-input" name={value} id={value} checked={_.includes(who, value)} onChange={(evt) => handleTravelerCheck(evt, 'tagDropDown', 'who')} />
                                                                     <label className="custom-control-label" htmlFor={value}>{value}</label>
