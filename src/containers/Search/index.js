@@ -13,13 +13,13 @@ import { BACKEND_URL } from '../../utils/request';
 import SiteCard from '../../components/Search/SiteCard'
 import TagComponent from '../../components/Search/tagComponent'
 import SelectSort from '../../components/Search/SelectSort';
+import TagBox from 'components/Search/TagBox';
 
 const Search = (props) => {
 
     const parent = useRef(null);
-    const daterange = useRef(null)
-    const tagBox = useRef(null)
-
+    const daterange = useRef(null);
+  
     const [budgetArr, setbudgetArr] = useState([]);
     const [startDate, setStartDate] = useState()
     const [endDate, setEndDate] = useState()
@@ -342,7 +342,7 @@ const Search = (props) => {
                                             <button className="tags" type="button" onClick={toggleDropDown}>
                                                 Tags
                                             </button>
-                                            {isDropDownOpen &&
+                                            {isDropDownOpen?
                                                 <div className="custom-dropDownMenu pl-2">
                                                     <div className="w-100" style={{ height: "200px" }}>
                                                         <Scrollbar style={{ paddingLeft: "5px", paddingRight: "15px" }}
@@ -380,27 +380,23 @@ const Search = (props) => {
                                                                 </div>)}
                                                         </Scrollbar>
                                                     </div>
-                                                    <div className="w-25 text-center px-2 pt-1 mt-3 mb-1 mx-3 tag-select-done-btn" onClick={handleTagSelectDone}>Done</div>
+                                                    <div className="w-25 tag-select-done-btn d-flex justify-content-center align-items-center mr-2 mb-2" onClick={handleTagSelectDone}>
+                                                        <p className="mb-0">Done</p>
+                                                    </div>
+                                                </div>:
+                                                <div className="pt-3">
+                                                    <TagBox 
+                                                        who = {who}
+                                                        number = {number}
+                                                        howlong = {howlong}
+                                                        themes = {themes}
+                                                        onClick = {handleDeleteTagBtnClick}
+                                                    />
                                                 </div>
+
                                             }
                                         </div>
-
                                     </div>
-                                    {!isDropDownOpen &&
-                                        <div className="px-2 item-spacing">
-                                            <div className="tag-area">
-                                                <Scrollbar
-                                                    options={{ wheelSpeed: 0.2, wheelPropagation: (!_.isEmpty(who) || !_.isEmpty(number) || !_.isEmpty(themes) ||  !_.isEmpty(howlong))?false:true }}
-                                                >
-                                                    <div className="d-flex flex-wrap pt-2 px-2" ref={tagBox}>
-                                                        {displayTag(who)}
-                                                        {displayTag(number)}
-                                                        {displayTag(themes)}
-                                                        {displayTag(howlong)}
-                                                    </div>
-                                                </Scrollbar>
-                                            </div>
-                                        </div>}
                                     <div className="d-flex px-2 pb-2 justify-content-between align-items-center">
                                         <p className="select-item-name">Travelers Composition</p>
                                         <p className="clear" onClick={() => handleClearBtnClick(3)}>CLEAR</p>

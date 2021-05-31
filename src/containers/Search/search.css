@@ -208,9 +208,10 @@ select {
 	background-color: #00DAF8;
 	border-radius: 10px;
 	color: white;
-	font-size: 12px;
+	font-size: 0.75rem;
 	height: 24px;
 	float: right;
+	font-weight:bold;
 }
 
 .custom-control-label::before, .custom-file-label, .custom-select {
