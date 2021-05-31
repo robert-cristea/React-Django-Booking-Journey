@@ -16,7 +16,7 @@ const TagBox = (props) => {
     };
 
     return (
-        <div className="px-2 item-spacing">
+        <div className="item-spacing">
             <div className="tag-area">
                 <Scrollbar
                     options={{ wheelSpeed: 0.2, wheelPropagation: (!_.isEmpty(who) || !_.isEmpty(number) || !_.isEmpty(themes) || !_.isEmpty(howlong)) ? false : true }}
