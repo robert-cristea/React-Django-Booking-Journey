@@ -1,0 +1,31 @@
+.selectsort .dropdown-item:hover {
+	background-color: #00daf8 !important;
+	color: white !important;
+}
+
+.selectsort.dropdown {
+	width: 100px;
+}
+
+.selectsort .dropdown-toggle::after {
+	display: none !important;
+}
+
+.selectsort .bootstrap-select .dropdown-toggle:focus {
+	box-shadow: none!important;
+
+}
+
+.selectsort #dropdownMenuButton:focus {
+	box-shadow:none;
+}
+.selectsort #dropdownMenuButton {
+	cursor: default!important;
+}
+
+.selectsort .dropdown-menu {
+	min-width:7rem!important;
+	cursor:default!important;
+	padding-top:0!important;
+	padding-bottom:0!important;
+}
