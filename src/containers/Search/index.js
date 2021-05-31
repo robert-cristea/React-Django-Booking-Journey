@@ -13,12 +13,13 @@ import { BACKEND_URL } from '../../utils/request';
 import SiteCard from '../../components/Search/SiteCard'
 import TagComponent from '../../components/Search/tagComponent'
 import SelectSort from '../../components/Search/SelectSort';
+import TagBox from 'components/Search/TagBox';
 
 const Search = (props) => {
 
     const parent = useRef(null);
     const daterange = useRef(null)
-    const tagBox = useRef(null)
+  
 
     const [budgetArr, setbudgetArr] = useState([]);
     const [startDate, setStartDate] = useState()
@@ -387,20 +388,14 @@ const Search = (props) => {
 
                                     </div>
                                     {!isDropDownOpen &&
-                                        <div className="px-2 item-spacing">
-                                            <div className="tag-area">
-                                                <Scrollbar
-                                                    options={{ wheelSpeed: 0.2, wheelPropagation: (!_.isEmpty(who) || !_.isEmpty(number) || !_.isEmpty(themes) ||  !_.isEmpty(howlong))?false:true }}
-                                                >
-                                                    <div className="d-flex flex-wrap pt-2 px-2" ref={tagBox}>
-                                                        {displayTag(who)}
-                                                        {displayTag(number)}
-                                                        {displayTag(themes)}
-                                                        {displayTag(howlong)}
-                                                    </div>
-                                                </Scrollbar>
-                                            </div>
-                                        </div>}
+                                        <TagBox 
+                                            who = {who}
+                                            number = {number}
+                                            howlong = {howlong}
+                                            themes = {themes}
+                                            onClick = {handleDeleteTagBtnClick}
+                                        />
+                                    }
                                     <div className="d-flex px-2 pb-2 justify-content-between align-items-center">
                                         <p className="select-item-name">Travelers Composition</p>
                                         <p className="clear" onClick={() => handleClearBtnClick(3)}>CLEAR</p>
