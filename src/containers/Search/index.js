@@ -12,7 +12,7 @@ import _ from 'lodash';
 import { BACKEND_URL } from '../../utils/request';
 import SiteCard from '../../components/Search/SiteCard'
 import SelectSort from '../../components/Search/SelectSort';
-import TagBox from 'components/Search/TagBox';
+import TagBox from '../../components/Search/TagBox';
 
 const Search = (props) => {
 

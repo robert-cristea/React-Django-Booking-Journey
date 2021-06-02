@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import ReactStars from "react-rating-stars-component";
-import TagComponent from "./tagComponent";
+import TagComponent from "./TagComponent";
 import 'font-awesome/css/font-awesome.min.css';
 import './SiteCard.css'
 import _ from "lodash";

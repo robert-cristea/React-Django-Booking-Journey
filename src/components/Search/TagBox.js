@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import Scrollbar from 'react-perfect-scrollbar';
-import TagComponent from './tagComponent'
+import TagComponent from './TagComponent'
 import _ from 'lodash';
 
 const TagBox = (props) => {
